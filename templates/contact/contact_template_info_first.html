@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Info First</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Google Font: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom CSS for a professional, "info-first" contact page */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        :root {
+            --brand-color: #059669; /* Emerald Green */
+            --brand-color-dark: #047857;
+        }
+        
+        .info-card {
+            background-color: #fff;
+            border: 1px solid #e5e7eb;
+            border-top: 4px solid var(--brand-color);
+            padding: 2rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .form-input {
+            border: 1px solid #d1d5db;
+        }
+        .form-input:focus {
+            border-color: var(--brand-color);
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+            outline: none;
+        }
+        
+        .submit-button {
+            background-color: var(--brand-color);
+            transition: all 0.3s ease;
+        }
+        .submit-button:hover {
+            background-color: var(--brand-color-dark);
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold" style="color: var(--brand-color);">SupportHub</div>
+            <div class="hidden md:flex space-x-6">
+                <a href="#" class="text-gray-600 hover:text-gray-900">Home</a>
+                <a href="#" class="text-gray-600 hover:text-gray-900">FAQ</a>
+                <a href="#" class="text-gray-900 font-semibold">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="py-20 text-center">
+        <div class="container mx-auto px-6">
+            <h1 class="text-5xl font-bold text-gray-900 mb-4">Contact Us</h1>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                We're here to help. Find the best way to get in touch with our team below.
+            </p>
+        </div>
+    </section>
+
+    <!-- Info Cards Section -->
+    <section class="container mx-auto px-6 pb-20">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Card 1: Email -->
+            <div class="info-card">
+                <div class="w-12 h-12 rounded-full flex items-center justify-center mb-4" style="background-color: #f0fdf4; color: var(--brand-color);">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-2">Email Support</h3>
+                <p class="text-gray-600 mb-4">The best way to get a detailed answer. We respond within 24 hours.</p>
+                <a href="mailto:support@example.com" class="font-semibold" style="color: var(--brand-color);">support@example.com</a>
+            </div>
+            <!-- Card 2: Phone -->
+            <div class="info-card">
+                <div class="w-12 h-12 rounded-full flex items-center justify-center mb-4" style="background-color: #f0fdf4; color: var(--brand-color);">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-2">Phone Support</h3>
+                <p class="text-gray-600 mb-4">For urgent issues, call us during business hours (9am - 5pm EST).</p>
+                <a href="tel:+1-555-123-4567" class="font-semibold" style="color: var(--brand-color);">+1 (555) 123-4567</a>
+            </div>
+            <!-- Card 3: Office -->
+            <div class="info-card">
+                <div class="w-12 h-12 rounded-full flex items-center justify-center mb-4" style="background-color: #f0fdf4; color: var(--brand-color);">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-2">Our Office</h3>
+                <p class="text-gray-600 mb-4">Come visit us in person. We're open on weekdays.</p>
+                <p class="font-semibold text-gray-800">123 Tech Avenue, Suite 100<br>New York, NY 10001</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Form Section -->
+    <section class="bg-white py-20">
+        <div class="container mx-auto px-6 max-w-3xl">
+            <h2 class="text-4xl font-bold text-gray-900 mb-8 text-center">Or Send a Form</h2>
+            <form action="#" method="POST" class="space-y-6">
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
+                    <input type="text" id="name" name="name" class="form-input mt-1 block w-full rounded-md px-4 py-3" required>
+                </div>
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
+                    <input type="email" id="email" name="email" class="form-input mt-1 block w-full rounded-md px-4 py-3" required>
+                </div>
+                <div>
+                    <label for="message" class="block text-sm font-medium text-gray-700">How can we help?</label>
+                    <textarea id="message" name="message" rows="5" class="form-input mt-1 block w-full rounded-md px-4 py-3" required></textarea>
+                </div>
+                <div class="text-right">
+                    <button type="submit"
+                            class="submit-button text-white font-semibold py-3 px-8 rounded-lg text-lg shadow-md">
+                        Submit
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+</body>
+</html>

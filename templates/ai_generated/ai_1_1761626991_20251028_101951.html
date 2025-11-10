@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OnlyFans - Create Your Account</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* RESET */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+            color: #ffffff;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            width: 850px; /* Slightly wider */
+            height: 550px; /* Slightly taller */
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(15px); /* Increased blur */
+            border-radius: 25px; /* Softer corners */
+            overflow: hidden;
+            box-shadow: 0 0 60px rgba(0, 0, 0, 0.6); /* Stronger shadow */
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .form-side {
+            flex: 1;
+            padding: 60px; /* Increased padding */
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.8s ease-in-out;
+        }
+
+        .form-side h2 {
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 25px; /* Increased margin */
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #e1005a; /* OnlyFans accent color */
+            text-shadow: 0 0 10px rgba(225, 0, 90, 0.6);
+            font-size: 2.2em;
+            font-weight: 700;
+        }
+
+        .form-side form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 25px; /* Increased margin */
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 15px 15px 45px; /* Adjusted padding for icon */
+            border: none;
+            border-radius: 8px; /* Softer corners */
+            background: rgba(255, 255, 255, 0.08); /* Darker input background */
+            color: #ffffff;
+            font-size: 1em;
+            outline: none;
+            transition: border 0.3s ease, background 0.3s ease;
+        }
+
+        .input-group input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .input-group input:focus {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid #e1005a;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1.1em;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(45deg, #e1005a, #ff4d94); /* Gradient button */
+            color: #fff;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            letter-spacing: 0.5px;
+            box-shadow: 0 5px 15px rgba(225, 0, 90, 0.4);
+        }
+
+        button:hover {
+            background: linear-gradient(45deg, #ff4d94, #e1005a);
+            box-shadow: 0 8px 20px rgba(225, 0, 90, 0.6);
+            transform: translateY(-2px);
+        }
+
+        .social-login {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .social-login p {
+            font-size: 0.9em;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 15px;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 1.3em;
+            text-decoration: none;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background: #e1005a;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(225, 0, 90, 0.4);
+        }
+
+        .toggle-text {
+            margin-top: 25px;
+            font-size: 0.9em;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .toggle-text a {
+            color: #e1005a;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .toggle-text a:hover {
+            color: #ff4d94;
+            text-decoration: underline;
+        }
+
+        /* Side Panel Styling */
+        .side-panel {
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, #e1005a, #b00045); /* Darker gradient for panel */
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            transition: transform 0.8s ease-in-out;
+            border-radius: 25px; /* Apply to match container */
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .side-panel-signup {
+            transform: translateX(0);
+        }
+
+        .side-panel-signin {
+            transform: translateX(-100%);
+        }
+
+        .side-panel h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .side-panel p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            max-width: 350px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .side-panel button {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid #fff;
+            color: #fff;
+            padding: 12px 30px;
+            font-weight: 600;
+            font-size: 1.05em;
+            border-radius: 30px;
+            box-shadow: none;
+            transition: all 0.4s ease;
+        }
+
+        .side-panel button:hover {
+            background: #fff;
+            color: #e1005a;
+            border-color: #e1005a;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Active form state */
+        .container.active .form-signup {
+            transform: translateX(-100%);
+        }
+
+        .container.active .form-signin {
+            transform: translateX(0);
+        }
+
+        .container.active .side-panel-signup {
+            transform: translateX(100%);
+        }
+
+        .container.active .side-panel-signin {
+            transform: translateX(0);
+        }
+
+        .form-signup {
+            transform: translateX(0);
+        }
+
+        .form-signin {
+            transform: translateX(100%);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4); /* Ensure sign-in form has same background */
+            padding: 60px;
+            border-radius: 25px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="container">
+        <!-- Sign Up Form -->
+        <div class="form-side form-signup">
+            <h2>Join OnlyFans</h2>
+            <form action="#" method="POST">
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" placeholder="Display Name" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" placeholder="Email Address" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" placeholder="Password" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" placeholder="Confirm Password" required>
+                </div>
+                <button type="submit">Create Account</button>
+            </form>
+            <div class="social-login">
+                <p>Or sign up with</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-google"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                </div>
+            </div>
+            <div class="toggle-text">
+                Already a creator? <a href="#" id="signInLink">Log In</a>
+            </div>
+        </div>
+
+        <!-- Sign In Form -->
+        <div class="form-side form-signin">
+            <h2>Welcome Back</h2>
+            <form action="#" method="POST">
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" placeholder="Email Address" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" placeholder="Password" required>
+                </div>
+                <button type="submit">Log In</button>
+            </form>
+            <div class="social-login">
+                <p>Or log in with</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-google"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                </div>
+            </div>
+            <div class="toggle-text">
+                New to OnlyFans? <a href="#" id="signUpLink">Sign Up</a>
+            </div>
+        </div>
+
+        <!-- Side Panel for Sign Up -->
+        <div class="side-panel side-panel-signup">
+            <h3>Welcome to OnlyFans</h3>
+            <p>Unlock your potential. Connect with your fans and start sharing exclusive content today!</p>
+            <button id="goToSignIn">Already a Creator?</button>
+        </div>
+
+        <!-- Side Panel for Sign In -->
+        <div class="side-panel side-panel-signin">
+            <h3>Creator Login</h3>
+            <p>Glad to see you back! Log in to manage your content and engage with your community.</p>
+            <button id="goToSignUp">Join OnlyFans</button>
+        </div>
+    </div>
+
+    <script>
+        const container = document.getElementById('container');
+        const signInLink = document.getElementById('signInLink');
+        const signUpLink = document.getElementById('signUpLink');
+        const goToSignIn = document.getElementById('goToSignIn');
+        const goToSignUp = document.getElementById('goToSignUp');
+
+        goToSignIn.addEventListener('click', () => {
+            container.classList.add('active');
+        });
+
+        goToSignUp.addEventListener('click', () => {
+            container.classList.remove('active');
+        });
+
+        signInLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            container.classList.add('active');
+        });
+
+        signUpLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            container.classList.remove('active');
+        });
+    </script>
+</body>
+</html>

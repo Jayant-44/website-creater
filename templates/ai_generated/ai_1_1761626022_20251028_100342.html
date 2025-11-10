@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmLink Connect - Farmer Signup</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* RESET */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to right, #a8e063, #56ab2f); /* Fresh farm greens */
+            overflow: hidden;
+            color: #333;
+        }
+
+        .container {
+            display: flex;
+            width: 900px; /* Slightly wider */
+            height: 600px; /* Taller for more info */
+            background: rgba(255,255,255,0.95); /* Nearly opaque white for clean farm feel */
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        .form-side {
+            flex: 2; /* Give more space to the form */
+            padding: 40px;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.8s ease-in-out;
+            background: #fff; /* White background for the form side */
+        }
+
+        .form-side h2 {
+            font-family: 'Merriweather', serif;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #56ab2f; /* Farm green */
+            text-shadow: 1px 1px #a8e063;
+            font-size: 2.2em;
+            text-align: center;
+        }
+
+        .form-side form {
+            width: 100%;
+            max-width: 400px; /* Constrain form width */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 25px;
+            width: 100%;
+        }
+
+        .input-group input,
+        .input-group select,
+        .input-group textarea {
+            width: 100%;
+            padding: 12px 15px 12px 45px; /* Adjust padding for icon */
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            outline: none;
+            font-size: 1em;
+            background-color: #f9f9f9;
+            color: #333;
+            transition: border-color 0.3s ease;
+        }
+
+        .input-group input:focus,
+        .input-group select:focus,
+        .input-group textarea:focus {
+            border-color: #56ab2f;
+            box-shadow: 0 0 5px rgba(86, 171, 47, 0.3);
+        }
+
+        .input-group label {
+            position: absolute;
+            left: 45px; /* Align with input text */
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            pointer-events: none;
+            transition: 0.3s ease all;
+            font-size: 0.9em;
+        }
+
+        .input-group input:focus ~ label,
+        .input-group input:not(:placeholder-shown) ~ label,
+        .input-group select:focus ~ label,
+        .input-group select:not([value=""]) ~ label,
+        .input-group textarea:focus ~ label,
+        .input-group textarea:not(:placeholder-shown) ~ label {
+            top: -10px;
+            left: 10px;
+            font-size: 0.8em;
+            color: #56ab2f;
+            background-color: #fff;
+            padding: 0 5px;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            font-size: 1.1em;
+        }
+
+        .input-group textarea {
+            min-height: 80px;
+            resize: vertical;
+            padding-top: 15px;
+        }
+
+        .input-group input[type="submit"] {
+            background: linear-gradient(to right, #56ab2f, #a8e063);
+            color: #fff;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: background 0.3s ease, transform 0.2s ease;
+            margin-top: 20px;
+            padding-left: 15px; /* Remove left padding from general input */
+        }
+
+        .input-group input[type="submit"]:hover {
+            background: linear-gradient(to right, #a8e063, #56ab2f);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .switch-link {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .switch-link a {
+            color: #56ab2f;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .switch-link a:hover {
+            color: #3c7d24;
+        }
+
+        .info-side {
+            flex: 1; /* Smaller info side */
+            background: url('https://source.unsplash.com/random/800x600/?farm,crops,nature') center center / cover no-repeat; /* Dynamic farm image */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .info-side::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5); /* Dark overlay for text readability */
+            z-index: -1;
+        }
+
+        .info-side h2 {
+            font-family: 'Merriweather', serif;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.6);
+        }
+
+        .info-side p {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .info-side button {
+            background: rgba(255,255,255,0.2); /* Semi-transparent white */
+            color: #fff;
+            border: 2px solid #fff;
+            padding: 12px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .info-side button:hover {
+            background: rgba(255,255,255,0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                width: 90%;
+                height: auto;
+            }
+            .form-side, .info-side {
+                flex: none;
+                width: 100%;
+                padding: 30px;
+            }
+            .info-side {
+                height: 300px; /* Give info side a fixed height on small screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-side">
+            <h2>Join FarmLink Connect</h2>
+            <form action="#" method="POST">
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="farmName" name="farmName" placeholder=" " required>
+                    <label for="farmName">Farm Name</label>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="email" name="email" placeholder=" " required>
+                    <label for="email">Email Address</label>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password" name="password" placeholder=" " required>
+                    <label for="password">Password</label>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-seedling"></i>
+                    <select id="primaryCrop" name="primaryCrop" required>
+                        <option value="">Select Primary Crop</option>
+                        <option value="wheat">Wheat</option>
+                        <option value="corn">Corn</option>
+                        <option value="soybeans">Soybeans</option>
+                        <option value="rice">Rice</option>
+                        <option value="vegetables">Vegetables</option>
+                        <option value="fruits">Fruits</option>
+                        <option value="cotton">Cotton</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <label for="primaryCrop">Primary Crop</label>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <textarea id="farmLocation" name="farmLocation" placeholder=" " required></textarea>
+                    <label for="farmLocation">Farm Location (City, State/Province)</label>
+                </div>
+                <div class="input-group">
+                    <input type="submit" value="Register Farm">
+                </div>
+            </form>
+            <p class="switch-link">
+                Already a member? <a href="#">Log In</a>
+            </p>
+        </div>
+        <div class="info-side">
+            <h2>Grow Your Business, Sustain Your Land</h2>
+            <p>Connect with buyers, share best practices, and thrive in the agricultural community. Your journey to a greener future starts here!</p>
+            <button onclick="alert('Learn more about FarmLink Connect!');">Learn More</button>
+        </div>
+    </div>
+</body>
+</html>

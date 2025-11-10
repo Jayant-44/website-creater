@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Friendly</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Google Font: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom CSS for a friendly, "bubbly" contact page */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #fef3c7; /* Amber 100 */
+        }
+        
+        :root {
+            --brand-color: #f59e0b; /* Amber 500 */
+            --brand-color-dark: #d97706; /* Amber 600 */
+        }
+        
+        .form-container {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .form-input {
+            border: 2px solid #e5e7eb;
+            border-radius: 9999px; /* rounded-full */
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        .form-input:focus {
+            border-color: var(--brand-color);
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
+            outline: none;
+        }
+        
+        .submit-button {
+            background-color: var(--brand-color);
+            color: #fff;
+            border-radius: 9999px; /* rounded-full */
+            transition: all 0.3s ease;
+        }
+        .submit-button:hover {
+            background-color: var(--brand-color-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(245, 158, 11, 0.3);
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-6">
+
+    <div class="w-full max-w-lg p-8 md:p-12 bg-white rounded-2xl shadow-2xl form-container">
+        
+        <!-- Header -->
+        <div class="text-center mb-10">
+            <img src="https://placehold.co/400x200/fef3c7/f59e0b?text=Say+Hello!&font=poppins" alt="Header illustration" class="w-full rounded-lg mb-6">
+            <h1 class="text-4xl font-bold text-gray-900">Get in Touch</h1>
+            <p class="text-gray-600 mt-3">
+                We'd love to hear from you!
+            </p>
+        </div>
+
+        <!-- Signup Form -->
+        <form action="#" method="POST" class="space-y-5">
+            <div>
+                <label for="name" class="block text-sm font-medium text-gray-700 ml-4 mb-1">Your Name</label>
+                <input type="text" id="name" name="name"
+                       class="form-input block w-full px-4 py-3"
+                       placeholder="What should we call you?" required>
+            </div>
+            
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700 ml-4 mb-1">Your Email</label>
+                <input type="email" id="email" name="email"
+                       class="form-input block w-full px-4 py-3"
+                       placeholder="Where can we reach you?" required>
+            </div>
+
+            <div>
+                <label for="message" class="block text-sm font-medium text-gray-700 ml-4 mb-1">Your Message</label>
+                <textarea id="message" name="message" rows="5"
+                          class="form-input block w-full px-4 py-3 !rounded-2xl"
+                          placeholder="What's on your mind?" required></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <div>
+                <button type="submit"
+                        class="submit-button w-full text-white font-bold py-3 px-4 shadow-lg">
+                    Send It!
+                </button>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>

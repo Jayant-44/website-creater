@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result: {{ template_file }} | Website Buddy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Reusing your color variables for consistency */
+        :root {
+            --primary-color: #00bcd4; /* Cyan/Aqua */
+            --secondary-color: #1f084a; /* Deep Violet/Black Background */
+            --accent-color: #ff0077; /* Neon Pink */
+            --text-color: #a0aec0; /* Light Gray for body text */
+            --light-text: #edf2f7; /* Near-white for headers */
+            --font-body: 'Inter', sans-serif;
+            --font-heading: 'Orbitron', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            padding: 40px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: var(--light-text);
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px rgba(255, 0, 119, 0.4);
+        }
+        
+        h2 {
+            color: var(--primary-color);
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        /* Prompt Editing Container */
+        #prompt-editor-container {
+            background: rgba(47, 12, 110, 0.8);
+            border: 1px solid rgba(0, 188, 212, 0.3);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 15px rgba(0, 188, 212, 0.2);
+        }
+        #prompt-editor-container strong {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+        #prompt-input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: 1px solid var(--primary-color);
+            background: #0d002a;
+            color: var(--light-text);
+            font-size: 1em;
+            box-sizing: border-box;
+        }
+
+        .grid {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .demo-area, .code-area {
+            flex: 1 1 45%; 
+            min-width: 400px; 
+            position: relative; 
+        }
+        
+        /* Iframe for Live Demo */
+        #demo-iframe { 
+            width: 100%; 
+            height: 600px; 
+            background-color: white; 
+            border: 5px solid var(--primary-color); 
+            border-radius: 10px; 
+            box-shadow: 0 0 30px rgba(0, 188, 212, 0.6); 
+        }
+
+        /* Code Display Area */
+        #code-display { 
+            background: #0d002a; 
+            color: #00bcd4; 
+            padding: 20px; 
+            border-radius: 10px; 
+            overflow: auto; 
+            font-size: 0.9em; 
+            line-height: 1.4;
+            height: 600px;
+            border: 1px solid rgba(255, 0, 119, 0.3);
+            white-space: pre; 
+        }
+        
+        /* Textarea for Editing */
+        #code-editor {
+            width: 100%;
+            height: 600px;
+            background: #0d002a; 
+            color: #00bcd4;
+            border: 1px solid var(--accent-color);
+            padding: 15px;
+            border-radius: 10px;
+            font-family: monospace;
+            font-size: 0.9em;
+            resize: none;
+            display: none; 
+        }
+        
+        /* Action Buttons */
+        .action-buttons { 
+            text-align: center; 
+            margin-top: 40px;
+        }
+
+        .btn { 
+            padding: 12px 25px; 
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            color: var(--light-text); 
+            border: none; 
+            border-radius: 50px; 
+            cursor: pointer; 
+            font-weight: bold;
+            transition: all 0.3s;
+            margin: 0 5px;
+            text-transform: uppercase;
+        }
+        .btn-secondary {
+            background: #4a5568;
+            box-shadow: none;
+        }
+        .btn-secondary:hover {
+            background: #606b7d;
+            box-shadow: none;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 0, 119, 0.5);
+        }
+
+        /* Loader Style */
+        .loader {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--accent-color);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            display: none;
+        }
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        @media (max-width: 900px) {
+            .grid {
+                flex-direction: column;
+            }
+            .demo-area, .code-area {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>✨ AI Generation Complete!</h1>
+        
+        <div id="prompt-editor-container">
+            <p><strong>Your Current Prompt:</strong></p>
+            <input type="text" id="prompt-input" value="{{ user_query }}" placeholder="Edit your prompt here...">
+            <p style="margin-top: 10px;"><strong>Matched Description:</strong> Template {{ template_id }} - {{ generated_prompt }}</p>
+        </div>
+
+        <div class="grid">
+            <div class="demo-area">
+                <h2>Live Demo <i class="fa-solid fa-desktop"></i></h2>
+                <div class="loader" id="demo-loader"></div> 
+                <iframe id="demo-iframe" 
+                    src="{% if custom_html_content %}about:blank{% else %}{{ url_for('serve_template_file', template_id=template_id) }}{% endif %}" 
+                    title="Live Demo">
+                </iframe>
+            </div>
+            
+            <div class="code-area">
+                <h2>Code Editor <i class="fa-solid fa-code"></i></h2>
+                <pre id="code-display">Loading code...</pre>
+                <textarea id="code-editor" style="display:none;"></textarea>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <h2>Actions</h2>
+            
+            <button class="btn" id="refine-prompt-btn" onclick="regeneratePrompt()">
+                <i class="fa-solid fa-bolt"></i> Re-Generate with New Prompt
+            </button>
+            
+            <button class="btn btn-secondary" id="edit-code-btn" onclick="toggleCodeEditMode(true)">
+                <i class="fa-solid fa-pen-to-square"></i> Refine Code
+            </button>
+            
+            <button class="btn" id="run-code-btn" onclick="runCode()" style="display:none;">
+                <i class="fa-solid fa-play"></i> Update/Run Code
+            </button>
+            <button class="btn btn-secondary" id="cancel-edit-btn" onclick="toggleCodeEditMode(false)" style="display:none;">
+                <i class="fa-solid fa-xmark"></i> Cancel Edit
+            </button>
+
+            <button class="btn" id="satisfied-btn" onclick="alert('Congratulations! This code is ready for deployment. The updated version is in your history.');" style="background: #28a745;">
+                <i class="fa-solid fa-check"></i> Finalize Code
+            </button>
+        </div>
+    </div>
+    
+    <script>
+        const codeDisplay = document.getElementById('code-display');
+        const codeEditor = document.getElementById('code-editor');
+        const demoIframe = document.getElementById('demo-iframe');
+        const demoLoader = document.getElementById('demo-loader');
+        const promptInput = document.getElementById('prompt-input');
+        const refinePromptBtn = document.getElementById('refine-prompt-btn');
+        const editCodeBtn = document.getElementById('edit-code-btn');
+        const runCodeBtn = document.getElementById('run-code-btn');
+        const cancelEditBtn = document.getElementById('cancel-edit-btn');
+        const satisfiedBtn = document.getElementById('satisfied-btn');
+
+        // Check if custom HTML content was passed from the AI simulation route
+        const customContent = `{{ custom_html_content|safe }}`;
+        
+        // Function to safely fetch and display the code
+        function fetchAndDisplayCode() {
+            demoLoader.style.display = 'block';
+            codeDisplay.textContent = 'Loading code...';
+            
+            if (customContent.trim().length > 0) {
+                // Scenario 1: AI EDIT (Use custom HTML)
+                const unescapedData = customContent.trim();
+                
+                // Set iframe content using data URL
+                const blob = new Blob([unescapedData], { type: 'text/html' });
+                const url = URL.createObjectURL(blob);
+                demoIframe.src = url;
+
+                // Update the code view
+                const escapedData = unescapedData.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+                codeDisplay.textContent = escapedData;
+                codeEditor.value = unescapedData;
+                
+                demoIframe.onload = () => { demoLoader.style.display = 'none'; };
+
+            } else {
+                // Scenario 2: STANDARD TEMPLATE (Fetch from server)
+                fetch('{{ url_for("serve_template_file", template_id=template_id) }}')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`Server returned status: ${response.status}`);
+                        }
+                        return response.text();
+                    })
+                    .then(data => {
+                        const unescapedData = data;
+                        
+                        const escapedData = unescapedData.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+                        
+                        codeDisplay.textContent = escapedData;
+                        codeEditor.value = unescapedData; 
+                        
+                        demoIframe.onload = () => { demoLoader.style.display = 'none'; };
+                    })
+                    .catch(error => {
+                        codeDisplay.textContent = `Error loading code content: ${error.message}.`;
+                        console.error('Code Fetch Error:', error);
+                        demoLoader.style.display = 'none';
+                    });
+            }
+        }
+
+        // Function to switch between code display and edit mode
+        function toggleCodeEditMode(enable) {
+            if (enable) {
+                codeDisplay.style.display = 'none';
+                codeEditor.style.display = 'block';
+                editCodeBtn.style.display = 'none';
+                refinePromptBtn.style.display = 'none';
+                satisfiedBtn.style.display = 'none';
+                runCodeBtn.style.display = 'inline-block';
+                cancelEditBtn.style.display = 'inline-block';
+            } else {
+                codeDisplay.style.display = 'block';
+                codeEditor.style.display = 'none';
+                editCodeBtn.style.display = 'inline-block';
+                refinePromptBtn.style.display = 'inline-block';
+                satisfiedBtn.style.display = 'inline-block';
+                runCodeBtn.style.display = 'none';
+                cancelEditBtn.style.display = 'none';
+            }
+        }
+        
+        // Function to run the code currently in the textarea (Code Refinement)
+        function runCode() {
+            const code = codeEditor.value;
+            demoLoader.style.display = 'block';
+            
+            // Create a data URL from the current code
+            const blob = new Blob([code], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            
+            // Update the iframe source
+            demoIframe.src = url;
+            
+            // Update the read-only display code for consistency
+            const escapedCode = code.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+            codeDisplay.textContent = escapedCode;
+
+            // Hide loader once iframe finishes loading
+            demoIframe.onload = function() {
+                demoLoader.style.display = 'none';
+                demoIframe.onload = null;
+            };
+            
+            // Revert back to display mode after running
+            toggleCodeEditMode(false); 
+        }
+
+        // Function to submit the new prompt for regeneration (Prompt Refinement)
+        function regeneratePrompt() {
+            const newQuery = promptInput.value.trim();
+            if (!newQuery) {
+                alert("Please enter a non-empty prompt for regeneration.");
+                return;
+            }
+            
+            // Use JavaScript to create and submit a form dynamically
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '{{ url_for("dashboard") }}'; 
+            
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'query';
+            input.value = newQuery;
+            
+            form.appendChild(input);
+            document.body.appendChild(form);
+            
+            form.submit(); 
+        }
+
+        // Initial load of the code content
+        document.addEventListener('DOMContentLoaded', fetchAndDisplayCode);
+    </script>
+</body>
+</html>

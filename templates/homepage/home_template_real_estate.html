@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage - Real Estate</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Google Font: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom CSS for a professional Real Estate site */
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #2d3748;
+        }
+
+        :root {
+            --brand-color: #065f46; /* Dark Green */
+            --brand-color-light: #d1fae5;
+        }
+
+        .hero-bg {
+            background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://placehold.co/1920x900/a5b4fc/ffffff?text=Beautiful+Home&font=poppins');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .property-card {
+            transition: all 0.3s ease;
+        }
+        .property-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .property-card img {
+            transition: transform 0.3s ease;
+        }
+        .property-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .search-form {
+            backdrop-filter: blur(5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .search-button {
+            background-color: var(--brand-color);
+            transition: all 0.3s ease;
+        }
+        .search-button:hover {
+            background-color: #044230;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <!-- Header -->
+    <header class="absolute top-0 left-0 right-0 z-50 py-4">
+        <nav class="container mx-auto px-6 flex justify-between items-center">
+            <div class="text-3xl font-bold text-white">Skyline Realty</div>
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="#" class="text-white font-medium hover:text-gray-200">Buy</a>
+                <a href="#" class="text-white font-medium hover:text-gray-200">Sell</a>
+                <a href="#" class="text-white font-medium hover:text-gray-200">About Us</a>
+                <a href="#" class="border border-white text-white px-5 py-2 rounded-md font-medium hover:bg-white hover:text-gray-900 transition duration-300">
+                    Contact
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-bg h-[70vh] md:h-[80vh] flex items-center justify-center text-white">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-8">Find Your Dream Home</h1>
+            
+            <!-- Search Form -->
+            <form class="search-form p-6 rounded-lg max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
+                <input type="text" placeholder="Enter city, neighborhood, or ZIP..." class="w-full p-3 rounded-md text-gray-700 col-span-1 md:col-span-2 focus:outline-none focus:ring-2 focus:ring-green-700">
+                <select class="w-full p-3 rounded-md text-gray-500 focus:outline-none focus:ring-2 focus:ring-green-700">
+                    <option value="">Any Price</option>
+                    <option value="300k">$300,000+</option>
+                    <option value="500k">$500,000+</option>
+                    <option value="700k">$700,000+</option>
+                </select>
+                <button type="submit" class="w-full p-3 rounded-md search-button text-white font-semibold uppercase">
+                    Search
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Featured Properties Section -->
+    <section class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="text-left mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Featured Properties</h2>
+                <p class="text-lg text-gray-600">
+                    Hand-picked listings from our expert agents.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Property 1 -->
+                <div class="property-card bg-white rounded-lg overflow-hidden shadow-lg">
+                    <div class="overflow-hidden">
+                        <img src="https://placehold.co/600x400/065f46/ffffff?text=Modern+Villa&font=poppins" alt="Modern Villa" class="w-full h-56 object-cover">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-2xl font-bold" style="color: var(--brand-color);">$1,250,000</span>
+                            <span class="bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full">For Sale</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Modern Lakefront Villa</h3>
+                        <p class="text-gray-500 mb-4">123 Sunset Ave, Miami, FL</p>
+                        <div class="flex space-x-4 text-gray-600 border-t pt-4">
+                            <span><strong>4</strong> bed</span>
+                            <span><strong>3.5</strong> bath</span>
+                            <span><strong>3,200</strong> sqft</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Property 2 -->
+                <div class="property-card bg-white rounded-lg overflow-hidden shadow-lg">
+                    <div class="overflow-hidden">
+                        <img src="https://placehold.co/600x400/065f46/ffffff?text=Urban+Loft&font=poppins" alt="Urban Loft" class="w-full h-56 object-cover">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-2xl font-bold" style="color: var(--brand-color);">$4,500 / mo</span>
+                            <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full">For Rent</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Stylish Urban Loft</h3>
+                        <p class="text-gray-500 mb-4">456 Main St, Unit 8B, New York, NY</p>
+                        <div class="flex space-x-4 text-gray-600 border-t pt-4">
+                            <span><strong>2</strong> bed</span>
+                            <span><strong>2</strong> bath</span>
+                            <span><strong>1,800</strong> sqft</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Property 3 -->
+                <div class="property-card bg-white rounded-lg overflow-hidden shadow-lg">
+                    <div class="overflow-hidden">
+                        <img src="https://placehold.co/600x400/065f46/ffffff?text=Cozy+Cottage&font=poppins" alt="Cozy Cottage" class="w-full h-56 object-cover">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-2xl font-bold" style="color: var(--brand-color);">$680,000</span>
+                            <span class="bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full">For Sale</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Charming Suburban Home</h3>
+                        <p class="text-gray-500 mb-4">789 Oak Rd, Austin, TX</p>
+                        <div class="flex space-x-4 text-gray-600 border-t pt-4">
+                            <span><strong>3</strong> bed</span>
+                            <span><strong>2</strong> bath</span>
+                            <span><strong>2,100</strong> sqft</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Why Choose Skyline Realty?</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div class="text-center p-4">
+                    <div class="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4" style="background-color: var(--brand-color-light); color: var(--brand-color);">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-2.37M16 11V3H8v8m8 0h5v5h-5v-5zM8 11H3v10h5V11z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Expert Agents</h3>
+                    <p class="text-gray-600">Our agents are local experts with a deep understanding of the market and a commitment to your goals.</p>
+                </div>
+                <div class="text-center p-4">
+                    <div class="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4" style="background-color: var(--brand-color-light); color: var(--brand-color);">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12 12 0 0012 21.694a12 12 0 008.618-3.04A11.955 11.955 0 0112 2.944z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Streamlined Process</h3>
+                    <p class="text-gray-600">We leverage technology to make buying or selling your home simple, fast, and stress-free.</p>
+                </div>
+                <div class="text-center p-4">
+                    <div class="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4" style="background-color: var(--brand-color-light); color: var(--brand-color);">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 19.5V7a1 1 0 011-1h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 00.707.293H14z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Client Satisfaction</h3>
+                    <p class="text-gray-600">With a 99% client satisfaction rate, we are dedicated to providing an exceptional experience.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-12">
+        <div class="container mx-auto px-6 text-center">
+            <h3 class="text-2xl font-bold text-white mb-4">Skyline Realty</h3>
+            <p class="mb-6">Your future home is waiting.</p>
+            <p class="text-gray-500 text-sm">&copy; 2025 Skyline Realty. All rights reserved. Licensed Real Estate Brokerage.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Creative Agency</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom CSS for a Creative Agency */
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+        }
+        
+        h1, h2, h3, h4, .font-serif {
+            font-family: 'DM Serif Display', serif;
+        }
+
+        :root {
+            --brand-color: #f97316; /* Vibrant Orange */
+        }
+
+        .hero-bg {
+            background-color: #fffbeb; /* Light yellow cream */
+        }
+        
+        .process-step {
+            border-left: 3px solid var(--brand-color);
+            transition: all 0.3s ease;
+        }
+        .process-step:hover {
+            background-color: #fff;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transform: translateX(5px);
+        }
+        
+        .stat-number {
+            color: var(--brand-color);
+        }
+        
+        .team-card img {
+            filter: grayscale(100%);
+            transition: all 0.4s ease;
+        }
+        .team-card:hover img {
+            filter: grayscale(0%);
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="bg-white">
+
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-3xl font-serif font-bold text-gray-900">PixelHaus</div>
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="#" class="text-gray-600 hover:text-gray-900">Home</a>
+                <a href="#" class="text-gray-900 font-semibold" style="color: var(--brand-color);">About</a>
+                <a href="#" class="text-gray-600 hover:text-gray-900">Work</a>
+                <a href="#" class="text-gray-600 hover:text-gray-900">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-bg py-24 md:py-32">
+        <div class="container mx-auto px-6 max-w-4xl text-center">
+            <h1 class="text-5xl md:text-7xl font-bold text-gray-900 mb-6">We don't just build websites. We build experiences.</h1>
+            <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
+                PixelHaus is a creative agency where digital strategy, bold design, and new technology unite to create things people love.
+            </p>
+        </div>
+    </section>
+
+    <!-- Our Values Section -->
+    <section class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Our Values</h2>
+                <p class="text-lg text-gray-600 max-w-xl mx-auto">
+                    These principles guide our work, our team, and our partnerships.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <!-- Value 1 -->
+                <div class="text-center p-6">
+                    <h3 class="text-5xl font-serif stat-number mb-3">01.</h3>
+                    <h4 class="text-2xl font-bold mb-3">Be Curious</h4>
+                    <p class="text-gray-600">
+                        We ask "what if?" We explore new ideas and aren't afraid to challenge the status quo.
+                    </p>
+                </div>
+                <!-- Value 2 -->
+                <div class="text-center p-6">
+                    <h3 class="text-5xl font-serif stat-number mb-3">02.</h3>
+                    <h4 class="text-2xl font-bold mb-3">Build Together</h4>
+                    <p class="text-gray-600">
+                        Great ideas are a team sport. We collaborate openly, with our clients and with each other.
+                    </p>
+                </div>
+                <!-- Value 3 -->
+                <div class="text-center p-6">
+                    <h3 class="text-5xl font-serif stat-number mb-3">03.</h3>
+                    <h4 class="text-2xl font-bold mb-3">Aim for Wow</h4>
+                    <p class="text-gray-600">
+                        We're not here to be average. We pour our craft into every detail to create work that inspires.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Our Process Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                <div class="pr-0 md:pr-12">
+                    <h2 class="text-4xl font-bold text-gray-900 mb-6">Our Process</h2>
+                    <div class="space-y-6">
+                        <div class="process-step pl-6 py-4">
+                            <h3 class="text-2xl font-bold mb-2">Discovery & Strategy</h3>
+                            <p class="text-gray-600">We start by understanding your "why." We dive deep into your brand, your audience, and your goals.</p>
+                        </div>
+                        <div class="process-step pl-6 py-4">
+                            <h3 class="text-2xl font-bold mb-2">Design & Prototype</h3>
+                            <p class="text-gray-600">We translate strategy into a visual language, creating wireframes and high-fidelity prototypes that you can see and feel.</p>
+                        </div>
+                        <div class="process-step pl-6 py-4">
+                            <h3 class="text-2xl font-bold mb-2">Build & Launch</h3>
+                            <p class="text-gray-600">Our developers bring the designs to life with clean, scalable code. We test, iterate, and deploy.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="rounded-lg overflow-hidden">
+                    <img src="https://placehold.co/600x700/fed7aa/f97316?text=Our+Process&font=poppins" alt="Our team at a whiteboard" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Meet the Team -->
+    <section class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Meet the Haus</h2>
+                <p class="text-lg text-gray-600 max-w-xl mx-auto">
+                    The creative minds behind our work.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Team Card 1 -->
+                <div class="team-card text-center">
+                    <div class="overflow-hidden rounded-lg">
+                        <img src="https://placehold.co/400x450/d1d5db/333333?text=Jane&font=poppins" alt="Jane Doe" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mt-4">Jane Doe</h3>
+                    <p class="text-gray-500" style="color: var(--brand-color);">Creative Director</p>
+                </div>
+                <!-- Team Card 2 -->
+                <div class="team-card text-center">
+                    <div class="overflow-hidden rounded-lg">
+                        <img src="https://placehold.co/400x450/d1d5db/333333?text=Mark&font=poppins" alt="Mark Lee" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mt-4">Mark Lee</h3>
+                    <p class="text-gray-500" style="color: var(--brand-color);">Lead Developer</p>
+                </div>
+                <!-- Team Card 3 -->
+                <div class="team-card text-center">
+                    <div class="overflow-hidden rounded-lg">
+                        <img src="https://placehold.co/400x450/d1d5db/333333?text=Aisha&font=poppins" alt="Aisha Khan" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mt-4">Aisha Khan</h3>
+                    <p class="text-gray-500" style="color: var(--brand-color);">Lead Designer</p>
+                </div>
+                <!-- Team Card 4 -->
+                <div class="team-card text-center">
+                    <div class="overflow-hidden rounded-lg">
+                        <img src="https://placehold.co/400x450/d1d5db/333333?text=Tom&font=poppins" alt="Tom Chen" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mt-4">Tom Chen</h3>
+                    <p class="text-gray-500" style="color: var(--brand-color);">Strategist</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-12">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 PixelHaus. We dream in digital.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glassmorphism Sign Up Form</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* RESET */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* Gradient background for the body */
+            background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+            overflow: hidden;
+            position: relative; /* For the background shapes */
+        }
+
+        /* Background shapes for visual interest */
+        body::before, body::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1));
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        }
+
+        body::before {
+            width: 250px;
+            height: 250px;
+            top: -50px;
+            left: -50px;
+            animation: floatShape 10s infinite ease-in-out alternate;
+        }
+
+        body::after {
+            width: 300px;
+            height: 300px;
+            bottom: -70px;
+            right: -70px;
+            animation: floatShape 12s infinite ease-in-out alternate-reverse;
+        }
+
+        @keyframes floatShape {
+            0% { transform: translate(0, 0); }
+            50% { transform: translate(20px, 20px); }
+            100% { transform: translate(0, 0); }
+        }
+
+        .container {
+            display: flex;
+            width: 850px; /* Slightly wider for better layout */
+            height: 550px; /* Slightly taller */
+            /* Glassmorphism effect */
+            background: rgba(255, 255, 255, 0.15); /* Semi-transparent white */
+            backdrop-filter: blur(20px); /* Stronger blur */
+            -webkit-backdrop-filter: blur(20px); /* For Safari */
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3); /* Light border for definition */
+            overflow: hidden;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); /* Prominent shadow */
+            position: relative;
+            z-index: 1; /* Ensure container is above background shapes */
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .form-side {
+            flex: 1;
+            padding: 50px;
+            color: #ffffff; /* White text for contrast */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.8s ease-in-out, background 0.8s ease-in-out;
+            position: relative;
+            z-index: 2; /* Ensure content is above background effects */
+        }
+
+        .form-side h2 {
+            font-family: 'Poppins', sans-serif;
+            margin-bottom: 25px; /* More space */
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+            /* Gradient text color */
+            background: linear-gradient(45deg, #00c6ff, #0072ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Subtle shadow */
+        }
+
+        .form-side form {
+            width: 80%; /* Slightly smaller width for form elements */
+            display: flex;
+            flex-direction: column;
+            gap: 15px; /* Space between inputs */
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid rgba(255, 255, 255, 0.3); /* Lighter border */
+            border-radius: 10px; /* More rounded */
+            background: rgba(255, 255, 255, 0.2); /* Slightly more opaque for input fields */
+            color: #fff;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Subtle shadow for inputs */
+        }
+
+        .input-group input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .input-group input:focus {
+            border-color: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        .input-group label {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.8);
+            pointer-events: none;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+
+        .input-group input:focus + label,
+        .input-group input:not(:placeholder-shown) + label {
+            top: 0px; /* Move label above input */
+            left: 10px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.9);
+            background: linear-gradient(45deg, #00c6ff, #0072ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            padding: 0 5px;
+        }
+
+        .social-login {
+            margin-top: 20px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-login a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            font-size: 20px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .social-login a:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        .form-side button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+            /* Gradient button background */
+            background: linear-gradient(45deg, #00c6ff, #0072ff);
+            color: #fff;
+            box-shadow: 0 8px 15px rgba(0, 198, 255, 0.3);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-side button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 198, 255, 0.4);
+            background: linear-gradient(45deg, #0072ff, #00c6ff); /* Slight color shift on hover */
+        }
+
+        .toggle-panel {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            /* Gradient background for the panel */
+            background: linear-gradient(135deg, #89f7fe, #66a6ff);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            transition: transform 0.8s ease-in-out;
+            z-index: 3; /* Ensure panel is above form sides */
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            border-radius: 20px; /* Apply border-radius to match container */
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .toggle-panel h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            font-weight: 700;
+        }
+
+        .toggle-panel p {
+            font-size: 16px;
+            line-height: 1.6;
+            text-align: center;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .toggle-panel button {
+            background: rgba(255, 255, 255, 0.3); /* Glassmorphism button */
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            color: #fff;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            text-transform: uppercase;
+        }
+
+        .toggle-panel button:hover {
+            background: rgba(255, 255, 255, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        }
+
+        /* Initial state of the forms */
+        .sign-in-form {
+            position: absolute;
+            width: 50%;
+            height: 100%;
+            left: 0;
+            opacity: 1;
+            z-index: 1;
+        }
+
+        .sign-up-form {
+            position: absolute;
+            width: 50%;
+            height: 100%;
+            right: 0;
+            opacity: 0;
+            z-index: 0;
+            transform: translateX(100%); /* Start off-screen to the right */
+        }
+
+        /* Container class for when sign-up is active */
+        .container.sign-up-active .sign-in-form {
+            transform: translateX(-100%);
+            opacity: 0;
+            z-index: 0;
+        }
+
+        .container.sign-up-active .sign-up-form {
+            transform: translateX(0);
+            opacity: 1;
+            z-index: 1;
+        }
+
+        .container.sign-up-active .toggle-panel {
+            transform: translateX(100%);
+            border-top-right-radius: 20px; /* Maintain radius */
+            border-bottom-right-radius: 20px; /* Maintain radius */
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+        /* Specific styles for the forms within the container */
+        .sign-in-form .form-side,
+        .sign-up-form .form-side {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out;
+            background: rgba(255, 255, 255, 0.1); /* Consistent glass background */
+            backdrop-filter: blur(15px); /* Consistent blur */
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 20px; /* Match container radius */
+            padding: 50px;
+        }
+
+        .sign-in-form {
+            left: 0; /* Initially on the left half */
+            transform: translateX(0%);
+            opacity: 1;
+        }
+
+        .sign-up-form {
+            left: 50%; /* Initially on the right half but hidden */
+            transform: translateX(0%); /* Position for rendering, but opacity is 0 */
+            opacity: 0;
+        }
+
+        /* When sign-up is active, shift forms */
+        .container.sign-up-active .sign-in-form {
+            transform: translateX(-100%); /* Slide left */
+            opacity: 0;
+            pointer-events: none; /* Disable interaction */
+        }
+
+        .container.sign-up-active .sign-up-form {
+            transform: translateX(-100%); /* Slide left to cover sign-in form's original spot */
+            opacity: 1;
+            pointer-events: all; /* Enable interaction */
+        }
+
+        .forgot-password {
+            margin-top: 10px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .forgot-password:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        /* Accessibility improvements */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container" id="container">
+        <div class="form-side sign-in-form">
+            <h2>Sign In</h2>
+            <form action="#">
+                <div class="input-group">
+                    <input type="email" id="signInEmail" placeholder=" " required>
+                    <label for="signInEmail">Email</label>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="signInPassword" placeholder=" " required>
+                    <label for="signInPassword">Password</label>
+                </div>
+                <a href="#" class="forgot-password">Forgot your password?</a>
+                <button type="submit">Sign In</button>
+            </form>
+            <div class="social-login">
+                <a href="#" aria-label="Sign in with Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Sign in with Google"><i class="fab fa-google"></i></a>
+                <a href="#" aria-label="Sign in with LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+
+        <div class="form-side sign-up-form">
+            <h2>Create Account</h2>
+            <form action="#">
+                <div class="input-group">
+                    <input type="text" id="signUpName" placeholder=" " required>
+                    <label for="signUpName">Name</label>
+                </div>
+                <div class="input-group">
+                    <input type="email" id="signUpEmail" placeholder=" " required>
+                    <label for="signUpEmail">Email</label>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="signUpPassword" placeholder=" " required>
+                    <label for="signUpPassword">Password</label>
+                </div>
+                <button type="submit">Sign Up</button>
+            </form>
+            <div class="social-login">
+                <a href="#" aria-label="Sign up with Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Sign up with Google"><i class="fab fa-google"></i></a>
+                <a href="#" aria-label="Sign up with LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+
+        <div class="toggle-panel" id="togglePanel">
+            <div class="toggle-left toggle-panel-content">
+                <h1>Welcome Back!</h1>
+                <p>To keep connected with us please login with your personal info</p>
+                <button class="hidden" id="signInToggle">Sign In</button>
+            </div>
+            <div class="toggle-right toggle-panel-content">
+                <h1>Hello, Friend!</h1>
+                <p>Register with your personal details to use all of site features</p>
+                <button class="hidden" id="signUpToggle">Sign Up</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const container = document.getElementById('container');
+        const signUpToggle = document.getElementById('signUpToggle');
+        const signInToggle = document.getElementById('signInToggle');
+        const togglePanel = document.getElementById('togglePanel');
+
+        // Initial state adjustments for the toggle panel content
+        const toggleLeft = togglePanel.querySelector('.toggle-left');
+        const toggleRight = togglePanel.querySelector('.toggle-right');
+
+        // Set initial visibility for toggle content
+        toggleRight.style.opacity = '1';
+        toggleRight.style.pointerEvents = 'all';
+        toggleLeft.style.opacity = '0';
+        toggleLeft.style.pointerEvents = 'none';
+
+        signUpToggle.addEventListener('click', () => {
+            container.classList.add("sign-up-active");
+            // Transition toggle panel content
+            toggleRight.style.opacity = '0';
+            toggleRight.style.pointerEvents = 'none';
+            toggleLeft.style.opacity = '1';
+            toggleLeft.style.pointerEvents = 'all';
+        });
+
+        signInToggle.addEventListener('click', () => {
+            container.classList.remove("sign-up-active");
+            // Transition toggle panel content
+            toggleRight.style.opacity = '1';
+            toggleRight.style.pointerEvents = 'all';
+            toggleLeft.style.opacity = '0';
+            toggleLeft.style.pointerEvents = 'none';
+        });
+    </script>
+</body>
+</html>

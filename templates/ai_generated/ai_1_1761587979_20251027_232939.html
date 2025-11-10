@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyberpunk Datapad Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@400;600&family=VT323&display=swap');
+
+        :root {
+            --cyber-dark-bg: #0A0A0D;
+            --cyber-medium-bg: #1A1A20;
+            --cyber-light-bg: #2A2A30;
+            --neon-blue: #00FFFF; /* Cyan */
+            --neon-purple: #FF00FF; /* Magenta */
+            --neon-green: #39FF14; /* Electric Green */
+            --neon-red: #FF3131;
+            --text-primary: #E0E0E0;
+            --text-secondary: #888888;
+            --border-color: #3A3A4A;
+            --glow-low: 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue);
+            --glow-medium: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue);
+            --glow-high: 0 0 15px var(--neon-blue), 0 0 30px var(--neon-blue), 0 0 45px var(--neon-blue);
+            --input-focus-glow: 0 0 8px var(--neon-green), inset 0 0 8px var(--neon-green);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: linear-gradient(135deg, var(--cyber-dark-bg) 0%, #000000 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            perspective: 1200px;
+            color: var(--text-primary);
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(to right, rgba(0,255,255,0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0,255,255,0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.3;
+            animation: backgroundScan 15s linear infinite;
+        }
+
+        @keyframes backgroundScan {
+            0% { background-position: 0 0; }
+            100% { background-position: -500px -500px; }
+        }
+
+        .flip-container {
+            width: 400px;
+            height: 600px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 1s cubic-bezier(0.8, 0.2, 0.2, 0.8);
+            box-shadow: var(--glow-medium);
+            border-radius: 8px;
+            background: rgba(10, 10, 13, 0.8); /* Slightly transparent dark */
+            border: 2px solid var(--neon-blue);
+            animation: pulseGlow 4s infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: var(--glow-low); }
+            100% { box-shadow: var(--glow-medium); }
+        }
+
+        .flipper {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 1s cubic-bezier(0.8, 0.2, 0.2, 0.8);
+        }
+
+        .front, .back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 8px;
+            background-color: var(--cyber-medium-bg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .back {
+            transform: rotateY(180deg);
+        }
+
+        .flip-container.flipped .flipper {
+            transform: rotateY(180deg);
+        }
+
+        /* --- Form Elements --- */
+        .form-content {
+            width: 100%;
+            position: relative;
+            padding: 20px 0;
+        }
+        
+        .form-content h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.8em;
+            color: var(--neon-green);
+            margin-bottom: 25px;
+            font-weight: 700;
+            text-shadow: 0 0 8px var(--neon-green);
+            animation: textGlowPulse 3s infinite alternate;
+        }
+
+        @keyframes textGlowPulse {
+            0% { text-shadow: 0 0 5px var(--neon-green), 0 0 10px var(--neon-green); }
+            100% { text-shadow: 0 0 10px var(--neon-green), 0 0 20px var(--neon-green); }
+        }
+
+        .form-content p.sub-text {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1em;
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .form-content form {
+            margin-top: 30px;
+        }
+
+        .form-content input {
+            font-family: 'VT323', monospace;
+            width: 100%;
+            padding: 15px 20px;
+            margin-bottom: 18px;
+            background-color: var(--cyber-dark-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 1.1em;
+            color: var(--neon-blue);
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            text-shadow: 0 0 3px var(--neon-blue);
+        }
+
+        .form-content input::placeholder {
+            color: rgba(0, 255, 255, 0.5);
+            text-shadow: none;
+        }
+
+        .form-content input:focus {
+            border-color: var(--neon-green);
+            box-shadow: var(--input-focus-glow);
+        }
+
+        .form-content button {
+            font-family: 'Orbitron', sans-serif;
+            background-color: transparent;
+            color: var(--neon-purple);
+            border: 2px solid var(--neon-purple);
+            padding: 15px 25px;
+            border-radius: 4px;
+            font-size: 1.1em;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s, box-shadow 0.3s, transform 0.2s;
+            width: 100%;
+            text-shadow: 0 0 5px var(--neon-purple);
+            box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+        }
+
+        .form-content button:hover {
+            background-color: var(--neon-purple);
+            color: var(--cyber-dark-bg);
+            border-color: var(--neon-purple);
+            box-shadow: 0 0 20px var(--neon-purple), 0 0 30px var(--neon-purple);
+            transform: translateY(-3px);
+            text-shadow: none;
+        }
+
+        .form-content a.link-text {
+            color: var(--neon-blue);
+            font-size: 0.95em;
+            margin-top: 15px;
+            text-decoration: none;
+            transition: color 0.3s, text-shadow 0.3s;
+            text-shadow: 0 0 5px var(--neon-blue);
+            display: block;
+        }
+        
+        .form-content a.link-text:hover {
+            color: var(--neon-green);
+            text-decoration: underline;
+            text-shadow: 0 0 8px var(--neon-green);
+        }
+
+        /* --- Social Icons --- */
+        .social-login {
+            margin: 25px 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-login a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            border: 2px solid var(--neon-blue);
+            border-radius: 50%;
+            font-size: 1.5em;
+            color: var(--neon-blue);
+            text-decoration: none;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s, box-shadow 0.3s;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+            text-shadow: 0 0 5px var(--neon-blue);
+        }
+        
+        .social-login a:hover {
+            background-color: var(--neon-blue);
+            color: var(--cyber-dark-bg);
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 20px var(--neon-blue), 0 0 30px var(--neon-blue);
+            text-shadow: none;
+            transform: scale(1.1);
+        }
+        
+        /* --- Toggle Button Specifics --- */
+        .toggle-btn {
+            font-family: 'Rajdhani', sans-serif;
+            background: none;
+            border: none;
+            color: var(--neon-green);
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            margin-top: 30px;
+            font-size: 1em;
+            transition: color 0.3s, text-shadow 0.3s;
+            text-shadow: 0 0 5px var(--neon-green);
+            position: relative;
+            padding-bottom: 5px;
+        }
+        
+        .toggle-btn::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--neon-green);
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.3s ease-out;
+            box-shadow: 0 0 5px var(--neon-green);
+        }
+
+        .toggle-btn:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        .toggle-btn:hover {
+            color: var(--neon-blue);
+            text-shadow: 0 0 8px var(--neon-blue);
+        }
+    </style>
+</head>
+<body>
+    <div class="flip-container" id="flipContainer">
+        <div class="flipper">
+            <div class="front">
+                <div class="form-content">
+                    <h2>ACCESS PROTOCOL</h2>
+                    <p class="sub-text">Initiate login sequence to access network data.</p>
+                    
+                    <div class="social-login">
+                        <a href="#"><i class="fab fa-google"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                    
+                    <p class="sub-text">Or input credentials directly</p>
+
+                    <form action="#" id="signInForm">
+                        <input type="email" placeholder="USER ID (EMAIL)" required>
+                        <input type="password" placeholder="SECURE KEY (PASSWORD)" required>
+                        <a href="#" class="link-text">FORGOTTEN SECURE KEY?</a>
+                        <button type="submit">INITIATE LOGIN</button>
+                    </form>
+                    
+                    <button class="toggle-btn" id="showSignUp">NO USER ID? REGISTER NEW PROTOCOL</button>
+                </div>
+            </div>
+
+            <div class="back">
+                <div class="form-content">
+                    <h2>CREATE NEW ID</h2>
+                    <p class="sub-text">Establish new identity on the network.</p>
+
+                    <div class="social-login">
+                        <a href="#"><i class="fab fa-google"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                    
+                    <p class="sub-text">Or register with email sequence</p>
+                    
+                    <form action="#" id="signUpForm">
+                        <input type="text" placeholder="FULL IDENTIFIER" required>
+                        <input type="email" placeholder="NEW USER ID (EMAIL)" required>
+                        <input type="password" placeholder="CREATE SECURE KEY" required minlength="6">
+                        <button type="submit">ESTABLISH ID</button>
+                    </form>
+                    
+                    <button class="toggle-btn" id="showSignIn">ALREADY HAVE ID? ACCESS PROTOCOL</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const flipContainer = document.getElementById('flipContainer');
+        const showSignUpBtn = document.getElementById('showSignUp');
+        const showSignInBtn = document.getElementById('showSignIn');
+        const signInForm = document.getElementById('signInForm');
+        const signUpForm = document.getElementById('signUpForm');
+
+        showSignUpBtn.addEventListener('click', () => {
+            flipContainer.classList.add('flipped');
+        });
+
+        showSignInBtn.addEventListener('click', () => {
+            flipContainer.classList.remove('flipped');
+        });
+
+        signInForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Login initiated! (Simulated)');
+        });
+
+        signUpForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('New ID established! (Simulated)');
+        });
+
+    </script>
+</body>
+</html>

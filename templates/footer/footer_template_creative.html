@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Footer Template - Creative</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Google Font: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .preview-body {
+            background-color: #f3f4f6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end; /* Pushes footer to the bottom */
+        }
+        .cta-link {
+            color: #d1d5db;
+            transition: color 0.3s ease;
+            position: relative;
+            display: inline-block;
+        }
+        .cta-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #ca8a04; /* Yellow */
+            transition: transform 0.3s ease;
+            transform: scaleX(0);
+            transform-origin: right;
+        }
+        .cta-link:hover {
+            color: #fff;
+        }
+        .cta-link:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+    </style>
+</head>
+<body class="preview-body">
+
+    <!-- 
+      ============================================================
+      CREATIVE / MODERN FOOTER
+      Your Flask app can grab this <footer ...> ... </footer> block.
+      ============================================================
+    -->
+    <footer class="bg-black text-gray-300">
+        <div class="container mx-auto px-6 py-20 md:py-24">
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                
+                <!-- Column 1: CTA -->
+                <div class="md:col-span-2">
+                    <h2 class="text-4xl md:text-6xl font-extrabold text-white mb-6">
+                        Have a project in mind?
+                        <br>
+                        <a href="#" class="cta-link">Let's talk.</a>
+                    </h2>
+                </div>
+                
+                <!-- Column 2: Contact Info -->
+                <div class="md:col-span-1">
+                    <h3 class="text-lg font-semibold text-white uppercase mb-4">Get in Touch</h3>
+                    <div class="space-y-4">
+                        <p>
+                            <span class="text-gray-500 block">Email Us</span>
+                            <a href="mailto:hello@brand.com" class="hover:text-white">hello@brand.com</a>
+                        </p>
+                        <p>
+                            <span class="text-gray-500 block">Call Us</span>
+                            <a href="tel:+123456789" class="hover:text-white">+1 (234) 567-890</a>
+                        </p>
+                        <p>
+                            <span class="text-gray-500 block">Find Us</span>
+                            123 Creative Way, Suite 100<br>Design City, 10001
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+            
+            <!-- Bottom Bar: Socials & Copyright -->
+            <div class="border-t border-gray-800 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <div class="flex space-x-6">
+                    <!-- Behance -->
+                    <a href="#" class="text-gray-500 hover:text-white">Behance</a>
+                    <!-- Dribbble -->
+                    <a href="#" class="text-gray-500 hover:text-white">Dribbble</a>
+                    <!-- LinkedIn -->
+                    <a href="#" class="text-gray-500 hover:text-white">LinkedIn</a>
+                </div>
+                <p class="text-sm text-gray-600 mt-4 md:mt-0">&copy; 2025 Brand Creative Studio.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

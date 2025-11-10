@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - SaaS Analytics</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Google Font: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Load Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        /* Custom CSS for a dark, "tech-style" dashboard */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #030712; /* Darkest Gray */
+            color: #d1d5db;
+        }
+
+        :root {
+            --brand-color: #0ea5e9; /* Sky Blue */
+            --brand-color-dark: #0284c7;
+        }
+
+        .sidebar {
+            background-color: #1f2937;
+            border-right: 1px solid #374151;
+        }
+        .main-content {
+            background-color: #111827;
+        }
+        
+        .stat-card {
+            background-color: #1f2937;
+            border: 1px solid #374151;
+            transition: all 0.3s ease;
+        }
+        .stat-card:hover {
+            border-color: var(--brand-color);
+            transform: translateY(-5px);
+        }
+        
+        .sidebar-link {
+            color: #9ca3af;
+            transition: all 0.3s ease;
+        }
+        .sidebar-link:hover, .sidebar-link.active {
+            color: #fff;
+            background-color: #374151;
+            border-left: 3px solid var(--brand-color);
+            padding-left: 1.25rem; /* 20px - 3px border */
+        }
+        .sidebar-link.active {
+             padding-left: 1.25rem;
+        }
+        .sidebar-link:not(.active) {
+            padding-left: 1.5rem; /* 24px */
+        }
+
+        /* Custom styles for Chart.js canvas */
+        #revenueChart {
+            max-height: 400px;
+        }
+    </style>
+</head>
+<body class="flex h-screen">
+
+    <!-- 
+      ============================================================
+      DASHBOARD TEMPLATE 1: SAAS/ANALYTICS (DARK MODE)
+      Your Flask app can grab this <div class="flex"> ... </div>
+      and place it inside its own base template.
+      ============================================================
+    -->
+
+    <!-- Sidebar -->
+    <aside class="sidebar w-64 flex-shrink-0 flex flex-col">
+        <div class="h-20 flex items-center justify-center border-b border-gray-700">
+            <h1 class="text-2xl font-bold text-white">SaaS Admin</h1>
+        </div>
+        <nav class="flex-1 overflow-y-auto py-6">
+            <ul class="space-y-2">
+                <li>
+                    <a href="#" class="sidebar-link active flex items-center py-3 px-6">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6-4a1 1 0 001-1v-1a1 1 0 10-2 0v1a1 1 0 001 1z"></path></svg>
+                        Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="sidebar-link flex items-center py-3 px-6">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                        Users
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="sidebar-link flex items-center py-3 px-6">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                        Analytics
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="sidebar-link flex items-center py-3 px-6">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.096 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        Settings
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="p-6 border-t border-gray-700">
+             <a href="#" class="sidebar-link flex items-center py-3 px-6">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                Logout
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content flex-1 overflow-y-auto">
+        <!-- Top Header Bar -->
+        <header class="h-20 flex items-center justify-between px-8 border-b border-gray-800">
+            <div class="flex items-center">
+                <input type="text" placeholder="Search..." class="bg-gray-800 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500">
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="text-gray-400 hover:text-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341A6.002 6.002 0 006 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+                </button>
+                <img src="https://placehold.co/40x40/1f2937/d1d5db?text=JD" alt="User Avatar" class="w-10 h-10 rounded-full border-2 border-gray-700">
+            </div>
+        </header>
+
+        <!-- Page Content -->
+        <div class="p-8">
+            <h2 class="text-3xl font-bold text-white mb-6">Dashboard</h2>
+
+            <!-- Stat Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="stat-card rounded-lg p-6">
+                    <h3 class="text-sm font-medium text-gray-400 uppercase">Total Revenue</h3>
+                    <span class="text-3xl font-bold text-white block mt-2">$45,231.89</span>
+                    <span class="text-sm text-green-400 mt-1 flex items-center">+20.1% from last month</span>
+                </div>
+                <div class="stat-card rounded-lg p-6">
+                    <h3 class="text-sm font-medium text-gray-400 uppercase">Subscriptions</h3>
+                    <span class="text-3xl font-bold text-white block mt-2">+2,350</span>
+                    <span class="text-sm text-green-400 mt-1 flex items-center">+180.1% from last month</span>
+                </div>
+                <div class="stat-card rounded-lg p-6">
+                    <h3 class="text-sm font-medium text-gray-400 uppercase">New Users</h3>
+                    <span class="text-3xl font-bold text-white block mt-2">+1,200</span>
+                    <span class="text-sm text-green-400 mt-1 flex items-center">+12% from last month</span>
+                </div>
+                <div class="stat-card rounded-lg p-6">
+                    <h3 class="text-sm font-medium text-gray-400 uppercase">Bounce Rate</h3>
+                    <span class="text-3xl font-bold text-white block mt-2">26.3%</span>
+                    <span class="text-sm text-red-400 mt-1 flex items-center">-2.1% from last month</span>
+                </div>
+            </div>
+
+            <!-- Main Chart -->
+            <div class="bg-gray-800 border border-gray-700 rounded-lg p-6 mb-8">
+                <h3 class="text-xl font-bold text-white mb-4">Revenue Overview</h3>
+                <canvas id="revenueChart"></canvas>
+            </div>
+
+            <!-- Recent Activity Table -->
+            <div class="bg-gray-800 border border-gray-700 rounded-lg p-6">
+                <h3 class="text-xl font-bold text-white mb-4">Recent Users</h3>
+                <table class="w-full text-left">
+                    <thead>
+                        <tr class="border-b border-gray-700 text-gray-400 uppercase text-sm">
+                            <th class="py-3">Name</th>
+                            <th class="py-3">Email</th>
+                            <th class="py-3">Plan</th>
+                            <th class="py-3">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-700">
+                        <tr>
+                            <td class="py-4">John Doe</td>
+                            <td class="py-4">john@example.com</td>
+                            <td class="py-4">Pro Plan</td>
+                            <td class="py-4"><span class="bg-green-500/20 text-green-400 text-xs font-medium px-2 py-1 rounded-full">Active</span></td>
+                        </tr>
+                        <tr>
+                            <td class="py-4">Jane Smith</td>
+                            <td class="py-4">jane@example.com</td>
+                            <td class="py-4">Free Plan</td>
+                            <td class="py-4"><span class="bg-yellow-500/20 text-yellow-400 text-xs font-medium px-2 py-1 rounded-full">Pending</span></td>
+                        </tr>
+                        <tr>
+                            <td class="py-4">Mike Johnson</td>
+                            <td class="py-4">mike@example.com</td>
+                            <td class="py-4">Pro Plan</td>
+                            <td class="py-4"><span class="bg-green-500/20 text-green-400 text-xs font-medium px-2 py-1 rounded-full">Active</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+    
+    <script>
+        // JavaScript for Chart.js
+        const ctx = document.getElementById('revenueChart').getContext('2d');
+        const revenueChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                datasets: [{
+                    label: 'Revenue',
+                    data: [12000, 19000, 15000, 21000, 18000, 23000, 25000, 28000, 32000, 30000, 35000, 40000],
+                    borderColor: 'rgba(14, 165, 233, 1)', // --brand-color
+                    backgroundColor: 'rgba(14, 165, 233, 0.1)',
+                    borderWidth: 2,
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { color: '#9ca3af' },
+                        grid: { color: '#374151' }
+                    },
+                    x: {
+                        ticks: { color: '#9ca3af' },
+                        grid: { color: '#374151' }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        labels: { color: '#9ca3af' }
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>

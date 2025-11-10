@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Restaurant</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Karla:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom CSS for a warm, "farm-to-table" restaurant */
+        body {
+            font-family: 'Karla', sans-serif;
+            background-color: #fffaf5; /* Warm Cream */
+            color: #4c3b3b;
+        }
+        
+        h1, h2, h3, h4, .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        :root {
+            --brand-color: #b91c1c; /* Deep Red */
+            --brand-color-dark: #991b1b;
+        }
+        
+        .hero-bg {
+            background-color: #b91c1c;
+            background-image: linear-gradient(to right, #b91c1c, #7f1d1d);
+        }
+        
+        .cta-button {
+            background-color: var(--brand-color);
+            transition: all 0.3s ease;
+        }
+        .cta-button:hover {
+            background-color: var(--brand-color-dark);
+        }
+        
+        .image-gallery img {
+            transition: all 0.4s ease;
+        }
+        .image-gallery img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-white/90 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-serif font-bold" style="color: var(--brand-color);">The Hearth</div>
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="#" class="text-gray-600 hover:text-gray-900">Home</a>
+                <a href="#" class="text-gray-600 hover:text-gray-900">Menu</a>
+                <a href="#" class="text-gray-900 font-semibold" style="color: var(--brand-color);">Our Story</a>
+                <a href="#" class="text-gray-600 hover:text-gray-900">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-bg py-24 md:py-32 text-white">
+        <div class="container mx-auto px-6 max-w-4xl text-center">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6">Food is our common ground, a universal experience.</h1>
+            <p class="text-lg md:text-xl text-red-100 leading-relaxed">
+                At The Hearth, we believe in honest food and warm company. Our story is simple: use the best ingredients, and treat them with respect.
+            </p>
+        </div>
+    </section>
+
+    <!-- Meet the Chef Section -->
+    <section class="py-20">
+        <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <div>
+                <span class="text-sm font-semibold uppercase" style="color: var(--brand-color);">Our Philosophy</span>
+                <h2 class="text-4xl font-bold text-gray-900 mt-2 mb-6">Meet Chef Isabella Rossi</h2>
+                <div class="space-y-4 text-lg text-gray-700 leading-relaxed">
+                    <p>
+                        Chef Isabella Rossi brings over 20 years of experience from the kitchens of Milan and New York. Her philosophy is built on the "farm-to-table" principle, a deep respect for seasonal ingredients, and the belief that a great meal is a celebration.
+                    </p>
+                    <p>
+                        "For me, cooking is about memory," says Chef Isabella. "It's about the feeling of a shared meal, the taste of a perfectly ripe tomato in summer. That's what we try to capture at The Hearth—food that feels like home, only better."
+                    </p>
+                </div>
+            </div>
+            <div class="rounded-lg overflow-hidden shadow-xl">
+                <img src="https://placehold.co/600x700/fecaca/b91c1c?text=Chef+Rossi&font=playfair" alt="Chef Isabella Rossi" class="w-full h-full object-cover">
+            </div>
+        </div>
+    </section>
+    
+    <!-- Gallery Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">A Glimpse Inside</h2>
+                <p class="text-lg text-gray-600 max-w-xl mx-auto">
+                    A warm, inviting space for every occasion.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 image-gallery">
+                <div class="rounded-lg overflow-hidden h-64 md:h-80">
+                    <img src="https://placehold.co/400x500/d1d5db/333333?text=Ambiance+1" alt="Restaurant interior" class="w-full h-full object-cover">
+                </div>
+                <div class="rounded-lg overflow-hidden h-64 md:h-80 md:row-span-2">
+                    <img src="https://placehold.co/400x800/d1d5db/333333?text=The+Bar" alt="Restaurant bar" class="w-full h-full object-cover">
+                </div>
+                <div class="rounded-lg overflow-hidden h-64 md:h-80">
+                    <img src="https://placehold.co/400x500/d1d5db/333333?text=Ambiance+2" alt="Restaurant dish" class="w-full h-full object-cover">
+                </div>
+                <div class="rounded-lg overflow-hidden h-64 md:h-80">
+                    <img src="https://placehold.co/400x500/d1d5db/333333?text=Dish+Detail" alt="Dish detail" class="w-full h-full object-cover">
+                </div>
+                <div class="rounded-lg overflow-hidden h-64 md:h-80">
+                    <img src="https://placehold.co/400x500/d1d5db/333333?text=Patio" alt="Restaurant patio" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA -->
+    <section class="py-20" style="background-color: var(--brand-color-light);">
+        <div class="container mx-auto px-6 text-center max-w-2xl">
+            <h2 class="text-4xl font-bold text-gray-900 mb-6">Join Us for Dinner</h2>
+            <p class="text-lg text-gray-700 mb-8 leading-relaxed">
+                Reservations are recommended, especially for weekends. We look forward to welcoming you to our table.
+            </p>
+            <a href="#" class="cta-button text-white font-bold py-3 px-8 rounded-lg text-lg shadow-lg">
+                Book Your Table
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-12">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 The Hearth. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

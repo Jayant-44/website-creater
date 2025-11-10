@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Non-Profit</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Google Font: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom CSS for a clean, "human-made" non-profit site */
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #374151;
+        }
+        
+        h1, h2, h3, .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        :root {
+            --brand-color: #059669; /* Emerald Green */
+            --brand-color-dark: #047857;
+        }
+
+        .hero-bg {
+            background-color: #f0fdf4;
+        }
+        
+        .donate-button {
+            background-color: var(--brand-color);
+            transition: all 0.3s ease;
+        }
+        .donate-button:hover {
+            background-color: var(--brand-color-dark);
+            transform: scale(1.05);
+        }
+        
+        .stat-number {
+            color: var(--brand-color);
+        }
+        
+        .team-card img {
+            filter: grayscale(100%);
+            transition: all 0.3s ease;
+        }
+        .team-card:hover img {
+            filter: grayscale(0%);
+        }
+    </style>
+</head>
+<body class="bg-white">
+
+    <!-- Header -->
+    <header class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-serif font-bold" style="color: var(--brand-color);">GreenLeaf Trust</div>
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="#" class="text-gray-600 hover:text-gray-900">Home</a>
+                <a href="#" class="text-gray-900 font-semibold" style="color: var(--brand-color);">About Us</a>
+                <a href="#" class="text-gray-600 hover:text-gray-900">Programs</a>
+                <a href="#" class="donate-button text-white px-5 py-2 rounded-full font-medium text-sm">
+                    Donate
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-bg py-24 md:py-32">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <span class="text-sm font-semibold uppercase" style="color: var(--brand-color);">Our Mission</span>
+                    <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mt-2 mb-6">
+                        We exist to protect and restore our planet.
+                    </h1>
+                    <p class="text-lg text-gray-700 leading-relaxed">
+                        The GreenLeaf Trust is a non-profit organization dedicated to reforestation, ocean conservation, and climate action. We believe in a future where people and nature can thrive together.
+                    </p>
+                </div>
+                <div class="rounded-lg overflow-hidden shadow-xl">
+                    <img src="https://placehold.co/600x450/a7f3d0/059669?text=Our+Work&font=inter" alt="Reforestation project" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Stats -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Our Impact by the Numbers</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <!-- Stat 1 -->
+                <div class="text-center p-6">
+                    <h3 class="text-6xl font-bold stat-number mb-3">1.5M</h3>
+                    <h4 class="text-2xl font-semibold text-gray-800 mb-2">Trees Planted</h4>
+                    <p class="text-gray-600">
+                        In vital ecosystems across 5 countries to restore biodiversity and capture carbon.
+                    </p>
+                </div>
+                <!-- Stat 2 -->
+                <div class="text-center p-6">
+                    <h3 class="text-6xl font-bold stat-number mb-3">25,000+</h3>
+                    <h4 class="text-2xl font-semibold text-gray-800 mb-2">Volunteers</h4>
+                    <p class="text-gray-600">
+                        A global network of passionate individuals dedicated to making a difference.
+                    </p>
+                </div>
+                <!-- Stat 3 -->
+                <div class="text-center p-6">
+                    <h3 class="text-6xl font-bold stat-number mb-3">92%</h3>
+                    <h4 class="text-2xl font-semibold text-gray-800 mb-2">Funds to Programs</h4>
+                    <p class="text-gray-600">
+                        We are proud that 92 cents of every dollar goes directly to our conservation projects.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Meet the Team -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Our Team & Board</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Team Card 1 -->
+                <div class="team-card text-center">
+                    <div class="overflow-hidden rounded-full w-40 h-40 mx-auto">
+                        <img src="https://placehold.co/400x400/d1fae5/333333?text=Dr.+Chen&font=inter" alt="Dr. Lena Chen" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mt-4">Dr. Lena Chen</h3>
+                    <p class="text-gray-500" style="color: var(--brand-color);">Founder & Director</p>
+                </div>
+                <!-- Team Card 2 -->
+                <div class="team-card text-center">
+                    <div class="overflow-hidden rounded-full w-40 h-40 mx-auto">
+                        <img src="https://placehold.co/400x400/d1fae5/333333?text=M.+Okoro&font=inter" alt="Marko Okoro" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mt-4">Marko Okoro</h3>
+                    <p class="text-gray-500" style="color: var(--brand-color);">Head of Field Ops</p>
+                </div>
+                <!-- Team Card 3 -->
+                <div class="team-card text-center">
+                    <div class="overflow-hidden rounded-full w-40 h-40 mx-auto">
+                        <img src="https://placehold.co/400x400/d1fae5/333333?text=S.+Patel&font=inter" alt="Samira Patel" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mt-4">Samira Patel</h3>
+                    <p class="text-gray-500" style="color: var(--brand-color);">Board Chair</p>
+                </div>
+                <!-- Team Card 4 -->
+                <div class="team-card text-center">
+                    <div class="overflow-hidden rounded-full w-40 h-40 mx-auto">
+                        <img src="https://placehold.co/400x400/d1fae5/333333?text=D.+Cole&font=inter" alt="David Cole" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mt-4">David Cole</h3>
+                    <p class="text-gray-500" style="color: var(--brand-color);">Treasurer</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-12">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 GreenLeaf Trust. We are a registered 501(c)(3) organization.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

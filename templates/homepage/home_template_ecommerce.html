@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage - E-commerce Product</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Google Font: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom CSS for a premium e-commerce feel */
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #1a202c;
+        }
+
+        :root {
+            --brand-color: #008080; /* Teal */
+            --brand-color-dark: #006666;
+        }
+
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--brand-color);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover {
+            color: var(--brand-color);
+        }
+        .nav-link:hover:after {
+            width: 100%;
+        }
+        
+        .buy-button {
+            background-color: var(--brand-color);
+            transition: all 0.3s ease;
+        }
+        .buy-button:hover {
+            background-color: var(--brand-color-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 7px 14px rgba(0, 128, 128, 0.25);
+        }
+        
+        .feature-icon-bg {
+            background-color: #e6f2f2;
+            color: var(--brand-color);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold" style="color: var(--brand-color);">AURA</div>
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="#" class="nav-link text-gray-700 font-medium">Home</a>
+                <a href="#" class="nav-link text-gray-700 font-medium">Shop</a>
+                <a href="#" class="nav-link text-gray-700 font-medium">Features</a>
+                <a href="#" class="nav-link text-gray-700 font-medium">Support</a>
+            </div>
+            <a href="#" class="p-2 rounded-full hover:bg-gray-100 transition duration-300">
+                <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+            </a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="container mx-auto px-6 py-16 md:py-24">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <!-- Product Image -->
+            <div class="bg-gray-200 rounded-lg shadow-lg flex items-center justify-center p-8">
+                <img src="https://placehold.co/500x500/e6f2f2/008080?text=AURA+Headphones&font=poppins" alt="Aura Wireless Headphones" class="w-full max-w-sm">
+            </div>
+            
+            <!-- Product Details -->
+            <div>
+                <span class="text-sm font-semibold uppercase" style="color: var(--brand-color);">Premium Wireless Headphones</span>
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mt-2 mb-4">The Aura T-1</h1>
+                <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                    Experience crystal-clear audio and unparalleled comfort. The Aura T-1 features active noise-cancellation and a 40-hour battery life.
+                </p>
+                <div class="flex items-center mb-6">
+                    <span class="text-4xl font-bold text-gray-900">$249.99</span>
+                    <span class="text-gray-500 line-through ml-4 text-xl">$299.99</span>
+                </div>
+                <div class="flex space-x-4">
+                    <button class="buy-button text-white font-bold py-3 px-10 rounded-lg text-lg shadow-lg">
+                        Buy Now
+                    </button>
+                    <button class="bg-gray-200 text-gray-800 font-bold py-3 px-8 rounded-lg hover:bg-gray-300 transition duration-300">
+                        Learn More
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Why You'll Love Aura</h2>
+                <p class="text-lg text-gray-600 max-w-xl mx-auto">
+                    Engineered for sound. Designed for life.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <!-- Feature 1 -->
+                <div class="text-center p-6">
+                    <div class="feature-icon-bg rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-5">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.478 0-8.268-2.943-9.542-7z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">Immersive Sound</h3>
+                    <p class="text-gray-600">
+                        Proprietary drivers deliver deep, rich bass and crystal-clear highs.
+                    </p>
+                </div>
+                <!-- Feature 2 -->
+                <div class="text-center p-6">
+                    <div class="feature-icon-bg rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-5">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">All-Day Comfort</h3>
+                    <p class="text-gray-600">
+                        Plush memory foam earcups and a lightweight design for zero fatigue.
+                    </p>
+                </div>
+                <!-- Feature 3 -->
+                <div class="text-center p-6">
+                    <div class="feature-icon-bg rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-5">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">40-Hour Battery</h3>
+                    <p class="text-gray-600">
+                        Go for days without charging. A 15-minute quick charge gives you 5 hours of playback.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Shop</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white">Headphones</a></li>
+                        <li><a href="#" class="hover:text-white">Earbuds</a></li>
+                        <li><a href="#" class="hover:text-white">Accessories</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Support</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white">Help Center</a></li>
+                        <li><a href="#" class="hover:text-white">Downloads</a></li>
+                        <li><a href="#" class="hover:text-white">Warranty</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Company</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white">About Us</a></li>
+                        <li><a href="#" class="hover:text-white">Blog</a></li>
+                        <li><a href="#" class="hover:text-white">Press</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Follow Us</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="hover:text-white">Facebook</a>
+                        <a href="#" class="hover:text-white">Instagram</a>
+                        <a href="#" class="hover:text-white">Twitter</a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-10 border-t border-gray-700 pt-6 text-center text-gray-500">
+                &copy; 2025 Aura Audio, Inc. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

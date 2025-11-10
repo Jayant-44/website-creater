@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dark Mode — Sign In / Sign Up</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg-1:#0d0d0d;
+      --bg-2:#1b0f2e;
+      --card:#11121a;
+      --muted:#bfbfdc;
+      --accent-start:#7a3bff;
+      --accent-end:#5c24d6;
+      --input-bg:#141423;
+      --input-border:#2b2b40;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      background:linear-gradient(160deg,var(--bg-1) 0%, var(--bg-2) 65%, #101020 100%);
+      color:#fff;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding:24px;
+    }
+
+    /* Card */
+    .card{
+      width:420px;
+      max-width:94vw;
+      border-radius:16px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06));
+      padding:1.25rem;
+      box-shadow: 0 30px 60px rgba(5,5,10,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .head{
+      text-align:center;
+      margin-bottom:12px;
+    }
+    .head h1{
+      font-size:20px;
+      margin:0;
+      letter-spacing:0.2px;
+      font-weight:600;
+    }
+    .sub{
+      margin-top:6px;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    /* Slider that contains both forms side-by-side */
+    .forms-slider{
+      width:200%;
+      display:grid;
+      grid-template-columns: 1fr 1fr; /* two equal columns */
+      transition: transform 450ms cubic-bezier(.2,.9,.2,1);
+      will-change: transform;
+    }
+
+    .form{
+      padding:18px;
+      min-height:240px;
+    }
+
+    label{
+      display:block;
+      font-size:13px;
+      color:var(--muted);
+      margin-bottom:6px;
+    }
+
+    .input{
+      width:100%;
+      padding:12px 14px;
+      border-radius:10px;
+      border:2px solid var(--input-border);
+      background:var(--input-bg);
+      color:#fff;
+      outline:none;
+      font-size:14px;
+      transition: border-color 220ms, box-shadow 220ms, transform 120ms;
+      margin-bottom:12px;
+    }
+
+    .input::placeholder{color:#8f8fa8}
+
+    .input:focus{
+      border-color:var(--accent-start);
+      box-shadow:0 6px 18px rgba(122,59,255,0.12);
+      transform:translateY(-1px);
+    }
+
+    .row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:8px;
+      margin-bottom:12px;
+    }
+
+    .remember{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    /* Buttons */
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      width:100%;
+      padding:12px 14px;
+      border-radius:10px;
+      border:0;
+      cursor:pointer;
+      font-weight:600;
+      color:#fff;
+      background:linear-gradient(90deg, var(--accent-start), var(--accent-end));
+      box-shadow:0 10px 26px rgba(92,36,214,0.15);
+      transform:translateY(0);
+      transition: transform 180ms ease, box-shadow 200ms ease;
+      position:relative;
+      overflow:hidden; /* for ripple */
+    }
+
+    .btn:hover{ transform:translateY(-3px); box-shadow:0 20px 40px rgba(92,36,214,0.18) }
+
+    /* Ripple circle will be injected by JS */
+    .ripple{
+      position:absolute;
+      border-radius:50%;
+      transform:scale(0);
+      background:rgba(255,255,255,0.18);
+      animation:ripple 600ms ease-out;
+      pointer-events:none;
+    }
+    @keyframes ripple{
+      to{ transform:scale(4); opacity:0 }
+    }
+
+    .secondary{
+      width:100%;
+      background:transparent;
+      border:1px solid rgba(255,255,255,0.04);
+      color:var(--muted);
+      box-shadow:none;
+      font-weight:600;
+    }
+
+    /* Social icons group */
+    .social-row{
+      display:flex;
+      gap:10px;
+      margin-top:12px;
+      justify-content:center;
+    }
+    .social{
+      height:40px;
+      width:40px;
+      display:inline-grid;
+      place-items:center;
+      border-radius:10px;
+      background:rgba(255,255,255,0.02);
+      border:1px solid rgba(255,255,255,0.02);
+      cursor:pointer;
+      transition: transform 160ms, background 160ms;
+      position:relative;
+      overflow:hidden;
+    }
+    .social:hover{ transform:translateY(-4px); background:linear-gradient(180deg, rgba(122,59,255,0.12), rgba(92,36,214,0.08)) }
+
+    .footer{
+      margin-top:14px;
+      text-align:center;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .link{
+      color:var(--accent-start);
+      background:none;
+      border:0;
+      cursor:pointer;
+      font-weight:600;
+      padding:0;
+    }
+
+    /* Move slider to show sign-up */
+    .show-signup .forms-slider{ transform: translateX(-50%); }
+
+    /* small helper for spacing when forms are side-by-side */
+    .form-inner{ max-width:360px; margin:0 auto; }
+
+    /* Responsive */
+    @media (max-width:480px){
+      .card{ padding:12px }
+      .head h1{ font-size:18px }
+      .form{ padding:12px }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card" id="card">
+    <div class="head">
+      <h1 id="mainTitle">Sign In</h1>
+      <div class="sub" id="mainSub">Welcome back — enter your details</div>
+    </div>
+
+    <!-- Slider wrapper: width = 200% -> contains two forms side-by-side -->
+    <div class="forms-slider" id="slider">
+      <!-- SIGN IN -->
+      <div class="form" aria-hidden="false">
+        <div class="form-inner">
+          <form id="signInForm" autocomplete="on">
+            <label for="signin-email">Email</label>
+            <input id="signin-email" class="input" type="email" placeholder="you@domain.com" required>
+
+            <label for="signin-pass">Password</label>
+            <input id="signin-pass" class="input" type="password" placeholder="••••••••" required>
+
+            <div class="row">
+              <label class="remember"><input type="checkbox" id="remember-checkbox"> Remember me</label>
+              <button type="button" class="link" id="forgotBtn">Forgot?</button>
+            </div>
+
+            <button class="btn" type="submit" id="signInBtn">Sign In</button>
+
+            <div class="social-row" aria-hidden="false" style="margin-top:14px;">
+              <button type="button" class="social" title="Continue with Google" data-provider="google" aria-label="Google">
+                <!-- Google SVG -->
+                <svg width="18" height="18" viewBox="0 0 533.5 544.3" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path fill="#4285F4" d="M533.5 278.4c0-17.5-1.4-34.6-4.1-51H272v96.6h147.5c-6.4 34.3-25.2 63.3-53.9 82.8l87 68.1c50.9-46.9 80.9-115.9 80.9-196.5z"/>
+                  <path fill="#34A853" d="M272 544.3c72.6 0 133.7-24.1 178.2-65.4l-87-68.1c-24.2 16.2-55.1 25.9-91.2 25.9-70.1 0-129.4-47.2-150.6-110.7l-89.8 69.1C71.1 492.5 164.3 544.3 272 544.3z"/>
+                  <path fill="#FBBC05" d="M121.4 331.0c-10.1-30.4-10.1-63.4 0-93.8L31.6 168.1C-12.7 241.6-12.7 323.1 31.6 396.6l89.8-65.6z"/>
+                  <path fill="#EA4335" d="M272 107.1c39.4 0 75 13.6 103 40.7l77.2-77.2C405.5 23.8 344.4 0 272 0 164.3 0 71.1 51.9 31.6 130.2l89.8 69.1C142.6 154.4 201.9 107.1 272 107.1z"/>
+                </svg>
+              </button>
+
+              <button type="button" class="social" title="Continue with GitHub" data-provider="github" aria-label="GitHub">
+                <!-- GitHub SVG -->
+                <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+                  <path d="M12 .5C5.73.5.9 5.33.9 11.6c0 4.78 3.09 8.84 7.39 10.27.54.1.74-.23.74-.51 0-.25-.01-.92-.01-1.8-3.01.65-3.64-1.46-3.64-1.46-.49-1.25-1.2-1.58-1.2-1.58-.98-.67.07-.66.07-.66 1.08.08 1.65 1.11 1.65 1.11.96 1.64 2.52 1.17 3.14.9.1-.7.38-1.17.69-1.44-2.4-.27-4.93-1.2-4.93-5.36 0-1.18.42-2.14 1.11-2.9-.11-.27-.48-1.36.11-2.83 0 0 .9-.29 2.95 1.1a10.3 10.3 0 0 1 2.68-.36c.91.01 1.83.12 2.68.36 2.05-1.39 2.95-1.1 2.95-1.1.59 1.47.22 2.56.11 2.83.69.76 1.11 1.72 1.11 2.9 0 4.17-2.54 5.08-4.96 5.34.39.34.73 1.01.73 2.04 0 1.47-.01 2.66-.01 3.02 0 .28.2.61.75.51 4.3-1.43 7.39-5.49 7.39-10.27C23.1 5.33 18.27.5 12 .5z"/>
+                </svg>
+              </button>
+
+              <button type="button" class="social" title="Continue with Facebook" data-provider="facebook" aria-label="Facebook">
+                <!-- FB SVG -->
+                <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+                  <path d="M22 12a10 10 0 1 0-11.5 9.9v-7h-2.2v-2.9H10.5V9.2c0-2.1 1.2-3.2 3-3.2.9 0 1.8.16 1.8.16v2h-1c-1 0-1.3.62-1.3 1.2v1.5h2.3l-.4 2.9h-1.9v7A10 10 0 0 0 22 12z"/>
+                </svg>
+              </button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+
+      <!-- SIGN UP -->
+      <div class="form" aria-hidden="true">
+        <div class="form-inner">
+          <form id="signUpForm" autocomplete="on">
+            <label for="signup-name">Full name</label>
+            <input id="signup-name" class="input" type="text" placeholder="Your full name" required>
+
+            <label for="signup-email">Email</label>
+            <input id="signup-email" class="input" type="email" placeholder="you@domain.com" required>
+
+            <label for="signup-pass">Password</label>
+            <input id="signup-pass" class="input" type="password" placeholder="Create a password" required>
+
+            <button class="btn" type="submit" id="signUpBtn">Create account</button>
+
+            <div class="social-row">
+              <button type="button" class="social" title="Sign up with Google" data-provider="google">
+                <!-- reuse google SVG -->
+                <svg width="18" height="18" viewBox="0 0 533.5 544.3" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path fill="#4285F4" d="M533.5 278.4c0-17.5-1.4-34.6-4.1-51H272v96.6h147.5c-6.4 34.3-25.2 63.3-53.9 82.8l87 68.1c50.9-46.9 80.9-115.9 80.9-196.5z"/>
+                  <path fill="#34A853" d="M272 544.3c72.6 0 133.7-24.1 178.2-65.4l-87-68.1c-24.2 16.2-55.1 25.9-91.2 25.9-70.1 0-129.4-47.2-150.6-110.7l-89.8 69.1C71.1 492.5 164.3 544.3 272 544.3z"/>
+                  <path fill="#FBBC05" d="M121.4 331.0c-10.1-30.4-10.1-63.4 0-93.8L31.6 168.1C-12.7 241.6-12.7 323.1 31.6 396.6l89.8-65.6z"/>
+                  <path fill="#EA4335" d="M272 107.1c39.4 0 75 13.6 103 40.7l77.2-77.2C405.5 23.8 344.4 0 272 0 164.3 0 71.1 51.9 31.6 130.2l89.8 69.1C142.6 154.4 201.9 107.1 272 107.1z"/>
+                </svg>
+              </button>
+
+              <button type="button" class="social" title="Sign up with GitHub" data-provider="github">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M12 .5C5.73.5.9 5.33.9 11.6c0 4.78 3.09 8.84 7.39 10.27.54.1.74-.23.74-.51 0-.25-.01-.92-.01-1.8-3.01.65-3.64-1.46-3.64-1.46-.49-1.25-1.2-1.58-1.2-1.58-.98-.67.07-.66.07-.66 1.08.08 1.65 1.11 1.65 1.11.96 1.64 2.52 1.17 3.14.9.1-.7.38-1.17.69-1.44-2.4-.27-4.93-1.2-4.93-5.36 0-1.18.42-2.14 1.11-2.9-.11-.27-.48-1.36.11-2.83 0 0 .9-.29 2.95 1.1a10.3 10.3 0 0 1 2.68-.36c.91.01 1.83.12 2.68.36 2.05-1.39 2.95-1.1 2.95-1.1.59 1.47.22 2.56.11 2.83.69.76 1.11 1.72 1.11 2.9 0 4.17-2.54 5.08-4.96 5.34.39.34.73 1.01.73 2.04 0 1.47-.01 2.66-.01 3.02 0 .28.2.61.75.51 4.3-1.43 7.39-5.49 7.39-10.27C23.1 5.33 18.27.5 12 .5z"/>
+                </svg>
+              </button>
+
+              <button type="button" class="social" title="Sign up with Facebook" data-provider="facebook">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M22 12a10 10 0 1 0-11.5 9.9v-7h-2.2v-2.9H10.5V9.2c0-2.1 1.2-3.2 3-3.2.9 0 1.8.16 1.8.16v2h-1c-1 0-1.3.62-1.3 1.2v1.5h2.3l-.4 2.9h-1.9v7A10 10 0 0 0 22 12z"/>
+                </svg>
+              </button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <span id="altText">Don't have an account?</span>
+      <button class="link" id="toggleBtn">Create account</button>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      const card = document.getElementById('card');
+      const slider = document.getElementById('slider');
+      const toggleBtn = document.getElementById('toggleBtn');
+      const mainTitle = document.getElementById('mainTitle');
+      const mainSub = document.getElementById('mainSub');
+      const altText = document.getElementById('altText');
+
+      let showingSignUp = false;
+
+      function setMode(showSignUp){
+        showingSignUp = !!showSignUp;
+        if(showingSignUp){
+          card.classList.add('show-signup');
+          slider.style.transform = 'translateX(-50%)';
+          mainTitle.textContent = 'Create account';
+          mainSub.textContent = 'Join us — create your account';
+          altText.textContent = 'Already have an account?';
+          toggleBtn.textContent = 'Sign in';
+        } else {
+          card.classList.remove('show-signup');
+          slider.style.transform = 'translateX(0)';
+          mainTitle.textContent = 'Sign In';
+          mainSub.textContent = 'Welcome back — enter your details';
+          altText.textContent = "Don't have an account?";
+          toggleBtn.textContent = 'Create account';
+        }
+      }
+
+      toggleBtn.addEventListener('click', () => setMode(!showingSignUp));
+
+      // Prevent forms from submitting (demo)
+      document.getElementById('signInForm').addEventListener('submit', e=>{
+        e.preventDefault();
+        // placeholder demo action
+        alert('Sign in submitted (demo).');
+      });
+      document.getElementById('signUpForm').addEventListener('submit', e=>{
+        e.preventDefault();
+        alert('Sign up submitted (demo).');
+      });
+
+      // Ripple effect for .btn and .social elements
+      function attachRipple(selector){
+        document.querySelectorAll(selector).forEach(btn=>{
+          btn.addEventListener('pointerdown', function(e){
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height) * 1.2;
+            const circle = document.createElement('span');
+            circle.className = 'ripple';
+            circle.style.width = circle.style.height = size + 'px';
+            circle.style.left = (e.clientX - rect.left - size/2) + 'px';
+            circle.style.top = (e.clientY - rect.top - size/2) + 'px';
+            this.appendChild(circle);
+            circle.addEventListener('animationend', () => circle.remove());
+          });
+        });
+      }
+
+      attachRipple('.btn, .social');
+
+      // Social buttons demo handler
+      document.querySelectorAll('.social').forEach(s=>{
+        s.addEventListener('click', ()=> {
+          const provider = s.dataset.provider || 'social';
+          alert('Continue with ' + provider + ' (demo)');
+        });
+      });
+
+      // Small accessibility: pressing Enter on toggle will also toggle
+      toggleBtn.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' ') { e.preventDefault(); toggleBtn.click(); } });
+
+      // Initialize in sign-in mode
+      setMode(false);
+    })();
+  </script>
+</body>
+</html>

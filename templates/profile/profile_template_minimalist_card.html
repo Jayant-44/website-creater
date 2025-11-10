@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Minimalist Card</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Google Font: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom CSS for a minimal, vCard-style profile */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f0f2f5 0%, #e6e9f0 100%);
+            color: #2a3346;
+        }
+
+        :root {
+            --brand-color: #6366f1; /* Indigo */
+            --brand-color-dark: #4f46e5;
+        }
+
+        .profile-card {
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s ease;
+            transform: translateY(0px);
+        }
+        .profile-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .contact-button {
+            background-color: var(--brand-color);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .contact-button:hover {
+            background-color: var(--brand-color-dark);
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+        
+        .social-link {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: #f3f4f6;
+            color: #6b7280;
+            transition: all 0.3s ease;
+        }
+        .social-link:hover {
+            background-color: var(--brand-color);
+            color: #fff;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen">
+
+    <div class="profile-card bg-white w-full max-w-sm rounded-2xl overflow-hidden">
+        <!-- Profile Header -->
+        <div class="p-10 pb-0">
+            <img src="https://placehold.co/150x150/e0e7ff/4338ca?text=S.K.&font=poppins" alt="Sarah Kim" class="w-32 h-32 rounded-full mx-auto shadow-lg border-4 border-white -mt-24">
+            
+            <div class="text-center mt-4">
+                <h1 class="text-3xl font-bold text-gray-900">Sarah Kim</h1>
+                <p class="text-lg font-medium" style="color: var(--brand-color);">Product Designer</p>
+                <p class="text-gray-500 text-sm mt-1">Based in Seoul, South Korea</p>
+            </div>
+            
+            <p class="text-center text-gray-700 leading-relaxed my-6">
+                I design user-centric, accessible, and beautiful digital products that solve real problems.
+            </p>
+        </div>
+        
+        <!-- Stats -->
+        <div class="flex justify-around text-center p-4 bg-gray-50 border-t border-b border-gray-100">
+            <div>
+                <span class="text-2xl font-bold text-gray-900 block">34</span>
+                <span class="text-sm text-gray-500">Projects</span>
+            </div>
+            <div>
+                <span class="text-2xl font-bold text-gray-900 block">1.2K</span>
+                <span class="text-sm text-gray-500">Followers</span>
+            </div>
+            <div>
+                <span class="text-2xl font-bold text-gray-900 block">215</span>
+                <span class="text-sm text-gray-500">Following</span>
+            </div>
+        </div>
+        
+        <!-- Social Links -->
+        <div class="p-6 flex justify-center space-x-4">
+            <!-- Dribbble -->
+            <a href="#" class="social-link" title="Dribbble">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c1.82 0 3.54-.5 5.04-1.37l-1.39-2.39c-1.07.63-2.3.96-3.65.96-4.42 0-8-3.58-8-8 0-1.35.33-2.58.96-3.65L2.63 6.96C1.87 8.46 1.37 10.18 1.37 12 1.37 17.52 5.85 22 11.37 22 16.89 22 21.37 17.52 21.37 12c0-1.82-.5-3.54-1.37-5.04l-2.39 1.39c.63 1.07.96 2.3.96 3.65 0 4.42-3.58 8-8 8s-8-3.58-8-8c0-1.35.33-2.58.96-3.65L6.96 2.63C8.46 1.87 10.18 1.37 12 1.37c5.52 0 10 4.48 10 10 0 1.82-.5 3.54-1.37 5.04l-2.39-1.39c.63-1.07.96-2.3.96-3.65 0-4.42-3.58-8-8-8zm0 6c2.21 0 4 1.79 4 4s-1.79 4-4 4-4-1.79-4-4 1.79-4 4-4z"></path></svg>
+            </a>
+            <!-- LinkedIn -->
+            <a href="#" class="social-link" title="LinkedIn">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14zm-11 6H5v10h3V9zM6.5 7.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3zM19 19H16v-5.17c0-1.33-.03-3.04-1.85-3.04C12.34 10.79 12 12.16 12 13.83V19h-3V9h2.88v1.36h.04c.42-.79 1.44-1.64 2.84-1.64 3.03 0 3.59 1.99 3.59 4.58V19z"></path></svg>
+            </a>
+            <!-- Twitter/X -->
+            <a href="#" class="social-link" title="Twitter/X">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117l12.966 15.644z"></path></svg>
+            </a>
+        </div>
+        
+        <!-- Action Button -->
+        <div class="p-6 pt-0">
+            <button class="contact-button w-full text-center font-bold py-3 px-8 rounded-lg text-lg">
+                Contact Me
+            </button>
+        </div>
+    </div>
+
+</body>
+</html>

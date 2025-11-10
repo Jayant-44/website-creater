@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage - Non-Profit</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Google Font: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom CSS for a clean, "human-made" non-profit site */
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #374151;
+        }
+        
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        :root {
+            --brand-color: #3b82f6; /* Calming Blue */
+            --brand-color-dark: #2563eb;
+            --secondary-color: #10b981; /* Green */
+        }
+
+        .hero-bg {
+            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://placehold.co/1920x800/60a5fa/ffffff?text=Make+a+Difference&font=inter');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .donate-button {
+            background-color: var(--secondary-color);
+            transition: all 0.3s ease;
+        }
+        .donate-button:hover {
+            background-color: #059669;
+            transform: scale(1.05);
+            box-shadow: 0 8px 15px rgba(16, 185, 129, 0.2);
+        }
+        
+        .impact-card {
+            border-top: 4px solid var(--brand-color);
+        }
+        
+        .action-card {
+            transition: all 0.3s ease;
+        }
+        .action-card:hover {
+            box-shadow: 0 10px 20px rgba(0,0,0,0.07);
+            transform: translateY(-5px);
+            border-color: var(--brand-color);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold" style="font-family: 'Playfair Display', serif; color: var(--brand-color);">Hope Foundation</div>
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="#" class="text-gray-600 hover:text-gray-900">About Us</a>
+                <a href="#" class="text-gray-600 hover:text-gray-900">Our Work</a>
+                <a href="#" class="text-gray-600 hover:text-gray-900">Get Involved</a>
+                <a href="#" class="donate-button text-white px-6 py-2 rounded-full font-medium">
+                    Donate Now
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-bg h-[70vh] flex items-center justify-center text-white">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-6">
+                Together, We Can Create Change
+            </h1>
+            <p class="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto mb-10">
+                We are dedicated to providing clean water, education, and healthcare to communities in need.
+            </p>
+            <a href="#" class="donate-button text-white font-bold py-3 px-8 rounded-full text-lg shadow-lg">
+                Donate Now
+            </a>
+        </div>
+    </section>
+    
+    <!-- Mission Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6 text-center max-w-3xl">
+            <h2 class="text-4xl font-bold text-gray-900 mb-6">Our Mission</h2>
+            <p class="text-xl text-gray-700 leading-relaxed">
+                "To build a world where every person has the opportunity to thrive. We partner with underserved communities to provide the resources and support they need to build a healthier, more equitable future for themselves and their families."
+            </p>
+        </div>
+    </section>
+
+    <!-- Impact Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Our Impact So Far</h2>
+                <p class="text-lg text-gray-600 max-w-xl mx-auto">
+                    Your support is making a real, measurable difference.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <!-- Stat 1 -->
+                <div class="bg-white p-8 rounded-lg shadow-lg text-center impact-card">
+                    <span class="text-5xl font-bold" style="color: var(--brand-color);">12,000+</span>
+                    <h3 class="text-xl font-semibold text-gray-800 mt-4">People Served</h3>
+                    <p class="text-gray-600 mt-2">Provided with access to clean drinking water.</p>
+                </div>
+                <!-- Stat 2 -->
+                <div class="bg-white p-8 rounded-lg shadow-lg text-center impact-card">
+                    <span class="text-5xl font-bold" style="color: var(--brand-color);">8,500+</span>
+                    <h3 class="text-xl font-semibold text-gray-800 mt-4">Children Educated</h3>
+                    <p class="text-gray-600 mt-2">Given school supplies and funding for a full year.</p>
+                </div>
+                <!-- Stat 3 -->
+                <div class="bg-white p-8 rounded-lg shadow-lg text-center impact-card">
+                    <span class="text-5xl font-bold" style="color: var(--brand-color);">3,200+</span>
+                    <h3 class="text-xl font-semibold text-gray-800 mt-4">Patients Treated</h3>
+                    <p class="text-gray-600 mt-2">At our pop-up medical clinics in rural regions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Get Involved Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">You Can Help</h2>
+                <p class="text-lg text-gray-600 max-w-xl mx-auto">
+                    There are many ways to join our cause and make a difference.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-4xl mx-auto">
+                <!-- Action 1: Donate -->
+                <div class="bg-white p-8 rounded-lg shadow-lg border border-gray-200 action-card">
+                    <h3 class="text-3xl font-bold text-gray-900 mb-4">Donate</h3>
+                    <p class="text-gray-600 mb-6">
+                        Your gift, no matter the size, directly funds our projects. 95% of all donations go straight to our programs in the field.
+                    </p>
+                    <a href="#" class="donate-button text-white font-medium py-2 px-6 rounded-full">
+                        Give Today
+                    </a>
+                </div>
+                <!-- Action 2: Volunteer -->
+                <div class="bg-white p-8 rounded-lg shadow-lg border border-gray-200 action-card">
+                    <h3 class="text-3xl font-bold text-gray-900 mb-4">Volunteer</h3>
+                    <p class="text-gray-600 mb-6">
+                        Give the gift of your time. We have opportunities for both local and international volunteering.
+                    </p>
+                    <a href="#" class="font-medium py-2 px-6 rounded-full" style="color: var(--brand-color); background-color: var(--brand-color-light);">
+                        Learn More
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-400 py-12">
+        <div class="container mx-auto px-6 text-center">
+            <h3 class="text-2xl font-bold text-white mb-4" style="font-family: 'Playfair Display', serif;">Hope Foundation</h3>
+            <p class="text-gray-400 mb-6">Building a better world, together.</p>
+            <p class="text-gray-500 text-sm">&copy; 2025 Hope Foundation. A registered 501(c)(3) non-profit organization.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

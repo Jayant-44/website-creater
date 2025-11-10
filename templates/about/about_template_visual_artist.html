@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Visual Artist</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Google Font: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom CSS for a minimal, visual-first "About" page */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: #111;
+        }
+
+        :root {
+            --brand-color: #8b5cf6; /* Violet */
+        }
+        
+        .hero-image-container {
+            height: 90vh;
+            min-height: 600px;
+        }
+
+        .cta-link {
+            position: relative;
+            color: #111;
+            padding-bottom: 5px;
+            font-weight: 500;
+        }
+        .cta-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--brand-color);
+            transition: all 0.3s ease;
+        }
+        .cta-link:hover::after {
+            width: 0;
+        }
+        .cta-link:hover {
+            color: var(--brand-color);
+        }
+
+        .gallery-item img {
+            transition: all 0.4s ease;
+            filter: grayscale(100%);
+        }
+        .gallery-item:hover img {
+            filter: grayscale(0%);
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Header -->
+    <header class="absolute top-0 left-0 right-0 z-50">
+        <nav class="container mx-auto px-6 py-6 flex justify-between items-center">
+            <div class="text-2xl font-bold text-black">A.K. Studio</div>
+            <div class="flex space-x-8 items-center">
+                <a href="#" class="text-gray-700 hover:text-black">Work</a>
+                <a href="#" class="text-black font-semibold">About</a>
+                <a href="#" class="text-gray-700 hover:text-black">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content Grid (Split) -->
+    <main>
+        <div class="grid grid-cols-1 md:grid-cols-2 min-h-screen">
+            <!-- Left Side (Image) -->
+            <div class="hero-image-container bg-gray-100">
+                <img src="https://placehold.co/800x1200/e5e7eb/111111?text=Anya+Kovacs&font=inter" alt="Anya Kovacs" class="w-full h-full object-cover">
+            </div>
+            
+            <!-- Right Side (Text) -->
+            <div class="flex items-center justify-center p-12 md:p-20">
+                <div class="max-w-md">
+                    <span class="text-sm font-semibold uppercase" style="color: var(--brand-color);">About Me</span>
+                    <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mt-4 mb-8">
+                        My name is Anya Kovacs. I capture moments in time.
+                    </h1>
+                    <div class="text-lg text-gray-700 space-y-6 leading-relaxed">
+                        <p>
+                            I am a photographer and visual artist based in Berlin. My work explores the intersection of urban landscapes and human emotion, seeking to find the quiet, powerful stories hidden in plain sight.
+                        </p>
+                        <p>
+                            Trained in analog film, my process is slow and deliberate. I believe in the power of a single image to convey a complex narrative. This website is a curated collection of my work, both personal and commercial.
+                        </p>
+                    </div>
+                    
+                    <div class="mt-12">
+                        <a href="#" class="cta-link text-xl">
+                            View My Selected Work
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Gallery Strip -->
+        <section class="py-20 bg-gray-100">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-gray-900 mb-10 text-center">Exhibitions & Features</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 gallery-item">
+                    <img src="https://placehold.co/400x500/d1d5db/333333?text=Gallery+1" alt="Gallery Image 1" class="rounded-lg object-cover w-full h-80">
+                    <img src="https://placehold.co/400x500/d1d5db/333333?text=Gallery+2" alt="Gallery Image 2" class="rounded-lg object-cover w-full h-80">
+                    <img src="https://placehold.co/400x500/d1d5db/333333?text=Gallery+3" alt="Gallery Image 3" class="rounded-lg object-cover w-full h-80">
+                    <img src="https://placehold.co/400x500/d1d5db/333333?text=Gallery+4" alt="Gallery Image 4" class="rounded-lg object-cover w-full h-80">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white py-12">
+        <div class="container mx-auto px-6 text-center text-gray-500">
+            <p>&copy; 2025 Anya Kovacs Studio. All images are my own.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

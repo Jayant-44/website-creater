@@ -1,0 +1,308 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glassmorphism Auth Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* --- CSS STYLES --- */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
+
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.2); /* Transparent white for glass effect */
+            --border-color: rgba(255, 255, 255, 0.3); /* Lighter border for contrast */
+            --text-light: #f0f0f0;
+            --text-dark: #333333;
+            --primary-accent: #8e2de2; /* Deep Purple */
+            --secondary-accent: #4a00e0; /* Another Purple */
+            --shadow-strong: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%); /* Vibrant purple gradient background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .glass-container {
+            position: relative;
+            width: 800px; /* Wider to accommodate both forms side-by-side */
+            max-width: 90%;
+            height: 550px;
+            background: var(--glass-bg);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-strong);
+            backdrop-filter: blur(10px); /* The key Glassmorphism effect */
+            -webkit-backdrop-filter: blur(10px);
+            overflow: hidden;
+            display: flex; /* Use flexbox for the internal layout */
+            transition: all 0.6s ease-in-out;
+        }
+
+        /* --- Form Panels --- */
+        .form-panel {
+            width: 50%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            text-align: center;
+            transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+        }
+
+        .sign-in-panel {
+            color: var(--text-light);
+            background: rgba(0, 0, 0, 0.1); /* Slightly darker glass for main login */
+        }
+        
+        .sign-up-panel {
+            color: var(--text-dark);
+            background: var(--glass-bg); /* Lighter glass for sign up, initially hidden */
+            position: absolute; /* Position absolutely to slide in */
+            right: 0;
+            transform: translateX(100%); /* Start off-screen to the right */
+            opacity: 0;
+            pointer-events: none; /* Disable interaction when hidden */
+        }
+
+        /* --- Active state for side reveal --- */
+        .glass-container.sign-up-active .sign-in-panel {
+            transform: translateX(-100%); /* Slide sign-in panel out */
+            opacity: 0;
+        }
+        
+        .glass-container.sign-up-active .sign-up-panel {
+            transform: translateX(0); /* Slide sign-up panel in */
+            opacity: 1;
+            pointer-events: auto; /* Enable interaction */
+        }
+
+        /* --- Content Styling --- */
+        h2 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        p {
+            font-size: 1em;
+            margin-bottom: 30px;
+        }
+
+        form {
+            width: 100%;
+            max-width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 15px;
+            background: rgba(255, 255, 255, 0.1); /* Light transparent input background */
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-light);
+            font-size: 1em;
+            outline: none;
+            backdrop-filter: blur(5px); /* Subtle blur for inputs too */
+            -webkit-backdrop-filter: blur(5px);
+        }
+        
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* Specific input style for sign-up panel */
+        .sign-up-panel input {
+            color: var(--text-dark);
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        .sign-up-panel input::placeholder {
+            color: rgba(51, 51, 51, 0.6);
+        }
+
+        button {
+            background: var(--primary-accent);
+            color: var(--text-light);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 500;
+            cursor: pointer;
+            text-transform: uppercase;
+            margin-top: 10px;
+            transition: background 0.3s ease, transform 0.1s;
+            width: 100%;
+            max-width: 200px;
+        }
+        
+        button:hover {
+            background: var(--secondary-accent);
+            transform: scale(1.02);
+        }
+
+        .link {
+            color: var(--text-light);
+            font-size: 0.9em;
+            margin-top: 15px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .link:hover {
+            color: var(--primary-accent);
+        }
+        
+        .sign-up-panel .link {
+            color: var(--text-dark);
+        }
+        
+        .sign-up-panel .link:hover {
+            color: var(--secondary-accent);
+        }
+
+        /* --- Social Icons --- */
+        .social-icons {
+            margin: 20px 0;
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-icons a {
+            color: var(--text-light);
+            font-size: 1.5em;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .social-icons a:hover {
+            color: var(--primary-accent);
+        }
+        
+        .sign-up-panel .social-icons a {
+            color: var(--text-dark);
+        }
+        
+        .sign-up-panel .social-icons a:hover {
+            color: var(--secondary-accent);
+        }
+        
+        /* Toggle button specific for this design */
+        .toggle-btn-light {
+            background: var(--glass-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-light);
+            font-weight: 500;
+            padding: 10px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-transform: uppercase;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .toggle-btn-light:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="glass-container" id="glassContainer">
+        
+        <div class="form-panel sign-in-panel">
+            <h2>Welcome Back!</h2>
+            <p>Log in to your account.</p>
+
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-google"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-apple"></i></a>
+            </div>
+
+            <form action="#" id="signInForm">
+                <input type="email" placeholder="Email Address" required>
+                <input type="password" placeholder="Password" required>
+                <a href="#" class="link">Forgot Password?</a>
+                <button type="submit">Sign In</button>
+            </form>
+            
+            <button class="toggle-btn-light" id="showSignUp">Create Account</button>
+        </div>
+
+        <div class="form-panel sign-up-panel">
+            <h2>Join Us!</h2>
+            <p>Enter your details to create an account.</p>
+
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-google"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-apple"></i></a>
+            </div>
+            
+            <form action="#" id="signUpForm">
+                <input type="text" placeholder="Full Name" required>
+                <input type="email" placeholder="Email Address" required>
+                <input type="password" placeholder="Password" required minlength="6">
+                <input type="password" placeholder="Confirm Password" required>
+                <button type="submit">Sign Up</button>
+            </form>
+
+            <button class="toggle-btn-light" id="showSignIn">I have an account</button>
+        </div>
+
+    </div>
+
+    <script>
+        // --- JAVASCRIPT LOGIC ---
+        const glassContainer = document.getElementById('glassContainer');
+        const showSignUpBtn = document.getElementById('showSignUp');
+        const showSignInBtn = document.getElementById('showSignIn');
+
+        showSignUpBtn.addEventListener('click', () => {
+            glassContainer.classList.add('sign-up-active');
+        });
+
+        showSignInBtn.addEventListener('click', () => {
+            glassContainer.classList.remove('sign-up-active');
+        });
+
+        // Basic form submission alerts (replace with actual backend logic)
+        document.getElementById('signInForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Glassmorphism Sign In submitted!');
+            // Add your AJAX/fetch call here
+        });
+
+        document.getElementById('signUpForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Glassmorphism Sign Up submitted!');
+            // Add your AJAX/fetch call here
+        });
+
+    </script>
+</body>
+</html>

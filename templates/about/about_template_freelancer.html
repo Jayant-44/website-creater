@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me - Freelancer</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0;600;1,400&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom CSS for a Personal/Freelancer "About Me" page */
+        body {
+            font-family: 'Lora', serif;
+            color: #333;
+            background-color: #f8f8f8;
+        }
+        
+        h1, h2, h3, h4, .font-sans {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        :root {
+            --brand-color: #16a34a; /* Green */
+            --brand-color-dark: #15803d;
+        }
+
+        .hero-image {
+            height: 80vh;
+            min-height: 500px;
+            background-image: url('https://placehold.co/800x1000/16a34a/ffffff?text=Alex+Chen&font=lora');
+            background-size: cover;
+            background-position: center 20%;
+        }
+        
+        .cta-button {
+            background-color: var(--brand-color);
+            transition: all 0.3s ease;
+        }
+        .cta-button:hover {
+            background-color: var(--brand-color-dark);
+            box-shadow: 0 5px 15px rgba(22, 163, 74, 0.2);
+        }
+        
+        .skill-tag {
+            background-color: #f0fdf4;
+            color: #15803d;
+            border: 1px solid #bbf7d0;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Header -->
+    <header class="bg-white/90 backdrop-blur-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-sans font-bold text-gray-800">Alex Chen</div>
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="#" class="font-sans text-gray-600 hover:text-gray-900">Home</a>
+                <a href="#" class="font-sans text-gray-900 font-medium" style="color: var(--brand-color);">About Me</a>
+                <a href="#" class="font-sans text-gray-600 hover:text-gray-900">Portfolio</a>
+                <a href="#" class="font-sans text-gray-600 hover:text-gray-900">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content Grid -->
+    <div class="container mx-auto max-w-6xl my-16">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-0 shadow-xl rounded-lg overflow-hidden bg-white">
+            
+            <!-- Left Side - Image -->
+            <div class="lg:col-span-1 hero-image">
+                <!-- Background image set in CSS -->
+            </div>
+            
+            <!-- Right Side - Content -->
+            <div class="lg:col-span-2 p-10 md:p-16">
+                <span class="font-sans text-sm font-semibold uppercase" style="color: var(--brand-color);">About Me</span>
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mt-2 mb-6">Hello, I'm Alex Chen.</h1>
+                <div class="text-lg text-gray-700 space-y-5 leading-relaxed">
+                    <p>
+                        I'm a freelance web developer and UX/UI designer based in Austin, TX. For the past six years, I've been helping startups and established businesses turn their complex problems into beautiful, simple, and intuitive digital solutions.
+                    </D>
+                    <p>
+                        My design philosophy is simple: **put the user first**. I believe that great design is not just about aesthetics, but about creating an experience that feels effortless, accessible, and enjoyable for every user.
+                    </p>
+                    <p>
+                        When I'm not coding or designing, you can find me hiking the greenbelt, trying out a new recipe, or getting lost in a good book.
+                    </p>
+                </div>
+                
+                <!-- Skills Section -->
+                <div class="mt-10">
+                    <h3 class="text-2xl font-bold text-gray-900 font-sans mb-4">My Toolkit</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="skill-tag text-sm font-medium px-4 py-1 rounded-full">UX/UI Design</span>
+                        <span class="skill-tag text-sm font-medium px-4 py-1 rounded-full">Figma & Sketch</span>
+                        <span class="skill-tag text-sm font-medium px-4 py-1 rounded-full">React & Next.js</span>
+                        <span class="skill-tag text-sm font-medium px-4 py-1 rounded-full">Node.js</span>
+                        <span class="skill-tag text-sm font-medium px-4 py-1 rounded-full">Webflow</span>
+                        <span class="skill-tag text-sm font-medium px-4 py-1 rounded-full">HTML & CSS</span>
+                    </div>
+                </div>
+
+                <!-- CTA Button -->
+                <div class="mt-12">
+                    <a href="#" class="cta-button font-sans text-white font-bold py-3 px-8 rounded-lg text-lg inline-block">
+                        Let's Work Together
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-gray-600 py-12">
+        <div class="container mx-auto px-6 text-center">
+            <div class="flex justify-center space-x-6 mb-4">
+                <a href="#" class="hover:text-gray-900">Twitter</a>
+                <a href="#" class="hover:text-gray-900">LinkedIn</a>
+                <a href="#" class="hover:text-gray-900">Dribbble</a>
+            </div>
+            <p>&copy; 2025 Alex Chen. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

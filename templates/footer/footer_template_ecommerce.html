@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Footer Template - E-commerce</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Google Font: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for payment icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .preview-body {
+            background-color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end; /* Pushes footer to the bottom */
+        }
+        .footer-link {
+            color: #4b5563; /* text-gray-600 */
+            transition: color 0.3s ease;
+        }
+        .footer-link:hover {
+            color: #000;
+        }
+    </style>
+</head>
+<body class="preview-body">
+
+    <!-- 
+      ============================================================
+      E-COMMERCE "FAT" FOOTER
+      Your Flask app can grab this <footer ...> ... </footer> block.
+      ============================================================
+    -->
+    <footer class="bg-gray-100 text-gray-600 border-t border-gray-200">
+        <div class="container mx-auto px-6 py-16">
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-10">
+                
+                <!-- Column 1: Customer Service -->
+                <div class="md:col-span-1">
+                    <h3 class="text-lg font-semibold text-gray-900 uppercase mb-4">Customer Service</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="footer-link">Contact Us</a></li>
+                        <li><a href="#" class="footer-link">Help & FAQ</a></li>
+                        <li><a href="#" class="footer-link">Shipping & Returns</a></li>
+                        <li><a href="#" class="footer-link">Order Tracker</a></li>
+                        <li><a href="#" class="footer-link">Store Locator</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 2: Shop -->
+                <div class="md:col-span-1">
+                    <h3 class="text-lg font-semibold text-gray-900 uppercase mb-4">Shop</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="footer-link">New Arrivals</a></li>
+                        <li><a href="#" class="footer-link">Men's</a></li>
+                        <li><a href="#" class="footer-link">Women's</a></li>
+                        <li><a href="#" class="footer-link">Kids</a></li>
+                        <li><a href="#" class="footer-link">Sale</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: About -->
+                <div class="md:col-span-1">
+                    <h3 class="text-lg font-semibold text-gray-900 uppercase mb-4">Our Company</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="footer-link">About Us</a></li>
+                        <li><a href="#" class="footer-link">Our Story</a></li>
+                        <li><a href="#" class="footer-link">Careers</a></li>
+                        <li><a href="#" class="footer-link">Sustainability</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 4 & 5: Subscribe & Socials -->
+                <div class="col-span-2 lg:col-span-2">
+                    <h3 class="text-lg font-semibold text-gray-900 uppercase mb-4">Join Our List</h3>
+                    <p class="mb-4">Get 15% off your first order when you sign up for our newsletter.</p>
+                    <form action="#" method="POST" class="flex">
+                        <input 
+                            type="email" 
+                            placeholder="Enter your email" 
+                            class="w-full px-4 py-3 border border-gray-300 rounded-l-md focus:outline-none focus:border-gray-900" 
+                            required>
+                        <button 
+                            type="submit" 
+                            class="bg-gray-800 text-white font-semibold py-3 px-5 rounded-r-md hover:bg-black transition-colors">
+                            Sign Up
+                        </button>
+                    </form>
+                    
+                    <div class="flex space-x-5 mt-8">
+                        <!-- Socials -->
+                        <a href="#" class="text-gray-500 hover:text-gray-900"><i class="fab fa-facebook-f fa-lg"></i></a>
+                        <a href="#" class="text-gray-500 hover:text-gray-900"><i class="fab fa-instagram fa-lg"></i></a>
+                        <a href="#" class="text-gray-500 hover:text-gray-900"><i class="fab fa-pinterest-p fa-lg"></i></a>
+                        <a href="#" class="text-gray-500 hover:text-gray-900"><i class="fab fa-twitter fa-lg"></i></a>
+                    </div>
+                </div>
+
+            </div>
+            
+            <!-- Bottom Bar: Payments & Copyright -->
+            <div class="border-t border-gray-300 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center space-x-3 mb-4 md:mb-0">
+                    <!-- Payment Icons -->
+                    <i class="fab fa-cc-visa fa-2x text-gray-500"></i>
+                    <i class="fab fa-cc-mastercard fa-2x text-gray-500"></i>
+                    <i class="fab fa-cc-paypal fa-2x text-gray-500"></i>
+                    <i class="fab fa-cc-apple-pay fa-2x text-gray-500"></i>
+                </div>
+                <p class="text-sm text-gray-500">&copy; 2025 Your E-commerce Shop. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

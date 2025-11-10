@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Website Buddy | AI-Powered Web Generation</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Orbitron:wght@600;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/scrollreveal"></script>
+
+    <style>
+      /* --- GLOBAL STYLES & RESETS --- */
+      :root {
+        /* DEEP SPACE / CYBERPUNK PALETTE */
+        --primary-color: #00bcd4; /* Cyan/Aqua */
+        --secondary-color: #1f084a; /* Deep Violet/Black Background */
+        --accent-color: #ff0077; /* Neon Pink */
+        --text-color: #a0aec0; /* Light Gray for body text */
+        --light-text: #edf2f7; /* Near-white for headers */
+        --card-bg: rgba(31, 8, 74, 0.6); /* Semi-transparent card background */
+        --card-border: 1px solid rgba(0, 188, 212, 0.2);
+        --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        --font-body: "Inter", sans-serif;
+        --font-heading: "Orbitron", sans-serif;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: var(--font-body);
+      }
+
+      body {
+        line-height: 1.6;
+        color: var(--text-color);
+        background-color: var(--secondary-color);
+        scroll-behavior: smooth;
+        background-image: radial-gradient(
+          circle at center,
+          rgba(31, 8, 74, 0.8) 0%,
+          var(--secondary-color) 100%
+        );
+      }
+
+      a {
+        text-decoration: none;
+        color: var(--primary-color);
+      }
+
+      section {
+        padding: 100px 5%; /* Increased padding for more breathing room */
+        position: relative;
+        overflow: hidden;
+      }
+
+      h2 {
+        text-align: center;
+        font-size: 3rem;
+        margin-bottom: 10px;
+        color: var(--light-text);
+        font-family: var(--font-heading);
+        letter-spacing: 2px;
+        text-shadow: 0 0 15px rgba(0, 188, 212, 0.3);
+      }
+
+      .section-description {
+        text-align: center;
+        max-width: 700px;
+        margin: 0 auto 60px;
+        font-size: 1.1rem;
+        color: var(--text-color);
+      }
+
+      /* --- NAVIGATION (Minimalist Dark) --- */
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background-color: rgba(31, 8, 74, 0.8);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.7);
+        border-bottom: 1px solid rgba(0, 188, 212, 0.1);
+      }
+
+      nav.nav {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px 0;
+      }
+
+      nav h3 {
+        font-size: 1.8rem;
+        color: var(--light-text);
+        font-family: var(--font-heading);
+      }
+
+      nav h3 span {
+        color: var(--accent-color);
+        text-shadow: 0 0 5px var(--accent-color);
+      }
+
+      nav ul {
+        display: flex;
+        gap: 30px;
+        list-style: none;
+      }
+
+      nav ul li a {
+        color: var(--text-color);
+        font-weight: 600;
+        transition: color 0.3s, text-shadow 0.3s;
+        display: flex;
+        align-items: center;
+        padding: 8px 10px;
+        border-radius: 5px;
+      }
+
+      nav ul li a:hover {
+        color: var(--primary-color);
+        text-shadow: 0 0 8px rgba(0, 188, 212, 0.7);
+      }
+
+      nav ul li .btn-logout {
+        background: linear-gradient(90deg, #ff0077 0%, #cc005f 100%);
+        color: white;
+        border-radius: 20px;
+        padding: 8px 18px;
+        transition: all 0.3s;
+        box-shadow: 0 0 10px rgba(255, 0, 119, 0.5);
+      }
+      nav ul li .btn-logout:hover {
+        background: linear-gradient(90deg, #cc005f 0%, #ff0077 100%);
+        box-shadow: 0 0 20px rgba(255, 0, 119, 0.8);
+        transform: translateY(-2px) scale(1.05);
+      }
+
+      #menu-btn {
+        display: none;
+        color: var(--light-text);
+        font-size: 2rem;
+        cursor: pointer;
+      }
+
+      @media (max-width: 768px) {
+        nav ul {
+          display: none;
+          flex-direction: column;
+          gap: 15px;
+          position: absolute;
+          right: 5%;
+          top: 70px;
+          width: 250px;
+          padding: 20px;
+          border-radius: 8px;
+          background-color: var(--secondary-color);
+          border: 1px solid var(--primary-color);
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        }
+        nav ul.open {
+          display: flex;
+        }
+        #menu-btn {
+          display: block;
+        }
+      }
+
+      /* --- BUTTONS (Advanced Neon/Glow) --- */
+      .btn,
+      .btn-outline {
+        display: inline-block;
+        padding: 14px 30px;
+        background: linear-gradient(
+          45deg,
+          var(--primary-color),
+          var(--accent-color)
+        );
+        color: var(--light-text);
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        box-shadow: 0 4px 15px rgba(0, 188, 212, 0.3);
+      }
+
+      .btn:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(255, 0, 119, 0.5);
+        filter: brightness(1.1);
+      }
+
+      /* --- HERO SECTION (Enhanced with AI Features) --- */
+      .hero-container {
+        background: none;
+        padding-top: 120px;
+        padding-bottom: 120px;
+      }
+
+      .hero-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        text-align: left;
+        gap: 50px;
+      }
+
+      .hero-text {
+        flex: 1;
+      }
+
+      .hero-content h1 {
+        font-size: 4rem;
+        margin-bottom: 25px;
+        line-height: 1.1;
+        font-family: var(--font-heading);
+        color: var(--light-text);
+        /* Neon Glow Effect */
+        text-shadow: 0 0 10px rgba(0, 188, 212, 0.6),
+          0 0 20px rgba(0, 188, 212, 0.4);
+      }
+
+      .hero-content p {
+        margin-bottom: 40px;
+        font-size: 1.15rem;
+        color: var(--text-color);
+      }
+
+      /* Enhanced Search Form with AI Features */
+      .hero-search-form {
+        position: relative;
+        display: flex;
+        max-width: 700px;
+        margin-top: 40px;
+        border-radius: 15px;
+        overflow: hidden;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(0, 188, 212, 0.3);
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        width: 100%;
+      }
+
+      .hero-search-form input[type="text"] {
+        flex-grow: 1;
+        padding: 18px 25px;
+        border: none;
+        outline: none;
+        background: transparent;
+        color: var(--light-text);
+        font-size: 1.1rem;
+        font-weight: 500;
+        position: relative;
+      }
+
+      .hero-search-form input[type="text"]::placeholder {
+        color: var(--text-color);
+      }
+
+      .hero-search-form button {
+        padding: 0 30px;
+        background: var(--accent-color);
+        color: var(--light-text);
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.3s;
+        border-radius: 0;
+        box-shadow: none;
+        text-transform: uppercase;
+        position: relative;
+      }
+
+      .hero-search-form button:hover {
+        background-color: #ff3399;
+        transform: none;
+      }
+
+      .hero-search-form button:disabled {
+        background: #666;
+        cursor: not-allowed;
+      }
+
+      /* AI Analysis Preview Box */
+      .ai-analysis-preview {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--card-bg);
+        border: var(--card-border);
+        border-radius: 0 0 15px 15px;
+        padding: 20px;
+        z-index: 100;
+        transform: translateY(-5px);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+        box-shadow: var(--card-shadow);
+      }
+
+      .ai-analysis-preview.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+
+      .analysis-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+        font-size: 0.9rem;
+      }
+
+      .analysis-item .label {
+        color: var(--primary-color);
+        font-weight: 600;
+      }
+
+      .analysis-item .value {
+        color: var(--light-text);
+      }
+
+      .confidence-bar {
+        width: 100%;
+        height: 4px;
+        background: rgba(0, 188, 212, 0.2);
+        border-radius: 2px;
+        overflow: hidden;
+        margin-top: 10px;
+      }
+
+      .confidence-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+        width: 0%;
+        transition: width 1s ease;
+      }
+
+      .hero-image-container {
+        flex: 1;
+        height: 400px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 20px;
+        border: var(--card-border);
+        position: relative;
+        overflow: hidden;
+        box-shadow: var(--card-shadow);
+        background: linear-gradient(
+          135deg,
+          rgba(31, 8, 74, 0.8) 0%,
+          rgba(0, 188, 212, 0.1) 100%
+        );
+      }
+
+      .hero-image-preview {
+        max-width: 90%;
+        max-height: 90%;
+        object-fit: contain;
+        border-radius: 10px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5),
+          0 0 25px rgba(255, 0, 119, 0.5);
+        transition: transform 0.5s ease;
+      }
+
+      .hero-image-preview:hover {
+        transform: scale(1.03);
+      }
+
+      @media (max-width: 1024px) {
+        .hero-content {
+          flex-direction: column;
+          text-align: center;
+        }
+        .hero-text {
+          flex: none;
+        }
+        .hero-content h1 {
+          font-size: 3rem;
+        }
+        .hero-image-container {
+          display: none;
+        }
+        .hero-search-form {
+          margin: 40px auto 0;
+        }
+      }
+
+      /* --- AI SUGGESTIONS SECTION (NEW) --- */
+      .ai-suggestions-section {
+        background: var(--card-bg);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 30px;
+        margin: 60px auto;
+        max-width: 1000px;
+        border: var(--card-border);
+        box-shadow: var(--card-shadow);
+      }
+
+      .ai-suggestions-title {
+        color: var(--primary-color);
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .suggestion-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 15px;
+      }
+
+      .suggestion-card {
+        background: rgba(0, 188, 212, 0.1);
+        border: 1px solid rgba(0, 188, 212, 0.2);
+        border-radius: 12px;
+        padding: 20px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      .suggestion-card:hover {
+        background: rgba(0, 188, 212, 0.2);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 188, 212, 0.3);
+      }
+
+      .suggestion-card h4 {
+        color: var(--light-text);
+        margin-bottom: 8px;
+        font-size: 1.1rem;
+      }
+
+      .suggestion-card p {
+        color: var(--text-color);
+        font-size: 0.9rem;
+        line-height: 1.4;
+      }
+
+      .suggestion-badge {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: var(--accent-color);
+        color: white;
+        padding: 2px 8px;
+        border-radius: 10px;
+        font-size: 0.7rem;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+
+      /* --- FEATURES SECTION (Enhanced) --- */
+      #features {
+        background-color: var(--secondary-color);
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .feature-card {
+        background-color: var(--card-bg);
+        padding: 30px;
+        border-radius: 15px;
+        border: var(--card-border);
+        box-shadow: var(--card-shadow);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        text-align: center;
+        overflow: hidden;
+        position: relative;
+        backdrop-filter: blur(5px);
+      }
+
+      .feature-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80%;
+        height: 3px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--accent-color),
+          transparent
+        );
+        opacity: 0.5;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5),
+          0 0 25px rgba(0, 188, 212, 0.6);
+        border-color: var(--primary-color);
+      }
+
+      .feature-card i {
+        font-size: 3rem;
+        color: var(--primary-color);
+        margin-bottom: 20px;
+        text-shadow: 0 0 10px rgba(0, 188, 212, 0.7);
+      }
+
+      .feature-card h3 {
+        font-size: 1.4rem;
+        margin-bottom: 10px;
+        color: var(--light-text);
+        font-family: var(--font-heading);
+      }
+
+      .feature-card p {
+        color: var(--text-color);
+      }
+
+      /* Enhanced feature cards with new AI capabilities */
+      .feature-card.enhanced {
+        border: 2px solid var(--accent-color);
+        background: linear-gradient(135deg, var(--card-bg), rgba(255, 0, 119, 0.1));
+      }
+
+      .feature-card.enhanced .new-badge {
+        position: absolute;
+        top: -5px;
+        right: 15px;
+        background: var(--accent-color);
+        color: white;
+        padding: 4px 12px;
+        border-radius: 0 0 10px 10px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      /* --- PROCESS SECTION (Enhanced with AI Steps) --- */
+      .process-steps {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        max-width: 1200px;
+        margin: 0 auto;
+        position: relative;
+        padding-top: 50px;
+      }
+
+      .step {
+        text-align: center;
+        z-index: 2;
+        padding: 20px;
+        background-color: var(--card-bg);
+        border-radius: 15px;
+        border: var(--card-border);
+        backdrop-filter: blur(10px);
+        transition: transform 0.3s ease;
+      }
+
+      .step:hover {
+        transform: translateY(-5px);
+      }
+
+      .step-icon {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(
+          135deg,
+          var(--primary-color),
+          var(--accent-color)
+        );
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.8rem;
+        margin: 0 auto 20px;
+        box-shadow: 0 0 20px rgba(0, 188, 212, 0.4);
+        transition: all 0.3s;
+      }
+
+      .step:hover .step-icon {
+        transform: scale(1.1) rotate(10deg);
+        box-shadow: 0 0 30px var(--accent-color);
+      }
+
+      .step h3 {
+        color: var(--light-text);
+        margin-bottom: 10px;
+      }
+
+      .step p {
+        color: var(--text-color);
+        line-height: 1.5;
+      }
+
+      /* --- CONTACT SECTION --- */
+      #contact {
+        background: linear-gradient(
+          45deg,
+          rgba(31, 8, 74, 0.9),
+          rgba(47, 12, 110, 0.9)
+        );
+        border-top: 1px solid rgba(0, 188, 212, 0.3);
+      }
+      .contact-card {
+        max-width: 700px;
+        margin: 0 auto;
+        background-color: var(--card-bg);
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: var(--card-shadow);
+        border: var(--card-border);
+        text-align: center;
+      }
+      .contact-card .btn {
+        margin-top: 20px;
+        font-size: 1.1rem;
+      }
+
+      /* --- FOOTER --- */
+      footer {
+        background-color: var(--secondary-color);
+        border-top: 1px solid rgba(255, 0, 119, 0.1);
+        padding: 30px 5%;
+      }
+
+      .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: var(--text-color);
+      }
+
+      .social-icon {
+        display: flex;
+        gap: 15px;
+      }
+
+      .social-icon i {
+        color: var(--text-color);
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .social-icon i:hover {
+        color: var(--accent-color);
+        text-shadow: 0 0 10px var(--accent-color);
+        transform: translateY(-2px);
+      }
+
+      /* --- Modal Styles --- */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.6);
+        justify-content: center;
+        align-items: center;
+      }
+      .modal-content-wrapper {
+        position: relative;
+        width: 90%;
+        max-width: 450px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+        border: 2px solid var(--accent-color);
+        border-radius: 15px;
+        animation: fadeIn 0.3s ease-out;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .close-btn {
+        position: absolute;
+        top: 15px;
+        right: 25px;
+        color: var(--light-text);
+        font-size: 30px;
+        font-weight: bold;
+        transition: color 0.2s;
+        cursor: pointer;
+        z-index: 1001;
+        text-shadow: 0 0 10px rgba(255, 0, 119, 0.8);
+      }
+      .close-btn:hover {
+        color: var(--primary-color);
+        text-shadow: 0 0 10px rgba(0, 188, 212, 0.8);
+      }
+
+      .modal-content {
+        background: linear-gradient(
+          135deg,
+          var(--secondary-color) 30%,
+          #3a1c71 100%
+        );
+        padding: 40px;
+        border-radius: 15px;
+        color: var(--light-text);
+      }
+
+      .modal-content h3 {
+        color: var(--primary-color);
+        border-bottom: 2px solid rgba(0, 188, 212, 0.5);
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+        font-family: var(--font-heading);
+        font-size: 1.5rem;
+      }
+
+      .modal-content label {
+        display: block;
+        margin-top: 15px;
+        margin-bottom: 5px;
+        font-weight: 600;
+      }
+
+      .modal-content input[type="text"],
+      .modal-content input[type="password"],
+      .modal-content input[type="file"] {
+        width: 100%;
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid var(--primary-color);
+        background: rgba(0, 0, 0, 0.3);
+        box-shadow: inset 0 0 5px rgba(0, 188, 212, 0.5);
+        color: white;
+        font-size: 16px;
+        margin-top: 5px;
+      }
+
+      .modal-content input[type="file"] {
+        padding: 5px;
+        background: rgba(0, 0, 0, 0.5);
+      }
+
+      .modal-content input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        margin-top: 20px;
+        background: linear-gradient(90deg, var(--accent-color), #f5576c);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: background 0.3s, transform 0.2s;
+        box-shadow: 0 0 15px rgba(255, 0, 119, 0.5);
+      }
+      .modal-content input[type="submit"]:hover {
+        background: linear-gradient(90deg, #f5576c, var(--accent-color));
+        transform: translateY(-1px);
+      }
+      .profile-img-preview {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid var(--primary-color);
+        margin-bottom: 15px;
+      }
+      .profile-pic-container {
+        text-align: center;
+      }
+
+      /* Loading and status indicators */
+      .loading-spinner {
+        border: 3px solid rgba(0, 188, 212, 0.3);
+        border-top: 3px solid var(--primary-color);
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        animation: spin 1s linear infinite;
+        display: inline-block;
+        margin-left: 10px;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .suggestion-grid {
+          grid-template-columns: 1fr;
+        }
+        
+        .ai-suggestions-section {
+          margin: 30px 10px;
+          padding: 20px;
+        }
+        
+        .footer-container {
+          flex-direction: column;
+          gap: 20px;
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="nav">
+        <h3><span style="color: var(--accent-color)">WEB</span>BUDDY<span style="font-size: 0.6em; color: var(--primary-color)"> AI</span></h3>
+
+        <div id="menu-btn">
+          <i class="ri-menu-line"></i>
+        </div>
+
+        <ul id="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#process">How It Works</a></li>
+
+          <li>
+            <a href="/history" title="View History"
+              ><i class="fa-solid fa-history"></i> History</a
+            >
+          </li>
+          <li>
+            <a href="#" id="edit-profile-link" title="Edit Profile"
+              ><i class="fa-solid fa-user-gear"></i> Profile</a
+            >
+          </li>
+
+          <li>
+            <a href="/logout" class="btn-logout" title="Logout"
+              ><i class="fa-solid fa-right-from-bracket"></i> Logout
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <section class="hero-container" id="home">
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1>AI-Driven Web Creation.</h1>
+          <h1>Build Instantly.</h1>
+          <p>
+            Website Buddy leverages advanced AI and natural language processing to transform your descriptions into production-ready HTML, CSS, and JavaScript. Our enhanced matching system understands your requirements and generates perfectly customized code.
+          </p>
+
+          <form class="hero-search-form" action="/generate" method="POST" id="main-form">
+            <input
+              type="text"
+              name="query"
+              id="main-query"
+              placeholder="Describe the page you need (e.g., 'A dark mode cyberpunk login form with neon effects')"
+              required
+            />
+            <button type="submit" id="generate-btn">
+              <i class="fa-solid fa-bolt"></i> Generate
+              <span class="loading-spinner" id="loading-spinner" style="display: none;"></span>
+            </button>
+            
+            <!-- AI Analysis Preview (shown when user starts typing) -->
+            <div class="ai-analysis-preview" id="analysis-preview">
+              <div class="analysis-item">
+                <span class="label">Style Detected:</span>
+                <span class="value" id="detected-style">-</span>
+              </div>
+              <div class="analysis-item">
+                <span class="label">Page Type:</span>
+                <span class="value" id="detected-page-type">-</span>
+              </div>
+              <div class="analysis-item">
+                <span class="label">Features:</span>
+                <span class="value" id="detected-features">-</span>
+              </div>
+              <div class="analysis-item">
+                <span class="label">AI Confidence:</span>
+                <span class="value" id="confidence-score">-</span>
+              </div>
+              <div class="confidence-bar">
+                <div class="confidence-fill" id="confidence-fill"></div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="hero-image-container">
+          <img
+            src="static/images/WebBuddy.png"
+            alt="WebBuddy AI Generation Preview"
+            class="hero-image-preview"
+          />
+        </div>
+      </div>
+
+      <!-- AI Smart Suggestions Section -->
+      <div class="ai-suggestions-section">
+        <div class="ai-suggestions-title">
+          <i class="fas fa-magic"></i>
+          Smart Suggestions - Try These Popular Requests
+        </div>
+        <div class="suggestion-grid">
+          <div class="suggestion-card" onclick="fillSuggestion('Create a dark mode cyberpunk login form with neon glowing effects and social media integration')">
+            <div class="suggestion-badge">HOT</div>
+            <h4>Cyberpunk Login</h4>
+            <p>Dark mode with neon effects, glowing borders, and social login options</p>
+          </div>
+          <div class="suggestion-card" onclick="fillSuggestion('Build a glassmorphism signup form with blur effects, gradient background, and smooth animations')">
+            <div class="suggestion-badge">NEW</div>
+            <h4>Glassmorphism Signup</h4>
+            <p>Modern glass effect design with smooth transitions and blur backgrounds</p>
+          </div>
+          <div class="suggestion-card" onclick="fillSuggestion('Design a minimalist professional login page with clean white design and subtle animations')">
+            <h4>Minimalist Professional</h4>
+            <p>Clean, corporate-friendly design with subtle hover effects</p>
+          </div>
+          <div class="suggestion-card" onclick="fillSuggestion('Create a retro 90s style signup form with bold colors, geometric shapes, and fun animations')">
+            <div class="suggestion-badge">FUN</div>
+            <h4>Retro 90s Style</h4>
+            <p>Nostalgic design with vibrant colors and playful geometric elements</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features">
+      <h2>ENHANCED AI CAPABILITIES</h2>
+      <p class="section-description">
+        Our advanced AI system now features intelligent template matching, real-time customization, and semantic understanding of design requirements.
+      </p>
+
+      <div class="features-grid">
+        <div class="feature-card enhanced">
+          <div class="new-badge">Enhanced</div>
+          <i class="fa-solid fa-brain"></i>
+          <h3>AI Template Matching</h3>
+          <p>
+            Advanced algorithm analyzes your requirements and matches them with the perfect template, then applies intelligent customizations.
+          </p>
+        </div>
+        <div class="feature-card">
+          <i class="fa-solid fa-feather-pointed"></i>
+          <h3>Natural Language Processing</h3>
+          <p>
+            Describe your vision in plain English. Our NLP engine understands style preferences, features, and layout requirements.
+          </p>
+        </div>
+        <div class="feature-card enhanced">
+          <div class="new-badge">New</div>
+          <i class="fa-solid fa-palette"></i>
+          <h3>Dynamic Customization</h3>
+          <p>
+            Automatically adjusts colors, animations, and layouts based on your preferences. No manual tweaking required.
+          </p>
+        </div>
+        <div class="feature-card">
+          <i class="fa-solid fa-file-code"></i>
+          <h3>Production-Ready Code</h3>
+          <p>
+            Clean, semantic HTML with modern CSS and optimized JavaScript. Ready for immediate deployment or further customization.
+          </p>
+        </div>
+        <div class="feature-card enhanced">
+          <div class="new-badge">Smart</div>
+          <i class="fa-solid fa-chart-line"></i>
+          <h3>Confidence Scoring</h3>
+          <p>
+            See how well your requirements match our templates with real-time confidence scores and suggestions for improvements.
+          </p>
+        </div>
+        <div class="feature-card">
+          <i class="fa-solid fa-mobile-screen-button"></i>
+          <h3>Responsive by Default</h3>
+          <p>
+            Every generated component is mobile-first and fully responsive across all devices and screen sizes.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="process">
+      <h2>THE AI GENERATION PROCESS</h2>
+      <p class="section-description">
+        Our enhanced four-step AI pipeline combines template intelligence with dynamic customization for optimal results.
+      </p>
+
+      <div class="process-steps">
+        <div class="step">
+          <div class="step-icon"><i class="fa-solid fa-keyboard"></i></div>
+          <h3>1. Describe Your Vision</h3>
+          <p>
+            Use natural language to describe your ideal webpage. Include style preferences, features, colors, and layout ideas.
+          </p>
+        </div>
+        <div class="step">
+          <div class="step-icon"><i class="fa-solid fa-search"></i></div>
+          <h3>2. AI Template Matching</h3>
+          <p>
+            Our AI analyzes your requirements and finds the best matching template from our curated library using advanced scoring algorithms.
+          </p>
+        </div>
+        <div class="step">
+          <div class="step-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+          <h3>3. Intelligent Customization</h3>
+          <p>
+            The system automatically customizes the template with your preferred colors, animations, and features. No template found? We generate from scratch.
+          </p>
+        </div>
+        <div class="step">
+          <div class="step-icon"><i class="fa-solid fa-rocket"></i></div>
+          <h3>4. Deploy & Download</h3>
+          <p>
+            Preview your generated website instantly, download the complete code package, and deploy wherever you need.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="contact-card">
+        <h2>READY TO CREATE WITH AI?</h2>
+        <p class="section-description" style="margin-bottom: 20px">
+          Experience the next generation of web development. Generate professional websites in seconds with our enhanced AI system.
+        </p>
+
+        <a href="#home" class="btn" style="width: 100%" onclick="document.getElementById('main-query').focus()">
+          Start Creating with AI <i class="fa-solid fa-magic"></i>
+        </a>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-container">
+        <div>
+          <p>
+            &copy; 2025 All rights reserved by <a href="#">Website Buddy AI</a> | Enhanced with Advanced Template Matching
+          </p>
+        </div>
+        <div>
+          <div class="social-icon">
+            <i class="fa-brands fa-github"></i>
+            <i class="fa-brands fa-discord"></i>
+            <i class="fa-brands fa-twitter"></i>
+            <i class="fa-brands fa-youtube"></i>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <div id="editProfileModal" class="modal">
+      <div class="modal-content-wrapper">
+        <span class="close-btn" id="modal-close-global">&times;</span>
+        <div id="modal-content-area" class="modal-content">
+          <p style="text-align: center">Loading profile editor...</p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // --- Enhanced AI Features ---
+      let analysisTimeout;
+      const queryInput = document.getElementById('main-query');
+      const analysisPreview = document.getElementById('analysis-preview');
+      const generateBtn = document.getElementById('generate-btn');
+      const loadingSpinner = document.getElementById('loading-spinner');
+      const mainForm = document.getElementById('main-form');
+
+      // Real-time AI analysis as user types
+      queryInput.addEventListener('input', function() {
+        clearTimeout(analysisTimeout);
+        const query = this.value.trim();
+        
+        if (query.length > 10) {
+          analysisTimeout = setTimeout(() => {
+            analyzePrompt(query);
+          }, 500);
+        } else {
+          analysisPreview.classList.remove('active');
+        }
+      });
+
+      // Mock AI analysis function (replace with real API call)
+      function analyzePrompt(query) {
+        // Simulate AI analysis
+        const analysis = performMockAnalysis(query);
+        
+        // Update UI with analysis results
+        document.getElementById('detected-style').textContent = analysis.style;
+        document.getElementById('detected-page-type').textContent = analysis.pageType;
+        document.getElementById('detected-features').textContent = analysis.features.join(', ');
+        document.getElementById('confidence-score').textContent = analysis.confidence + '%';
+        
+        // Update confidence bar
+        const confidenceFill = document.getElementById('confidence-fill');
+        confidenceFill.style.width = analysis.confidence + '%';
+        
+        // Show analysis preview
+        analysisPreview.classList.add('active');
+      }
+
+      // Mock analysis logic (replace with real AI service)
+      function performMockAnalysis(query) {
+        const lowerQuery = query.toLowerCase();
+        let style = 'Modern';
+        let pageType = 'Login';
+        let features = [];
+        let confidence = 75;
+
+        // Style detection
+        if (lowerQuery.includes('dark') || lowerQuery.includes('cyberpunk')) {
+          style = 'Dark/Cyberpunk';
+          confidence += 10;
+        } else if (lowerQuery.includes('glass') || lowerQuery.includes('blur')) {
+          style = 'Glassmorphism';
+          confidence += 10;
+        } else if (lowerQuery.includes('minimal') || lowerQuery.includes('clean')) {
+          style = 'Minimalist';
+          confidence += 5;
+        } else if (lowerQuery.includes('retro') || lowerQuery.includes('90s')) {
+          style = 'Retro 90s';
+          confidence += 10;
+        }
+
+        // Page type detection
+        if (lowerQuery.includes('signup') || lowerQuery.includes('register')) {
+          pageType = 'Signup';
+          confidence += 5;
+        } else if (lowerQuery.includes('login') || lowerQuery.includes('signin')) {
+          pageType = 'Login';
+          confidence += 5;
+        } else if (lowerQuery.includes('home') || lowerQuery.includes('landing')) {
+          pageType = 'Homepage';
+          confidence += 5;
+        }
+
+        // Feature detection
+        if (lowerQuery.includes('social')) features.push('Social Login');
+        if (lowerQuery.includes('animation') || lowerQuery.includes('animated')) features.push('Animations');
+        if (lowerQuery.includes('responsive')) features.push('Responsive');
+        if (lowerQuery.includes('neon') || lowerQuery.includes('glow')) features.push('Neon Effects');
+
+        return {
+          style,
+          pageType,
+          features: features.length ? features : ['Standard Features'],
+          confidence: Math.min(95, confidence)
+        };
+      }
+
+      // Fill suggestion into input field
+      function fillSuggestion(suggestion) {
+        queryInput.value = suggestion;
+        queryInput.focus();
+        analyzePrompt(suggestion);
+        
+        // Scroll to form
+        queryInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+
+      // Enhanced form submission with loading state
+      mainForm.addEventListener('submit', function(e) {
+        generateBtn.disabled = true;
+        loadingSpinner.style.display = 'inline-block';
+        generateBtn.innerHTML = '<i class="fa-solid fa-cog fa-spin"></i> Generating... <span class="loading-spinner" style="display: inline-block;"></span>';
+        
+        // Hide analysis preview
+        analysisPreview.classList.remove('active');
+      });
+
+      // --- Mobile Menu Toggle ---
+      const menuBtn = document.getElementById("menu-btn");
+      const navLinks = document.getElementById("nav-links");
+      const menuBtnIcon = menuBtn.querySelector("i");
+
+      menuBtn.addEventListener("click", () => {
+        navLinks.classList.toggle("open");
+        const isOpen = navLinks.classList.contains("open");
+        menuBtnIcon.setAttribute(
+          "class",
+          isOpen ? "ri-close-line" : "ri-menu-line"
+        );
+      });
+
+      navLinks.addEventListener("click", (e) => {
+        if (e.target.tagName === "A") {
+          navLinks.classList.remove("open");
+          menuBtnIcon.setAttribute("class", "ri-menu-line");
+        }
+      });
+
+      // --- Modal Interaction Logic ---
+      const modal = document.getElementById("editProfileModal");
+      const editProfileLink = document.getElementById("edit-profile-link");
+      const globalClose = document.getElementById("modal-close-global");
+
+      function loadModalContent() {
+        const modalContentArea = document.getElementById("modal-content-area");
+        modalContentArea.innerHTML =
+          '<p style="text-align:center;">Loading profile editor...</p>';
+
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", "/edit_profile", true);
+
+        xhr.onload = function () {
+          if (xhr.status === 200) {
+            modalContentArea.innerHTML = xhr.responseText;
+          } else {
+            modalContentArea.innerHTML = `
+              <h3><i class="fa-solid fa-server"></i> Server Error</h3>
+              <p style="color: var(--accent-color);">
+                Could not load the profile editor. (Status: ${xhr.status})
+              </p>
+              <p>
+                This feature requires the Flask backend to be running with the '/edit_profile' route configured.
+              </p>
+            `;
+          }
+        };
+
+        xhr.onerror = function () {
+          modalContentArea.innerHTML = `
+            <h3><i class="fa-solid fa-network-wired"></i> Connection Error</h3>
+            <p style="color: var(--accent-color);">
+              Network request failed. Ensure your server is running.
+            </p>
+          `;
+        };
+
+        xhr.send();
+      }
+
+      if (editProfileLink) {
+        editProfileLink.onclick = function (event) {
+          event.preventDefault();
+          loadModalContent();
+          modal.style.display = "flex";
+        };
+      }
+
+      if (globalClose) {
+        globalClose.onclick = function () {
+          modal.style.display = "none";
+        };
+      }
+
+      window.onclick = function (event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      };
+
+      // --- Scroll Reveal Animations ---
+      const scrollRevealOption = {
+        distance: "60px",
+        origin: "bottom",
+        duration: 1200,
+        easing: "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+      };
+
+      // Apply animations
+      ScrollReveal().reveal(".hero-text h1", {
+        ...scrollRevealOption,
+        origin: "top",
+        delay: 100,
+        interval: 100,
+      });
+      ScrollReveal().reveal(".hero-text p", {
+        ...scrollRevealOption,
+        delay: 500,
+      });
+      ScrollReveal().reveal(".hero-search-form", {
+        ...scrollRevealOption,
+        delay: 800,
+      });
+      ScrollReveal().reveal(".hero-image-container", {
+        ...scrollRevealOption,
+        origin: "right",
+        delay: 300,
+      });
+
+      ScrollReveal().reveal(".ai-suggestions-section", {
+        ...scrollRevealOption,
+        delay: 1000,
+      });
+
+      ScrollReveal().reveal("#features h2, #features .section-description", {
+        ...scrollRevealOption,
+        origin: "top",
+      });
+      ScrollReveal().reveal(".features-grid .feature-card", {
+        ...scrollRevealOption,
+        interval: 150,
+        delay: 200,
+      });
+
+      ScrollReveal().reveal("#process h2, #process .section-description", {
+        ...scrollRevealOption,
+        origin: "top",
+      });
+      ScrollReveal().reveal(".process-steps .step", {
+        ...scrollRevealOption,
+        interval: 200,
+        delay: 200,
+      });
+
+      ScrollReveal().reveal(".contact-card", {
+        ...scrollRevealOption,
+        scale: 0.95,
+      });
+
+      // Enhanced keyboard shortcuts for power users
+      document.addEventListener('keydown', function(e) {
+        // Ctrl/Cmd + Enter to submit form
+        if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+          if (queryInput.value.trim()) {
+            mainForm.submit();
+          }
+        }
+        
+        // Escape to close analysis preview
+        if (e.key === 'Escape') {
+          analysisPreview.classList.remove('active');
+        }
+      });
+
+      // Add focus management
+      queryInput.addEventListener('focus', function() {
+        this.parentElement.style.boxShadow = '0 0 25px rgba(0, 188, 212, 0.4)';
+      });
+
+      queryInput.addEventListener('blur', function() {
+        this.parentElement.style.boxShadow = '0 0 20px rgba(0, 0, 0, 0.3)';
+        // Hide analysis after a delay if no interaction
+        setTimeout(() => {
+          if (!queryInput.matches(':focus')) {
+            analysisPreview.classList.remove('active');
+          }
+        }, 3000);
+      });
+    </script>
+  </body>
+</html>

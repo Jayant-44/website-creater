@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage - Travel Agency</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Google Font: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom CSS for a vibrant, image-heavy travel site */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .hero-bg {
+            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://placehold.co/1920x1080/6366f1/ffffff?text=Find+Your+Adventure&font=inter');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .destination-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.75rem;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        .destination-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .destination-card img {
+            transition: transform 0.4s ease;
+        }
+        .destination-card:hover img {
+            transform: scale(1.1);
+        }
+        
+        .destination-overlay-text {
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .search-form {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Header -->
+    <header class="absolute top-0 left-0 right-0 z-50">
+        <nav class="container mx-auto px-6 py-5 flex justify-between items-center">
+            <div class="text-3xl font-extrabold text-white">Wanderlust</div>
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="#" class="text-white font-medium hover:text-gray-200">Destinations</a>
+                <a href="#" class="text-white font-medium hover:text-gray-200">Tours</a>
+                <a href="#" class="text-white font-medium hover:text-gray-200">About</a>
+                <a href="#" class="border border-white text-white px-5 py-2 rounded-full font-medium hover:bg-white hover:text-gray-900 transition duration-300">
+                    Contact
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-bg h-screen flex items-center justify-center text-white">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-5xl md:text-7xl font-extrabold leading-tight mb-6">
+                Find Your Next Adventure
+            </h1>
+            <p class="text-lg md:text-2xl text-gray-200 max-w-2xl mx-auto mb-10">
+                Discover unforgettable travel experiences in the world's most beautiful destinations.
+            </p>
+            
+            <!-- Search Form -->
+            <form class="search-form p-6 rounded-lg max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4">
+                <input type="text" placeholder="Where to?" class="w-full p-3 rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-400">
+                <input type="date" class="w-full p-3 rounded-md text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-400">
+                <button type="submit" class="w-full p-3 rounded-md bg-indigo-600 text-white font-semibold hover:bg-indigo-700 transition duration-300">
+                    Search Tours
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Top Destinations Section -->
+    <section class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Top Destinations</h2>
+                <p class="text-lg text-gray-600 max-w-xl mx-auto">
+                    A curated selection of our most popular and breathtaking locations.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Destination 1 -->
+                <div class="destination-card shadow-lg">
+                    <img src="https://placehold.co/400x500/ec4899/ffffff?text=Kyoto&font=inter" alt="Kyoto" class="w-full h-full object-cover">
+                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/70 to-transparent">
+                        <h3 class="text-2xl font-bold text-white destination-overlay-text">Kyoto, Japan</h3>
+                    </div>
+                </div>
+                <!-- Destination 2 -->
+                <div class="destination-card shadow-lg">
+                    <img src="https://placehold.co/400x500/8b5cf6/ffffff?text=Paris&font=inter" alt="Paris" class="w-full h-full object-cover">
+                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/70 to-transparent">
+                        <h3 class="text-2xl font-bold text-white destination-overlay-text">Paris, France</h3>
+                    </div>
+                </div>
+                <!-- Destination 3 -->
+                <div class="destination-card shadow-lg">
+                    <img src="https://placehold.co/400x500/10b981/ffffff?text=Banff&font=inter" alt="Banff" class="w-full h-full object-cover">
+                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/70 to-transparent">
+                        <h3 class="text-2xl font-bold text-white destination-overlay-text">Banff, Canada</h3>
+                    </div>
+                </div>
+                <!-- Destination 4 -->
+                <div class="destination-card shadow-lg">
+                    <img src="https://placehold.co/400x500/f59e0b/ffffff?text=Cairo&font=inter" alt="Cairo" class="w-full h-full object-cover">
+                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/70 to-transparent">
+                        <h3 class="text-2xl font-bold text-white destination-overlay-text">Cairo, Egypt</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tour Packages Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Popular Tour Packages</h2>
+                <p class="text-lg text-gray-600 max-w-xl mx-auto">
+                    Let us handle the planning. You just handle the packing.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+                <!-- Package 1 -->
+                <div class="rounded-lg shadow-xl overflow-hidden">
+                    <img src="https://placehold.co/600x400/16a34a/ffffff?text=Jungle+Safari&font=inter" alt="Jungle Safari" class="w-full h-64 object-cover">
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">The Amazon Explorer</h3>
+                        <p class="text-gray-600 mb-4">A 7-day guided tour deep into the heart of the rainforest. See incredible wildlife and pristine nature.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-indigo-600">$1,999 / person</span>
+                            <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-800">Learn More &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Package 2 -->
+                <div class="rounded-lg shadow-xl overflow-hidden">
+                    <img src="https://placehold.co/600x400/0ea5e9/ffffff?text=Beach+Getaway&font=inter" alt="Beach Getaway" class="w-full h-64 object-cover">
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Maldives Beach Getaway</h3>
+                        <p class="text-gray-600 mb-4">A 5-day luxury stay in an overwater bungalow. Pure relaxation, white sand beaches, and crystal clear water.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-indigo-600">$2,499 / person</span>
+                            <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-800">Learn More &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 py-12">
+        <div class="container mx-auto px-6 text-center">
+            <h3 class="text-2xl font-bold text-white mb-4">Wanderlust</h3>
+            <div class="flex justify-center space-x-6 mb-6">
+                <a href="#" class="text-gray-400 hover:text-white">Facebook</a>
+                <a href="#" class="text-gray-400 hover:text-white">Instagram</a>
+                <a href="#" class="text-gray-400 hover:text-white">Twitter</a>
+            </div>
+            <p class="text-gray-500">&copy; 2025 Wanderlust Travel Co. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,311 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neumorphic Auth Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* --- CSS STYLES --- */
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+        :root {
+            --base-color: #e0e5ec; /* The main background color for Neumorphism */
+            --primary-accent: #ff6b6b; /* Soft Red/Coral Accent */
+            --shadow-light: #ffffff;
+            --shadow-dark: #a3b1c6;
+            --text-dark: #333333;
+            --text-secondary: #777777;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--base-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .auth-card {
+            width: 400px;
+            max-width: 90%;
+            padding: 30px;
+            background-color: var(--base-color);
+            border-radius: 20px;
+            /* Neumorphism effect: extruded appearance */
+            box-shadow: 
+                7px 7px 15px var(--shadow-dark),
+                -7px -7px 15px var(--shadow-light);
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        /* --- Tab/Toggle Buttons --- */
+        .tab-controls {
+            display: flex;
+            width: 100%;
+            margin-bottom: 30px;
+            border-radius: 15px;
+            /* Neumorphism inset for the control area */
+            box-shadow: inset 2px 2px 5px var(--shadow-dark),
+                        inset -5px -5px 10px var(--shadow-light);
+            padding: 5px;
+        }
+
+        .tab-btn {
+            flex-grow: 1;
+            padding: 12px 0;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 500;
+            color: var(--text-secondary);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .tab-btn.active {
+            background-color: var(--base-color);
+            color: var(--primary-accent);
+            /* Neumorphism pressed effect */
+            box-shadow: 
+                3px 3px 7px var(--shadow-dark),
+                -3px -3px 7px var(--shadow-light);
+        }
+
+        /* --- Form Containers --- */
+        .form-container {
+            position: relative;
+            width: 100%;
+            height: auto;
+        }
+
+        .form-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 0;
+            opacity: 0;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            transform: translateY(10px);
+            pointer-events: none;
+        }
+
+        .form-content.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+
+        /* --- Form Elements --- */
+        h2 {
+            font-size: 1.8em;
+            color: var(--text-dark);
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            border: none;
+            background-color: var(--base-color);
+            border-radius: 10px;
+            font-size: 1em;
+            color: var(--text-dark);
+            /* Neumorphism inset for input fields */
+            box-shadow: 
+                inset 2px 2px 5px var(--shadow-dark),
+                inset -5px -5px 10px var(--shadow-light);
+            outline: none;
+            transition: box-shadow 0.3s ease;
+        }
+        
+        input:focus {
+            /* Deeper inset shadow on focus */
+            box-shadow: 
+                inset 3px 3px 7px var(--shadow-dark),
+                inset -7px -7px 14px var(--shadow-light);
+        }
+
+        button.main-action {
+            width: 100%;
+            padding: 15px 0;
+            border: none;
+            border-radius: 15px;
+            background-color: var(--base-color);
+            color: var(--primary-accent);
+            font-size: 1.1em;
+            font-weight: 500;
+            cursor: pointer;
+            /* Neumorphism effect: extruded */
+            box-shadow: 
+                5px 5px 10px var(--shadow-dark),
+                -5px -5px 10px var(--shadow-light);
+            transition: all 0.3s ease;
+        }
+
+        button.main-action:hover {
+            color: var(--shadow-light);
+            background-color: var(--primary-accent);
+            /* Soft push-in effect on hover */
+            box-shadow: 
+                2px 2px 5px var(--shadow-dark),
+                -2px -2px 5px var(--shadow-light);
+        }
+
+        .forgot-link {
+            display: block;
+            text-align: center;
+            font-size: 0.9em;
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin-top: 15px;
+        }
+        
+        .forgot-link:hover {
+            color: var(--primary-accent);
+        }
+
+        /* --- Social Login Icons --- */
+        .social-login {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .social-login a {
+            width: 45px;
+            height: 45px;
+            line-height: 45px;
+            text-align: center;
+            border-radius: 50%;
+            color: var(--text-secondary);
+            background-color: var(--base-color);
+            /* Neumorphism effect: small extruded circle */
+            box-shadow: 
+                3px 3px 7px var(--shadow-dark),
+                -3px -3px 7px var(--shadow-light);
+            transition: all 0.3s ease;
+        }
+
+        .social-login a:hover {
+            color: var(--primary-accent);
+            /* Soft push-in effect on hover */
+            box-shadow: 
+                inset 2px 2px 4px var(--shadow-dark),
+                inset -2px -2px 4px var(--shadow-light);
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="auth-card" id="authCard">
+        
+        <div class="tab-controls">
+            <button class="tab-btn active" id="btnSignIn">Sign In</button>
+            <button class="tab-btn" id="btnSignUp">Sign Up</button>
+        </div>
+
+        <div class="form-container">
+            
+            <div class="form-content active" id="signInFormContent">
+                <h2>Welcome Back!</h2>
+                <div class="social-login">
+                    <a href="#"><i class="fab fa-google"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+                
+                <form action="#" id="signInForm">
+                    <input type="email" placeholder="Email Address" required>
+                    <input type="password" placeholder="Password" required>
+                    <button type="submit" class="main-action">Sign In</button>
+                    <a href="#" class="forgot-link">Forgot Password?</a>
+                </form>
+            </div>
+
+            <div class="form-content" id="signUpFormContent">
+                <h2>Create Account</h2>
+                <div class="social-login">
+                    <a href="#"><i class="fab fa-google"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+                
+                <form action="#" id="signUpForm">
+                    <input type="text" placeholder="Full Name" required>
+                    <input type="email" placeholder="Email Address" required>
+                    <input type="password" placeholder="Password" required minlength="6">
+                    <input type="password" placeholder="Confirm Password" required>
+                    <button type="submit" class="main-action">Sign Up</button>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+
+    <script>
+        // --- JAVASCRIPT LOGIC ---
+        const btnSignIn = document.getElementById('btnSignIn');
+        const btnSignUp = document.getElementById('btnSignUp');
+        const signInFormContent = document.getElementById('signInFormContent');
+        const signUpFormContent = document.getElementById('signUpFormContent');
+
+        function activateTab(targetForm, targetButton) {
+            // Remove active classes from all
+            btnSignIn.classList.remove('active');
+            btnSignUp.classList.remove('active');
+            signInFormContent.classList.remove('active');
+            signUpFormContent.classList.remove('active');
+
+            // Add active classes to target
+            targetButton.classList.add('active');
+            targetForm.classList.add('active');
+            
+            // Adjust the height of the parent form container based on the content (optional, but good practice)
+            document.querySelector('.form-container').style.height = targetForm.scrollHeight + 'px';
+        }
+
+        // Event Listeners for tab buttons
+        btnSignIn.addEventListener('click', () => {
+            activateTab(signInFormContent, btnSignIn);
+        });
+
+        btnSignUp.addEventListener('click', () => {
+            activateTab(signUpFormContent, btnSignUp);
+        });
+        
+        // Initial height setting (to prevent jump)
+        document.addEventListener('DOMContentLoaded', () => {
+             document.querySelector('.form-container').style.height = signInFormContent.scrollHeight + 'px';
+        });
+
+        // Basic form submission alerts
+        document.getElementById('signInForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Sign In Attempted (Neumorphic Design).');
+        });
+        document.getElementById('signUpForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Sign Up Attempted (Neumorphic Design).');
+        });
+    </script>
+</body>
+</html>

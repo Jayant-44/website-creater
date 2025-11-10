@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - E-commerce Admin</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Google Font: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Load Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        /* Custom CSS for a clean, light-mode e-commerce dashboard */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f3f4f6;
+            color: #1f2937;
+        }
+
+        :root {
+            --brand-color: #059669; /* Emerald Green */
+            --brand-color-dark: #047857;
+        }
+        
+        .sidebar {
+            background-color: #ffffff;
+            border-right: 1px solid #e5e7eb;
+        }
+        
+        .stat-card {
+            background-color: #ffffff;
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s ease;
+        }
+        .stat-card:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.07);
+            transform: translateY(-2px);
+        }
+        
+        .sidebar-link {
+            color: #4b5563;
+            transition: all 0.2s ease;
+        }
+        .sidebar-link:hover, .sidebar-link.active {
+            color: var(--brand-color);
+            background-color: #f0fdf4;
+            border-left: 3px solid var(--brand-color);
+            padding-left: 1.25rem; /* 20px - 3px border */
+        }
+        .sidebar-link.active {
+             padding-left: 1.25rem;
+        }
+        .sidebar-link:not(.active) {
+            padding-left: 1.5rem; /* 24px */
+        }
+        
+        .table-header {
+            background-color: #f9fafb;
+        }
+    </style>
+</head>
+<body class="flex h-screen">
+
+    <!-- 
+      ============================================================
+      DASHBOARD TEMPLATE 2: E-COMMERCE (LIGHT MODE)
+      ============================================================
+    -->
+
+    <!-- Sidebar -->
+    <aside class="sidebar w-64 flex-shrink-0 flex flex-col">
+        <div class="h-20 flex items-center justify-center border-b border-gray-200">
+            <h1 class="text-2xl font-bold" style="color: var(--brand-color);">StoreAdmin</h1>
+        </div>
+        <nav class="flex-1 overflow-y-auto py-6">
+            <ul class="space-y-1">
+                <li>
+                    <a href="#" class="sidebar-link active flex items-center py-3 px-6">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6-4a1 1 0 001-1v-1a1 1 0 10-2 0v1a1 1 0 001 1z"></path></svg>
+                        Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="sidebar-link flex items-center py-3 px-6">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                        Orders
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="sidebar-link flex items-center py-3 px-6">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                        Products
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="sidebar-link flex items-center py-3 px-6">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                        Customers
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content flex-1 overflow-y-auto">
+        <!-- Top Header Bar -->
+        <header class="h-20 flex items-center justify-between px-8 border-b border-gray-200 bg-white">
+            <h2 class="text-2xl font-semibold text-gray-800">Welcome back, Admin!</h2>
+            <div class="flex items-center space-x-4">
+                <button class="text-gray-500 hover:text-gray-800">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341A6.002 6.002 0 006 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+                </button>
+                <img src="https://placehold.co/40x40/f0fdf4/059669?text=A&font=poppins" alt="Admin Avatar" class="w-10 h-10 rounded-full">
+            </div>
+        </header>
+
+        <!-- Page Content -->
+        <div class="p-8">
+            <!-- Stat Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="stat-card rounded-lg p-6">
+                    <h3 class="text-sm font-medium text-gray-500 uppercase">Total Sales</h3>
+                    <span class="text-3xl font-bold text-gray-900 block mt-2">$128,450</span>
+                    <span class="text-sm text-green-600 mt-1 flex items-center">+8.2%</span>
+                </div>
+                <div class="stat-card rounded-lg p-6">
+                    <h3 class="text-sm font-medium text-gray-500 uppercase">New Orders</h3>
+                    <span class="text-3xl font-bold text-gray-900 block mt-2">320</span>
+                    <span class="text-sm text-green-600 mt-1 flex items-center">+15.7%</span>
+                </div>
+                <div class="stat-card rounded-lg p-6">
+                    <h3 class="text-sm font-medium text-gray-500 uppercase">New Customers</h3>
+                    <span class="text-3xl font-bold text-gray-900 block mt-2">145</span>
+                    <span class="text-sm text-green-600 mt-1 flex items-center">+5.3%</span>
+                </div>
+                <div class="stat-card rounded-lg p-6">
+                    <h3 class="text-sm font-medium text-gray-500 uppercase">Conversion Rate</h3>
+                    <span class="text-3xl font-bold text-gray-900 block mt-2">4.8%</span>
+                    <span class="text-sm text-red-600 mt-1 flex items-center">-0.2%</span>
+                </div>
+            </div>
+
+            <!-- Main Chart -->
+            <div class="bg-white border border-gray-200 rounded-lg p-6 mb-8">
+                <h3 class="text-xl font-bold text-gray-900 mb-4">Sales This Month</h3>
+                <canvas id="salesChart" style="max-height: 350px;"></canvas>
+            </div>
+
+            <!-- Recent Orders Table -->
+            <div class="bg-white border border-gray-200 rounded-lg p-6">
+                <h3 class="text-xl font-bold text-gray-900 mb-4">Recent Orders</h3>
+                <table class="w-full text-left">
+                    <thead class="table-header">
+                        <tr class="text-gray-600 uppercase text-sm">
+                            <th class="py-3 px-4">Order ID</th>
+                            <th class="py-3 px-4">Customer</th>
+                            <th class="py-3 px-4">Status</th>
+                            <th class="py-3 px-4">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        <tr>
+                            <td class="py-4 px-4 font-medium">#3021</td>
+                            <td class="py-4 px-4">Alex Johnson</td>
+                            <td class="py-4 px-4"><span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-1 rounded-full">Shipped</span></td>
+                            <td class="py-4 px-4 font-medium">$120.50</td>
+                        </tr>
+                        <tr>
+                            <td class="py-4 px-4 font-medium">#3020</td>
+                            <td class="py-4 px-4">Maria Garcia</td>
+                            <td class="py-4 px-4"><span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2 py-1 rounded-full">Processing</span></td>
+                            <td class="py-4 px-4 font-medium">$89.99</td>
+                        </tr>
+                        <tr>
+                            <td class="py-4 px-4 font-medium">#3019</td>
+                            <td class="py-4 px-4">David Kim</td>
+                            <td class="py-4 px-4"><span class="bg-red-100 text-red-800 text-xs font-medium px-2 py-1 rounded-full">Cancelled</span></td>
+                            <td class="py-4 px-4 font-medium">$45.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+    
+    <script>
+        // JavaScript for Chart.js
+        const ctx = document.getElementById('salesChart').getContext('2d');
+        const salesChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                datasets: [{
+                    label: 'Sales ($)',
+                    data: [12000, 19000, 15000, 21000],
+                    backgroundColor: 'rgba(5, 150, 105, 0.6)', // var(--brand-color) with opacity
+                    borderColor: 'rgba(5, 150, 105, 1)',
+                    borderWidth: 1,
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { color: '#6b7280' },
+                        grid: { color: '#e5e7eb' }
+                    },
+                    x: {
+                        ticks: { color: '#6b7280' },
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>

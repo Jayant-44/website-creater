@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebBuddy AI - Search History & Analytics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@600;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            /* Enhanced cyberpunk palette */
+            --primary-color: #00bcd4;
+            --secondary-color: #1f084a;
+            --accent-color: #ff0077;
+            --text-color: #a0aec0;
+            --light-text: #edf2f7;
+            --card-bg: rgba(31, 8, 74, 0.6);
+            --card-border: 1px solid rgba(0, 188, 212, 0.2);
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body { 
+            font-family: "Inter", sans-serif; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh; 
+            color: var(--light-text);
+            background-attachment: fixed;
+            position: relative;
+        }
+
+        /* Animated background effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 80%, rgba(0, 188, 212, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(255, 0, 119, 0.1) 0%, transparent 50%);
+            z-index: -1;
+            animation: backgroundMove 20s ease-in-out infinite;
+        }
+
+        @keyframes backgroundMove {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+
+        .header {
+            background: rgba(31, 8, 74, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            border-bottom: var(--card-border);
+            box-shadow: var(--card-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-family: "Orbitron", sans-serif;
+            font-weight: 900;
+            color: var(--light-text);
+        }
+
+        .logo span {
+            color: var(--accent-color);
+            text-shadow: 0 0 10px var(--accent-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+            background: rgba(0, 188, 212, 0.1);
+            text-shadow: 0 0 8px rgba(0, 188, 212, 0.5);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .page-title {
+            font-size: 3rem;
+            font-family: "Orbitron", sans-serif;
+            color: var(--light-text);
+            margin-bottom: 15px;
+            text-shadow: 0 0 20px rgba(0, 188, 212, 0.4);
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-color);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Analytics Dashboard */
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: var(--card-border);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            text-shadow: 0 0 10px rgba(0, 188, 212, 0.5);
+        }
+
+        .stat-label {
+            color: var(--text-color);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+
+        .stat-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            opacity: 0.3;
+        }
+
+        /* History Section */
+        .history-section {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: var(--card-border);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--light-text);
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+
+        .search-filter {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-input {
+            flex: 1;
+            min-width: 250px;
+            padding: 12px 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 188, 212, 0.3);
+            border-radius: 25px;
+            color: var(--light-text);
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .filter-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 15px rgba(0, 188, 212, 0.3);
+        }
+
+        .filter-input::placeholder {
+            color: var(--text-color);
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            background: rgba(0, 188, 212, 0.2);
+            border: 1px solid rgba(0, 188, 212, 0.4);
+            border-radius: 20px;
+            color: var(--light-text);
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(0, 188, 212, 0.5);
+        }
+
+        /* History Items */
+        .history-items {
+            space-y: 15px;
+        }
+
+        .history-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .history-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--primary-color);
+            transform: scaleY(0);
+            transition: transform 0.3s;
+        }
+
+        .history-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(0, 188, 212, 0.3);
+            transform: translateX(5px);
+        }
+
+        .history-item:hover::before {
+            transform: scaleY(1);
+        }
+
+        .history-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .query-text {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--light-text);
+            line-height: 1.4;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .history-meta {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 5px;
+        }
+
+        .timestamp {
+            font-size: 12px;
+            color: var(--text-color);
+            opacity: 0.8;
+        }
+
+        .match-score {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 12px;
+        }
+
+        .score-badge {
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 11px;
+        }
+
+        .score-high {
+            background: var(--success-color);
+            color: white;
+        }
+
+        .score-medium {
+            background: var(--warning-color);
+            color: #000;
+        }
+
+        .score-low {
+            background: var(--danger-color);
+            color: white;
+        }
+
+        .generation-type {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(0, 188, 212, 0.2);
+            border: 1px solid rgba(0, 188, 212, 0.4);
+            border-radius: 15px;
+            font-size: 11px;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-top: 8px;
+        }
+
+        .template-id {
+            color: var(--accent-color);
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-color);
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .empty-state h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--light-text);
+        }
+
+        .empty-state p {
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            color: var(--light-text);
+            box-shadow: 0 4px 15px rgba(0, 188, 212, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 188, 212, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light-text);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--primary-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+            
+            .page-title {
+                font-size: 2rem;
+            }
+            
+            .analytics-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+            
+            .history-item-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .history-meta {
+                align-items: flex-start;
+                width: 100%;
+            }
+            
+            .search-filter {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .filter-input {
+                min-width: auto;
+            }
+            
+            .nav-links {
+                gap: 10px;
+            }
+            
+            .nav-links a {
+                padding: 6px 10px;
+                font-size: 14px;
+            }
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-color);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <span>WEB</span>BUDDY<span style="font-size: 0.6em; color: var(--primary-color);"> AI</span>
+            </div>
+            <nav class="nav-links">
+                <a href="/dashboard"><i class="fas fa-home"></i> Dashboard</a>
+                <a href="#" onclick="refreshHistory()"><i class="fas fa-sync-alt"></i> Refresh</a>
+                <a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="page-header">
+            <h1 class="page-title"><i class="fas fa-chart-line"></i> AI Analytics & History</h1>
+            <p class="page-subtitle">
+                Track your AI-generated websites, analyze performance metrics, and revisit your creative journey with advanced insights.
+            </p>
+        </div>
+
+        <!-- Analytics Dashboard -->
+        <div class="analytics-grid">
+            <div class="stat-card">
+                <i class="fas fa-rocket stat-icon"></i>
+                <div class="stat-value">{{ history|length }}</div>
+                <div class="stat-label">Total Generations</div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-bullseye stat-icon"></i>
+                <div class="stat-value">
+                    {% set high_scores = history|selectattr("match_score", "ge", 0.7)|list %}
+                    {{ "%.1f"|format((high_scores|length / history|length * 100) if history else 0) }}%
+                </div>
+                <div class="stat-label">High Match Rate</div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-magic stat-icon"></i>
+                <div class="stat-value">
+                    {% set ai_generated = history|selectattr("generation_type", "equalto", "generated")|list %}
+                    {{ ai_generated|length }}
+                </div>
+                <div class="stat-label">AI Generated</div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-palette stat-icon"></i>
+                <div class="stat-value">
+                    {% set customized = history|selectattr("generation_type", "equalto", "customized")|list %}
+                    {{ customized|length }}
+                </div>
+                <div class="stat-label">Customized</div>
+            </div>
+        </div>
+
+        <!-- History Section -->
+        <div class="history-section">
+            <h2 class="section-title">
+                <i class="fas fa-history"></i>
+                Generation History
+                <span style="font-size: 0.8em; color: var(--text-color); margin-left: auto;">{{ history|length }} total entries</span>
+            </h2>
+            
+            <div class="search-filter">
+                <input type="text" class="filter-input" id="search-input" placeholder="Search your generations...">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="high">High Match</button>
+                    <button class="filter-btn" data-filter="generated">AI Generated</button>
+                    <button class="filter-btn" data-filter="customized">Customized</button>
+                </div>
+            </div>
+            
+            <div class="history-items" id="history-items">
+                {% if history %}
+                    {% for item in history %}
+                        <div class="history-item" 
+                             data-match-score="{{ item.match_score or 0 }}"
+                             data-generation-type="{{ item.generation_type or 'template_match' }}"
+                             data-query="{{ item.query.lower() }}">
+                            <div class="history-item-header">
+                                <div class="query-text">{{ item.query }}</div>
+                                <div class="history-meta">
+                                    <div class="timestamp">
+                                        {{ item.timestamp.strftime('Generated on %B %d, %Y at %H:%M') }}
+                                    </div>
+                                    <div class="match-score">
+                                        <span style="color: var(--text-color);">Match Score:</span>
+                                        <span class="score-badge 
+                                            {% if item.match_score >= 0.7 %}score-high
+                                            {% elif item.match_score >= 0.4 %}score-medium
+                                            {% else %}score-low{% endif %}">
+                                            {{ "%.1f"|format((item.match_score or 0) * 100) }}%
+                                        </span>
+                                    </div>
+                                    <div style="font-size: 12px; color: var(--text-color);">
+                                        Template: <span class="template-id">#{{ item.template_used or 1 }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="generation-type">
+                                {% if item.generation_type == 'generated' %}
+                                    <i class="fas fa-magic"></i> AI Generated from Scratch
+                                {% elif item.generation_type == 'customized' %}
+                                    <i class="fas fa-palette"></i> Heavily Customized Template
+                                {% else %}
+                                    <i class="fas fa-template"></i> Template Match
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            <!-- Empty State -->
+            <div class="empty-state" id="empty-state" style="display: {{ 'block' if not history else 'none' }};">
+                <i class="fas fa-robot"></i>
+                <h3>No Generation History Yet</h3>
+                <p>Start creating amazing websites with our AI-powered generator. Your generation history and analytics will appear here.</p>
+                <a href="/dashboard" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Create Your First Website
+                </a>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <a href="/dashboard" class="btn btn-primary">
+                <i class="fas fa-plus"></i> New Generation
+            </a>
+            <button class="btn btn-secondary" onclick="clearHistory()">
+                <i class="fas fa-trash"></i> Clear History
+            </button>
+            <button class="btn btn-secondary" onclick="exportHistory()">
+                <i class="fas fa-download"></i> Export Data
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Search and Filter functionality
+        const searchInput = document.getElementById('search-input');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const historyItems = document.querySelectorAll('.history-item');
+        const emptyState = document.getElementById('empty-state');
+
+        let currentFilter = 'all';
+
+        searchInput.addEventListener('input', filterHistory);
+        
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                filterButtons.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentFilter = this.dataset.filter;
+                filterHistory();
+            });
+        });
+
+        function filterHistory() {
+            const searchTerm = searchInput.value.toLowerCase();
+            let visibleCount = 0;
+
+            historyItems.forEach(item => {
+                const query = item.dataset.query;
+                const matchScore = parseFloat(item.dataset.matchScore);
+                const generationType = item.dataset.generationType;
+                
+                let shouldShow = true;
+
+                // Apply text search
+                if (searchTerm && !query.includes(searchTerm)) {
+                    shouldShow = false;
+                }
+
+                // Apply filter
+                if (currentFilter === 'high' && matchScore < 0.7) {
+                    shouldShow = false;
+                } else if (currentFilter === 'generated' && generationType !== 'generated') {
+                    shouldShow = false;
+                } else if (currentFilter === 'customized' && generationType !== 'customized') {
+                    shouldShow = false;
+                }
+
+                if (shouldShow) {
+                    item.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            // Show/hide empty state
+            const hasItems = {{ 'true' if history else 'false' }};
+            if (hasItems && visibleCount === 0) {
+                document.getElementById('history-items').innerHTML = 
+                    '<div class="empty-state"><i class="fas fa-search"></i><h3>No Results Found</h3><p>Try adjusting your search or filter criteria.</p></div>';
+            } else if (visibleCount > 0) {
+                // Re-show all items (they're already filtered above)
+            }
+        }
+
+        // Utility functions
+        function refreshHistory() {
+            location.reload();
+        }
+
+        function clearHistory() {
+            if (confirm('Are you sure you want to clear all generation history? This action cannot be undone.')) {
+                // You would implement this endpoint in Flask
+                fetch('/clear_history', { method: 'POST' })
+                    .then(response => {
+                        if (response.ok) {
+                            location.reload();
+                        } else {
+                            alert('Failed to clear history. Please try again.');
+                        }
+                    })
+                    .catch(error => {
+                        alert('Error: ' + error.message);
+                    });
+            }
+        }
+
+        function exportHistory() {
+            const historyData = [];
+            historyItems.forEach(item => {
+                const queryText = item.querySelector('.query-text').textContent;
+                const timestamp = item.querySelector('.timestamp').textContent;
+                const matchScore = item.dataset.matchScore;
+                const generationType = item.dataset.generationType;
+                
+                historyData.push({
+                    query: queryText,
+                    timestamp: timestamp,
+                    matchScore: matchScore,
+                    generationType: generationType
+                });
+            });
+
+            const dataStr = JSON.stringify(historyData, null, 2);
+            const blob = new Blob([dataStr], { type: 'application/json' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'webbuddy-history-' + new Date().toISOString().split('T')[0] + '.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.key === '/') {
+                e.preventDefault();
+                searchInput.focus();
+            }
+            if (e.key === 'Escape') {
+                searchInput.value = '';
+                searchInput.blur();
+                filterHistory();
+            }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add smooth animations on load
+            const cards = document.querySelectorAll('.stat-card, .history-item');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.5s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>

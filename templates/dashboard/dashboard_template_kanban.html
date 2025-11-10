@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Project Kanban</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Google Font: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom CSS for a "Trello-style" kanban board */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f5f7; /* Trello-like gray */
+            color: #172b4d;
+        }
+
+        :root {
+            --brand-color: #0079bf; /* Trello Blue */
+            --brand-color-dark: #0067a3;
+        }
+        
+        .header-bar {
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+        
+        .board-container {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            overflow-x: auto;
+            height: calc(100vh - 56px); /* Full height minus header */
+        }
+        
+        .kanban-column {
+            width: 300px;
+            flex-shrink: 0;
+            background-color: #ebecf0; /* Column color */
+            border-radius: 8px;
+            padding: 0.75rem;
+        }
+        
+        .task-card {
+            background-color: #fff;
+            border-radius: 4px;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        .task-card:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            background-color: #f9fafb;
+        }
+        .task-tag {
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 
+      ============================================================
+      DASHBOARD TEMPLATE 4: PROJECT KANBAN
+      ============================================================
+    -->
+
+    <!-- Header -->
+    <header class="header-bar h-14 flex items-center justify-between px-6 text-white" style="background-color: var(--brand-color);">
+        <h1 class="text-xl font-bold">Project Phoenix</h1>
+        <div class="flex items-center space-x-3">
+            <span class="text-sm">Team:</span>
+            <img src="https://placehold.co/32x32/ffffff/172b4d?text=A" alt="User" class="w-8 h-8 rounded-full border-2 border-white">
+            <img src="https://placehold.co/32x32/ffffff/172b4d?text=B" alt="User" class="w-8 h-8 rounded-full border-2 border-white">
+            <button class="bg-white/30 hover:bg-white/50 text-white font-medium py-1 px-3 rounded-md text-sm">
+                + Add Member
+            </button>
+        </div>
+    </header>
+
+    <!-- Board Container -->
+    <div class="board-container">
+        
+        <!-- Column 1: To Do -->
+        <div class="kanban-column">
+            <h2 class="font-semibold text-gray-700 p-2 mb-2">To Do (3)</h2>
+            <div class="space-y-3">
+                <div class="task-card">
+                    <span class="task-tag" style="background-color: #fecaca; color: #b91c1c;">Bug</span>
+                    <p class="mt-2 font-medium">Fix login page styling on mobile.</p>
+                </div>
+                <div class="task-card">
+                    <span class="task-tag" style="background-color: #dbeafe; color: #1e40af;">Feature</span>
+                    <p class="mt-2 font-medium">Add "Forgot Password" functionality.</p>
+                </div>
+                <div class="task-card">
+                    <p class="mt-2 font-medium">Refactor database connection string.</p>
+                </div>
+            </div>
+            <button class="mt-3 text-gray-600 hover:text-gray-900 w-full text-left p-2 rounded-md hover:bg-gray-300 transition-colors">+ Add a card</button>
+        </div>
+        
+        <!-- Column 2: In Progress -->
+        <div class="kanban-column">
+            <h2 class="font-semibold text-gray-700 p-2 mb-2">In Progress (2)</h2>
+            <div class="space-y-3">
+                <div class="task-card">
+                    <span class="task-tag" style="background-color: #dbeafe; color: #1e40af;">Feature</span>
+                    <p class="mt-2 font-medium">Build the new user dashboard page.</p>
+                </div>
+                <div class="task-card">
+                    <span class="task-tag" style="background-color: #fef08a; color: #854d0e;">Research</span>
+                    <p class="mt-2 font-medium">Investigate Chart.js for analytics.</p>
+                </div>
+            </div>
+            <button class="mt-3 text-gray-600 hover:text-gray-900 w-full text-left p-2 rounded-md hover:bg-gray-300 transition-colors">+ Add a card</button>
+        </div>
+        
+        <!-- Column 3: In Review -->
+        <div class="kanban-column">
+            <h2 class="font-semibold text-gray-700 p-2 mb-2">In Review (1)</h2>
+            <div class="space-y-3">
+                <div class="task-card">
+                    <p class="mt-2 font-medium">Implement new API endpoint for user tasks.</p>
+                </div>
+            </div>
+            <button class="mt-3 text-gray-600 hover:text-gray-900 w-full text-left p-2 rounded-md hover:bg-gray-300 transition-colors">+ Add a card</button>
+        </div>
+
+        <!-- Column 4: Done -->
+        <div class="kanban-column">
+            <h2 class="font-semibold text-gray-700 p-2 mb-2">Done (4)</h2>
+            <div class="space-y-3">
+                <div class="task-card opacity-70">
+                    <p class="mt-2 font-medium line-through">Setup project repository.</p>
+                </div>
+                <div class="task-card opacity-70">
+                    <p class="mt-2 font-medium line-through">Design database schema.</p>
+                </div>
+            </div>
+            <button class="mt-3 text-gray-600 hover:text-gray-900 w-full text-left p-2 rounded-md hover:bg-gray-300 transition-colors">+ Add a card</button>
+        </div>
+        
+        <!-- Column 5: Add New List -->
+        <div>
+            <button class="w-64 p-3 rounded-lg text-white font-medium transition-colors" style="background-color: rgba(0, 121, 191, 0.5); backdrop-filter: blur(5px);">
+                + Add another list
+            </button>
+        </div>
+
+    </div>
+
+</body>
+</html>

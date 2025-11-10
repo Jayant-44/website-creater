@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Creative</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Google Font: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom CSS for a bold, full-screen contact "page" */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111;
+            color: #fff;
+        }
+
+        :root {
+            --brand-color: #fde047; /* Bright Yellow */
+        }
+        
+        .cta-link {
+            font-size: 5vw; /* Responsive font size */
+            font-weight: 800;
+            line-height: 1.2;
+            color: #fff;
+            position: relative;
+            text-decoration: none;
+            display: inline;
+            transition: color 0.4s ease;
+        }
+        
+        @media (min-width: 1024px) {
+            .cta-link {
+                font-size: 5rem; /* 80px */
+            }
+        }
+        
+        /* Underline animation */
+        .cta-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background-color: var(--brand-color);
+            z-index: -1;
+            transition: height 0.4s ease;
+        }
+        
+        .cta-link:hover {
+            color: #111;
+        }
+        .cta-link:hover::after {
+            height: 100%;
+        }
+
+        .social-link {
+            color: #777;
+            transition: color 0.3s ease;
+        }
+        .social-link:hover {
+            color: var(--brand-color);
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-8">
+
+    <div class="w-full max-w-4xl text-left">
+        
+        <h2 class="text-xl md:text-2xl font-semibold text-gray-400 mb-4">Got an idea?</h2>
+        
+        <h1 class="font-black text-6xl md:text-8xl text-white mb-10 leading-none">
+            Let's work
+            <br>
+            together.
+        </h1>
+        
+        <a href="mailto:hello@creative.com" class="cta-link">
+            hello@creative.com
+        </a>
+        
+        <!-- Footer / Socials -->
+        <footer class="mt-20 border-t border-gray-800 pt-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm mb-4 md:mb-0">
+                    &copy; 2025 Creative Studio. All Rights Reserved.
+                </p>
+                <div class="flex space-x-6">
+                    <a href="#" class="social-link font-medium">Twitter</a>
+                    <a href="#" class="social-link font-medium">Instagram</a>
+                    <a href="#" class="social-link font-medium">LinkedIn</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+</body>
+</html>

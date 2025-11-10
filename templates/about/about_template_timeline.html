@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Company History</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Google Font: Roboto -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom CSS for a clean, timeline-focused page */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8f9fa;
+        }
+        
+        h1, h2, h3, h4, .font-slab {
+            font-family: 'Roboto Slab', serif;
+        }
+
+        :root {
+            --brand-color: #3b82f6; /* Blue */
+            --brand-color-light: #dbeafe;
+        }
+
+        .timeline-container {
+            position: relative;
+            padding: 2rem 0;
+        }
+        
+        /* The vertical timeline bar */
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background-color: #e5e7eb;
+        }
+        
+        .timeline-item {
+            position: relative;
+            width: 50%;
+            padding: 1rem 2.5rem;
+        }
+        
+        /* Position items on the left or right */
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            padding-right: 2.5rem;
+            text-align: right;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            padding-left: 2.5rem;
+            text-align: left;
+        }
+        
+        /* The circle on the timeline */
+        .timeline-dot {
+            content: '';
+            position: absolute;
+            top: 1.5rem;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border: 4px solid var(--brand-color);
+            border-radius: 50%;
+            z-index: 10;
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-dot {
+            right: -10px;
+            transform: translateX(0);
+        }
+
+        .timeline-item:nth-child(even) .timeline-dot {
+            left: -10px;
+            transform: translateX(0);
+        }
+        
+        .timeline-content {
+            background-color: #fff;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s ease;
+        }
+        .timeline-content:hover {
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transform: scale(1.02);
+        }
+
+        /* Responsive adjustments for the timeline */
+        @media (max-width: 768px) {
+            .timeline-container::before {
+                left: 10px;
+            }
+            .timeline-item {
+                width: 100%;
+                padding-left: 2.5rem;
+                padding-right: 1rem;
+                text-align: left;
+            }
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+            .timeline-dot {
+                left: 0;
+            }
+            .timeline-item:nth-child(odd) .timeline-dot,
+            .timeline-item:nth-child(even) .timeline-dot {
+                left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-slab font-bold" style="color: var(--brand-color);">Legacy Inc.</div>
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="#" class="text-gray-600 hover:text-gray-900">Home</a>
+                <a href="#" class="text-gray-900 font-semibold" style="color: var(--brand-color);">Our History</a>
+                <a href="#" class="text-gray-600 hover:text-gray-900">Services</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="py-24" style="background-color: var(--brand-color-light);">
+        <div class="container mx-auto px-6 max-w-3xl text-center">
+            <h1 class="text-5xl md:text-6xl font-bold text-gray-900 mb-6">Our Story</h1>
+            <p class="text-xl text-gray-700 leading-relaxed">
+                Founded on a simple idea, built with decades of passion. Follow our journey from a small workshop to a global leader in innovation.
+            </p>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="container mx-auto px-6 max-w-5xl py-20">
+        <div class="timeline-container">
+            
+            <!-- Timeline Item 1 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h2 class="text-2xl font-bold mb-2 font-slab">2005: The Spark</h2>
+                    <p class="text-gray-600">
+                        Legacy Inc. was founded by Jane Smith in a small garage with a single product and a big dream: to make manufacturing more sustainable.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Timeline Item 2 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h2 class="text-2xl font-bold mb-2 font-slab">2010: First Milestone</h2>
+                    <p class="text-gray-600">
+                        We opened our first official factory, hired our 50th employee, and shipped our 10,000th unit to an international client.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Timeline Item 3 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h2 class="text-2xl font-bold mb-2 font-slab">2016: Innovation Award</h2>
+                    <p class="text-gray-600">
+                        Our patented "Eco-Weld" process won the National Innovation Award for reducing energy consumption by 40%.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Timeline Item 4 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h2 class="text-2xl font-bold mb-2 font-slab">2023: Global Expansion</h2>
+                    <p class="text-gray-600">
+                        We expanded our operations to three continents, serving over 50 countries and employing over 1,000 people worldwide.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Timeline Item 5 (Future) -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h2 class="text-2xl font-bold mb-2 font-slab">2025 & Beyond</h2>
+                    <p class="text-gray-600">
+                        Our commitment to innovation continues as we invest in AI-driven logistics and fully recyclable materials, aiming for a carbon-neutral footprint by 2030.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-400 py-12">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 Legacy Inc. Building a better future since 2005.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

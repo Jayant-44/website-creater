@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Corporate/Legal</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom CSS for a professional, "law firm" style page */
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: #ffffff;
+            color: #333;
+        }
+        
+        h1, h2, h3, h4, .font-serif {
+            font-family: 'Merriweather', serif;
+        }
+
+        :root {
+            --brand-color: #0a2f5b; /* Deep Navy */
+            --accent-color: #bfa168; /* Muted Gold */
+        }
+        
+        .hero-bg {
+            background-color: var(--brand-color);
+        }
+        
+        .cta-button {
+            background-color: var(--accent-color);
+            transition: all 0.3s ease;
+        }
+        .cta-button:hover {
+            background-color: #a98d5f;
+        }
+        
+        .principle-card {
+            border-left: 4px solid var(--accent-color);
+            background-color: #f8f9fa;
+        }
+        
+        .attorney-card {
+            border: 1px solid #e5e7eb;
+            background-color: #fff;
+            transition: all 0.3s ease;
+        }
+        .attorney-card:hover {
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            border-color: var(--accent-color);
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-serif font-bold" style="color: var(--brand-color);">Harrison & Lee LLP</div>
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="#" class="text-gray-600 hover:text-gray-900">Home</a>
+                <a href="#" class="text-gray-900 font-semibold" style="color: var(--brand-color);">About Us</a>
+                <a href="#" class="text-gray-600 hover:text-gray-900">Practice Areas</a>
+                <a href="#" class="text-gray-600 hover:text-gray-900">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-bg text-white py-24">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <h1 class="text-5xl md:text-6xl font-bold mb-6">Our Firm</h1>
+            <p class="text-xl md:text-2xl text-gray-200 leading-relaxed max-w-2xl">
+                Founded on a tradition of excellence, Harrison & Lee LLP provides sophisticated legal counsel to clients worldwide. We are defined by our commitment to integrity, diligence, and unparalleled results.
+            </p>
+        </div>
+    </section>
+
+    <!-- Our Principles Section -->
+    <section class="py-20">
+        <div class="container mx-auto px-6 max-w-5xl">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Principle 1 -->
+                <div class="principle-card p-6">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-3">Integrity</h3>
+                    <p class="text-gray-600">We uphold the highest ethical standards, ensuring our clients receive honest, transparent, and trustworthy advice.</p>
+                </div>
+                <!-- Principle 2 -->
+                <div class="principle-card p-6">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-3">Diligence</h3>
+                    <p class="text-gray-600">We pursue every case with rigor and meticulous attention to detail, leaving no stone unturned in our advocacy.</p>
+                </div>
+                <!-- Principle 3 -->
+                <div class="principle-card p-6">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-3">Excellence</h3>
+                    <p class="text-gray-600">Our team consists of industry-leading attorneys dedicated to achieving the best possible outcome for every client.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Meet Our Attorneys Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Our Attorneys</h2>
+                <p class="text-lg text-gray-600 max-w-xl mx-auto">
+                    Meet the experienced partners and associates at our firm.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Attorney 1 -->
+                <div class="attorney-card rounded-lg overflow-hidden">
+                    <img src="https://placehold.co/600x400/0a2f5b/ffffff?text=J.+Harrison&font=merriweather" alt="James Harrison" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-1 text-gray-900">James Harrison</h3>
+                        <p class="font-semibold mb-3" style="color: var(--brand-color);">Founding Partner</p>
+                        <p class="text-gray-600 text-sm">Specializing in corporate litigation, James has over 30 years of experience in federal court.</p>
+                    </div>
+                </div>
+                <!-- Attorney 2 -->
+                <div class="attorney-card rounded-lg overflow-hidden">
+                    <img src="https://placehold.co/600x400/0a2f5b/ffffff?text=E.+Lee&font=merriweather" alt="Eleanor Lee" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-1 text-gray-900">Eleanor Lee</h3>
+                        <p class="font-semibold mb-3" style="color: var(--brand-color);">Managing Partner</p>
+                        <p class="text-gray-600 text-sm">Eleanor leads our intellectual property division and has been named a "Super Lawyer" for 8 consecutive years.</p>
+                    </div>
+                </div>
+                <!-- Attorney 3 -->
+                <div class="attorney-card rounded-lg overflow-hidden">
+                    <img src="https://placehold.co/600x400/0a2f5b/ffffff?text=M.+Chen&font=merriweather" alt="Michael Chen" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-1 text-gray-900">Michael Chen</h3>
+                        <p class="font-semibold mb-3" style="color: var(--brand-color);">Senior Associate</p>
+                        <p class="text-gray-600 text-sm">Michael's expertise in international trade law has helped clients navigate complex global markets.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-white py-16" style="background-color: var(--brand-color);">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl font-serif font-bold mb-6">Contact Us For a Consultation</h2>
+            <p class="text-gray-200 max-w-lg mx-auto mb-8">
+                Our team is ready to review your case. Contact us today to schedule a confidential consultation with one of our partners.
+            </p>
+            <a href="#" class="cta-button text-black font-bold py-3 px-8 rounded-lg text-lg shadow-lg">
+                Schedule Consultation
+            </a>
+            <p class="text-xs text-gray-300 mt-12">&copy; 2025 Harrison & Lee LLP. All rights reserved. Attorney Advertising.
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>

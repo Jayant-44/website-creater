@@ -1,0 +1,53 @@
+{
+    "base_templates": {
+        "modern_login": {
+            "name": "Modern Login",
+            "description": "Clean, modern login form",
+            "file": "modern_login.html",
+            "customizable_elements": [
+                "colors",
+                "typography",
+                "layout",
+                "animations"
+            ],
+            "default_colors": {
+                "primary": "#007bff",
+                "secondary": "#6c757d",
+                "background": "#ffffff",
+                "text": "#333333"
+            }
+        },
+        "cyberpunk_signup": {
+            "name": "Cyberpunk Signup",
+            "description": "Futuristic neon-style signup form",
+            "file": "cyberpunk_signup.html",
+            "customizable_elements": [
+                "colors",
+                "animations",
+                "effects"
+            ],
+            "default_colors": {
+                "primary": "#00ffff",
+                "secondary": "#ff00ff",
+                "background": "#1a1a2e",
+                "text": "#ffffff"
+            }
+        },
+        "glassmorphism_combined": {
+            "name": "Glassmorphism Combined",
+            "description": "Glass effect login/signup combination",
+            "file": "glassmorphism_combined.html",
+            "customizable_elements": [
+                "colors",
+                "blur_effects",
+                "transparency"
+            ],
+            "default_colors": {
+                "primary": "#667eea",
+                "secondary": "#764ba2",
+                "background": "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                "text": "#ffffff"
+            }
+        }
+    }
+}

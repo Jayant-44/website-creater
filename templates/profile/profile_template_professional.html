@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Professional</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Google Font: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom CSS for a professional, "LinkedIn-style" profile */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f7f6; /* Very light gray-green */
+        }
+
+        :root {
+            --brand-color: #0077b5; /* LinkedIn Blue */
+            --brand-color-dark: #005582;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        
+        .profile-header {
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .connect-button {
+            background-color: var(--brand-color);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .connect-button:hover {
+            background-color: var(--brand-color-dark);
+        }
+        
+        .message-button {
+            color: var(--brand-color);
+            border-color: var(--brand-color);
+            transition: all 0.3s ease;
+        }
+        .message-button:hover {
+            background-color: #f0f7ff;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 2.5rem;
+            padding-bottom: 2rem;
+            border-left: 2px solid #e5e7eb;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: -9px;
+            top: 4px;
+            width: 16px;
+            height: 16px;
+            background-color: #fff;
+            border: 3px solid #cbd5e1;
+            border-radius: 50%;
+        }
+        .timeline-item:first-child .timeline-dot {
+            border-color: var(--brand-color);
+        }
+        
+        .skill-tag {
+            background-color: #eef2ff;
+            color: #4338ca;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <div class="text-2xl font-bold" style="color: var(--brand-color);">ProNetwork</div>
+            <input type="text" placeholder="Search..." class="hidden md:block w-1/3 px-4 py-2 border rounded-md bg-gray-100">
+            <a href="#" class="font-medium text-gray-600 hover:text-gray-900">My Profile</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-12 max-w-5xl">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- Left Column (Main Profile) -->
+            <div class="lg:col-span-2 space-y-8">
+                
+                <!-- Profile Header Card -->
+                <div class="card overflow-hidden">
+                    <div class="h-32 bg-gray-200">
+                        <img src="https://placehold.co/1000x200/0077b5/ffffff?text=Banner&font=inter" alt="Cover Photo" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6 pb-8 relative">
+                        <img src="https://placehold.co/128x128/f0f7ff/0077b5?text=MA&font=inter" alt="Mark Anderson" class="w-32 h-32 rounded-full border-4 border-white -mt-20 shadow-lg">
+                        
+                        <div class="flex justify-between items-start mt-4">
+                            <div>
+                                <h1 class="text-3xl font-bold text-gray-900">Mark Anderson</h1>
+                                <p class="text-lg text-gray-700 mt-1">Senior Software Engineer at TechCorp</p>
+                                <p class="text-gray-500 mt-2">San Francisco Bay Area, USA</p>
+                            </div>
+                            <div class="flex space-x-3 flex-shrink-0">
+                                <button class="connect-button font-semibold py-2 px-5 rounded-full">Connect</button>
+                                <button class="message-button font-semibold py-2 px-5 rounded-full border-2">Message</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- About Card -->
+                <div class="card p-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">About</h2>
+                    <p class="text-gray-700 leading-relaxed">
+                        I am a results-driven Senior Software Engineer with 10+ years of experience in designing, developing, and scaling complex distributed systems. My expertise lies in cloud-native architectures, Go, and Kubernetes.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed mt-4">
+                        I'm passionate about building reliable, high-performance software and mentoring junior engineers. Currently leading the core platform team at TechCorp, responsible for services that handle over 1 billion daily requests.
+                    </p>
+                </div>
+                
+                <!-- Experience Card -->
+                <div class="card p-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">Experience</h2>
+                    <div class="relative">
+                        <!-- Timeline Item 1 -->
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <h3 class="text-xl font-semibold text-gray-800">Senior Software Engineer</h3>
+                            <p class="font-medium text-gray-700">TechCorp</p>
+                            <p class="text-sm text-gray-500 mb-2">Jan 2022 - Present</p>
+                            <p class="text-gray-600">Leading development of cloud-native microservices using Go and Kubernetes. Scaled core API to 1B+ daily requests.</p>
+                        </div>
+                        <!-- Timeline Item 2 -->
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <h3 class="text-xl font-semibold text-gray-800">Software Engineer</h3>
+                            <p class="font-medium text-gray-700">Innovate Solutions</p>
+                            <p class="text-sm text-gray-500 mb-2">Jun 2018 - Jan 2022</p>
+                            <p class="text-gray-600">Built and maintained a real-time analytics dashboard using Python (Django) and React.</p>
+                        </div>
+                        <!-- Timeline Item 3 -->
+                        <div class="timeline-item pb-0 border-transparent">
+                            <div class="timeline-dot"></div>
+                            <h3 class="text-xl font-semibold text-gray-800">Junior Developer</h3>
+                            <p class="font-medium text-gray-700">WebWorks Inc.</p>
+                            <p class="text-sm text-gray-500 mb-2">Jul 2015 - Jun 2018</p>
+                            <p class="text-gray-600">Developed custom WordPress plugins and themes for various clients.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+            <!-- Right Sidebar -->
+            <aside class="lg:col-span-1 space-y-8">
+                <!-- Skills Card -->
+                <div class="card p-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">Skills</h2>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-tag font-medium py-1 px-3 rounded-full">Go (Golang)</span>
+                        <span class="skill-tag font-medium py-1 px-3 rounded-full">Kubernetes</span>
+                        <span class="skill-tag font-medium py-1 px-3 rounded-full">Distributed Systems</span>
+                        <span class="skill-tag font-medium py-1 px-3 rounded-full">Python</span>
+                        <span class="skill-tag font-medium py-1 px-3 rounded-full">React</span>
+                        <span class="skill-tag font-medium py-1 px-3 rounded-full">Cloud Architecture</span>
+                        <span class="skill-tag font-medium py-1 px-3 rounded-full">SQL & NoSQL</span>
+                    </div>
+                </div>
+                
+                <!-- Education Card -->
+                <div class="card p-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">Education</h2>
+                    <h3 class="text-lg font-semibold text-gray-800">M.S. in Computer Science</h3>
+                    <p class="text-gray-600 mb-4">Metropolis University (2015)</p>
+                    <h3 class="text-lg font-semibold text-gray-800">B.S. in Software Engineering</h3>
+                    <p class="text-gray-600">State University (2013)</p>
+                </div>
+            </aside>
+
+        </div>
+    </main>
+
+</body>
+</html>

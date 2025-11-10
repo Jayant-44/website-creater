@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | Professional</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #FFF0F5 0%, #FDF5F6 100%); /* Very light pink gradient */
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #D02090; /* Darker pink for main text */
+        }
+
+        .container {
+            background: rgba(255, 240, 245, 0.9); /* Translucent very light pink */
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(208, 32, 144, 0.05); /* Subtle pink shadow */
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+            border: 1px solid rgba(255, 192, 203, 0.4); /* Translucent light pink border */
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 30px;
+            border-radius: 12px;
+            background: #FDE2E8; /* Light pink for tab background */
+            padding: 4px;
+            position: relative;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 12px 24px;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            color: #E91E63; /* Raspberry pink for inactive tab text */
+            position: relative;
+            z-index: 2;
+        }
+
+        .tab.active {
+            color: #D02090; /* Darker pink for active tab text */
+            background: white; /* White for active tab background for contrast */
+            box-shadow: 0 2px 8px rgba(208, 32, 144, 0.1); /* Subtle pink shadow */
+        }
+
+        .form-container {
+            position: relative;
+            min-height: 320px;
+        }
+
+        .form {
+            position: absolute;
+            width: 100%;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s ease;
+            pointer-events: none;
+        }
+
+        .form.active {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #D02090; /* Darker pink for headings */
+            font-weight: 600;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #E91E63; /* Raspberry pink for labels */
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #FFD1DC; /* Light pink border */
+            border-radius: 10px;
+            background: #FDE2E8; /* Light pink input background */
+            font-size: 16px;
+            color: #D02090; /* Darker pink for input text */
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #FF69B4; /* Hot pink on focus */
+            box-shadow: 0 0 0 3px rgba(255, 105, 180, 0.2); /* Hot pink shadow on focus */
+        }
+
+        .input-group input::placeholder {
+            color: #FFB6C1; /* Light pink placeholder */
+        }
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            background: #FF69B4; /* Hot pink button background */
+            color: white; /* White text for contrast */
+            border: none;
+            border-radius: 10px;
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background: #FF1493; /* Deep pink on hover */
+            transform: translateY(-2px);
+        }
+
+        .social-login {
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        .social-login .or-separator {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 20px 0;
+            color: #FFB6C1; /* Light pink for separator text */
+        }
+
+        .social-login .or-separator::before,
+        .social-login .or-separator::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #FFD1DC; /* Light pink separator line */
+        }
+
+        .social-login .or-separator:not(:empty)::before {
+            margin-right: .25em;
+        }
+
+        .social-login .or-separator:not(:empty)::after {
+            margin-left: .25em;
+        }
+
+        .social-login .or-separator span {
+            padding: 0 10px;
+            background: #FFF0F5; /* Very light pink for separator background */
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #FFD1DC; /* Light pink border */
+            border-radius: 10px;
+            background: #FDE2E8; /* Light pink social button background */
+            color: #E91E63; /* Raspberry pink for social button text */
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s ease, border-color 0.3s ease;
+            margin-bottom: 10px;
+        }
+
+        .social-btn:hover {
+            background: #FFD1DC; /* Lighter pink on hover */
+            border-color: #FFB6C1; /* Light pink border on hover */
+        }
+
+        .social-btn img {
+            margin-right: 10px;
+            width: 20px;
+            height: 20px;
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 15px;
+            color: #E91E63; /* Raspberry pink for link text */
+        }
+
+        .signup-link a {
+            color: #FF69B4; /* Hot pink for links */
+            text-decoration: none;
+            font-weight: 600;
+            transition: text-decoration 0.3s ease;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #FFB6C1; /* Light pink for toggle icon */
+            font-size: 18px;
+        }
+
+        .password-toggle:hover {
+            color: #D02090; /* Darker pink on hover */
+        }
+
+        .form-footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 13px;
+            color: #FFB6C1; /* Light pink for footer text */
+        }
+
+        .form-footer a {
+            color: #FF69B4; /* Hot pink for footer links */
+            text-decoration: none;
+            font-weight: 500;
+            transition: text-decoration 0.3s ease;
+        }
+
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Auto-fill styling for Chrome/Safari */
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover,
+        input:-webkit-autofill:focus,
+        input:-webkit-autofill:active {
+            -webkit-box-shadow: 0 0 0px 1000px #FDE2E8 inset !important; /* Light pink autofill background */
+            -webkit-text-fill-color: #D02090 !important; /* Darker pink autofill text */
+            border-color: #FF69B4 !important; /* Hot pink autofill border */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="tabs">
+            <div class="tab" data-target="#signin-form">Sign In</div>
+            <div class="tab active" data-target="#signup-form">Sign Up</div>
+        </div>
+
+        <div class="form-container">
+            <!-- Sign In Form -->
+            <div id="signin-form" class="form">
+                <h2>Welcome Back!</h2>
+                <form>
+                    <div class="input-group">
+                        <label for="signin-email">Email Address</label>
+                        <input type="email" id="signin-email" placeholder="you@example.com" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="signin-password">Password</label>
+                        <input type="password" id="signin-password" placeholder="••••••••" required>
+                        <span class="password-toggle">👁️</span>
+                    </div>
+                    <button type="submit" class="btn">Sign In</button>
+                </form>
+                <div class="social-login">
+                    <div class="or-separator"><span>OR</span></div>
+                    <button class="social-btn">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/768px-Google_%22G%22_logo.svg.png" alt="Google icon">
+                        Continue with Google
+                    </button>
+                    <button class="social-btn">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/504px-Apple_logo_black.svg.png" alt="Apple icon">
+                        Continue with Apple
+                    </button>
+                </div>
+                <div class="signup-link">
+                    Don't have an account? <a href="#" onclick="showTab('signup-form')">Sign Up</a>
+                </div>
+            </div>
+
+            <!-- Sign Up Form -->
+            <div id="signup-form" class="form active">
+                <h2>Create Your Account</h2>
+                <form>
+                    <div class="input-group">
+                        <label for="signup-name">Full Name</label>
+                        <input type="text" id="signup-name" placeholder="John Doe" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="signup-email">Email Address</label>
+                        <input type="email" id="signup-email" placeholder="you@example.com" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="signup-password">Password</label>
+                        <input type="password" id="signup-password" placeholder="••••••••" required>
+                        <span class="password-toggle">👁️</span>
+                    </div>
+                    <button type="submit" class="btn">Sign Up</button>
+                </form>
+                <div class="social-login">
+                    <div class="or-separator"><span>OR</span></div>
+                    <button class="social-btn">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/768px-Google_%22G%22_logo.svg.png" alt="Google icon">
+                        Continue with Google
+                    </button>
+                    <button class="social-btn">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/504px-Apple_logo_black.svg.png" alt="Apple icon">
+                        Continue with Apple
+                    </button>
+                </div>
+                <div class="signup-link">
+                    Already have an account? <a href="#" onclick="showTab('signin-form')">Sign In</a>
+                </div>
+            </div>
+        </div>
+        <div class="form-footer">
+            By continuing, you agree to our <a href="#">Terms of Service</a> & <a href="#">Privacy Policy</a>.
+        </div>
+    </div>
+
+    <script>
+        function showTab(targetId) {
+            const forms = document.querySelectorAll('.form');
+            forms.forEach(form => form.classList.remove('active'));
+
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            document.getElementById(targetId).classList.add('active');
+            document.querySelector(`.tab[data-target="#${targetId}"]`).classList.add('active');
+        }
+
+        // Initialize to Sign Up tab
+        document.addEventListener('DOMContentLoaded', () => {
+            showTab('signup-form');
+
+            // Password toggle functionality
+            document.querySelectorAll('.password-toggle').forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    const passwordInput = this.previousElementSibling;
+                    if (passwordInput.type === 'password') {
+                        passwordInput.type = 'text';
+                        this.textContent = '🙈';
+                    } else {
+                        passwordInput.type = 'password';
+                        this.textContent = '👁️';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

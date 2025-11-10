@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Fitness Tracker</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Google Font: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Load Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        /* Custom CSS for a personal fitness dashboard */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+        }
+
+        :root {
+            --brand-color: #f97316; /* Vibrant Orange */
+            --brand-color-dark: #ea580c;
+        }
+        
+        .sidebar {
+            background-color: #0a0a0a;
+        }
+        .main-content {
+            background-color: #121212;
+        }
+        
+        .sidebar-link {
+            color: #a0a0a0;
+            transition: all 0.3s ease;
+        }
+        .sidebar-link:hover, .sidebar-link.active {
+            color: #fff;
+            background-color: #2a2a2a;
+        }
+        .sidebar-link.active {
+            border-left: 3px solid var(--brand-color);
+        }
+
+        .stat-card {
+            background-color: #1e1e1e;
+            border: 1px solid #2a2a2a;
+            border-radius: 12px;
+        }
+        
+        /* Styles for the progress ring */
+        .progress-ring {
+            position: relative;
+            width: 150px;
+            height: 150px;
+        }
+        .progress-ring-circle {
+            transition: stroke-dashoffset 0.5s ease;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+    </style>
+</head>
+<body class="flex h-screen">
+
+    <!-- 
+      ============================================================
+      DASHBOARD TEMPLATE 5: FITNESS TRACKER
+      ============================================================
+    -->
+
+    <!-- Sidebar -->
+    <aside class="sidebar w-20 md:w-64 flex-shrink-0 flex flex-col">
+        <div class="h-20 flex items-center justify-center border-b border-gray-800">
+            <h1 class="text-3xl font-extrabold" style="color: var(--brand-color);">Fit</h1>
+        </div>
+        <nav class="flex-1 overflow-y-auto py-6">
+            <ul class="space-y-2">
+                <li>
+                    <a href="#" class="sidebar-link active flex items-center py-4 px-6">
+                        <svg class="w-6 h-6 mr-0 md:mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                        <span class="hidden md:inline">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="sidebar-link flex items-center py-4 px-6">
+                        <svg class="w-6 h-6 mr-0 md:mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        <span class="hidden md:inline">Workouts</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="sidebar-link flex items-center py-4 px-6">
+                        <svg class="w-6 h-6 mr-0 md:mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"></path></svg>
+                        <span class="hidden md:inline">Progress</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="sidebar-link flex items-center py-4 px-6">
+                        <svg class="w-6 h-6 mr-0 md:mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span class="hidden md:inline">Nutrition</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content flex-1 overflow-y-auto">
+        <!-- Top Header Bar -->
+        <header class="h-20 flex items-center justify-between px-8">
+            <h2 class="text-2xl font-semibold text-white">Welcome back, Jayant!</h2>
+            <img src="https://placehold.co/40x40/f97316/0a0a0a?text=J&font=inter" alt="User Avatar" class="w-10 h-10 rounded-full">
+        </header>
+
+        <!-- Page Content -->
+        <div class="p-8">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                
+                <!-- Left Column: Progress & Stats -->
+                <div class="lg:col-span-2 space-y-8">
+                    <!-- Progress Ring -->
+                    <div class="stat-card p-8 flex flex-col md:flex-row items-center gap-8">
+                        <div class="progress-ring">
+                            <svg class="w-full h-full" viewBox="0 0 36 36">
+                                <path d="M18 2.0845
+                                    a 15.9155 15.9155 0 0 1 0 31.831
+                                    a 15.9155 15.9155 0 0 1 0 -31.831"
+                                    fill="none"
+                                    stroke="#333"
+                                    stroke-width="3"/>
+                                <path class="progress-ring-circle"
+                                    id="progress-circle"
+                                    d="M18 2.0845
+                                    a 15.9155 15.9155 0 0 1 0 31.831
+                                    a 15.9155 15.9155 0 0 1 0 -31.831"
+                                    fill="none"
+                                    stroke="var(--brand-color)"
+                                    stroke-width="3"
+                                    stroke-dasharray="85, 100" /* 85% full */
+                                    stroke-linecap="round"/>
+                            </svg>
+                            <div class="absolute inset-0 flex flex-col items-center justify-center">
+                                <span class="text-3xl font-bold text-white">85%</span>
+                                <span class="text-sm text-gray-400">Weekly Goal</span>
+                            </div>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-bold text-white mb-2">Almost there!</h3>
+                            <p class="text-gray-400">You're just 1 workout away from hitting your weekly goal of 5 workouts. Keep pushing!</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Stats Cards -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="stat-card p-6">
+                            <h3 class="text-sm font-medium text-gray-400 uppercase">Workouts This Week</h3>
+                            <span class="text-3xl font-bold text-white block mt-2">4 / 5</span>
+                        </div>
+                        <div class="stat-card p-6">
+                            <h3 class="text-sm font-medium text-gray-400 uppercase">Calories Burned (Today)</h3>
+                            <span class="text-3xl font-bold text-white block mt-2">480</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Weekly Chart -->
+                    <div class="stat-card p-6">
+                        <h3 class="text-xl font-bold text-white mb-4">Weekly Activity</h3>
+                        <canvas id="activityChart" style="max-height: 300px;"></canvas>
+                    </div>
+                </div>
+                
+                <!-- Right Column: Today's Plan -->
+                <div class="lg:col-span-1 space-y-8">
+                    <div class="stat-card p-6">
+                        <h3 class="text-xl font-bold text-white mb-6">Today's Plan</h3>
+                        <div class="space-y-4">
+                            <div class="p-4 rounded-lg" style="background-color: #f97316; color: #fff;">
+                                <span class="text-sm font-semibold uppercase">Workout</span>
+                                <p class="text-lg font-bold">Leg Day</p>
+                                <span class="text-sm">45 min / 5 exercises</span>
+                            </div>
+                            <div class="p-4 rounded-lg bg-gray-700">
+                                <span class="text-sm font-semibold uppercase text-gray-400">Nutrition</span>
+                                <p class="text-lg font-bold text-white">2,200 calories</p>
+                                <span class="text-sm text-gray-400">Goal: 2,500</span>
+                            </div>
+                            <div class="p-4 rounded-lg bg-gray-700">
+                                <span class="text-sm font-semibold uppercase text-gray-400">Hydration</span>
+                                <p class="text-lg font-bold text-white">6 / 8 glasses</p>
+                                <span class="text-sm text-gray-400">Goal: 8 glasses</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+    
+    <script>
+        // JavaScript for Chart.js
+        const ctx = document.getElementById('activityChart').getContext('2d');
+        const activityChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                datasets: [{
+                    label: 'Minutes',
+                    data: [45, 60, 0, 75, 45, 0, 0],
+                    backgroundColor: 'rgba(249, 115, 22, 0.6)', // var(--brand-color) with opacity
+                    borderColor: 'rgba(249, 115, 22, 1)',
+                    borderWidth: 1,
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { color: '#9ca3af' },
+                        grid: { color: '#374151' }
+                    },
+                    x: {
+                        ticks: { color: '#9ca3af' },
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>

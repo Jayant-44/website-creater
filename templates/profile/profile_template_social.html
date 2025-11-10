@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Social</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Google Font: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom CSS for a "social media" style public profile */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f2f5;
+        }
+
+        :root {
+            --brand-color: #1d9bf0; /* Twitter-like Blue */
+            --brand-color-dark: #1a8cd8;
+        }
+        
+        .profile-cover {
+            height: 35vh;
+            background-image: url('https://placehold.co/1500x500/1d9bf0/ffffff?text=My+Cover+Photo&font=poppins');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .profile-avatar {
+            margin-top: -72px; /* Pulls avatar up over the cover */
+            border: 4px solid #fff;
+        }
+        
+        .follow-button {
+            background-color: var(--brand-color);
+            transition: all 0.3s ease;
+        }
+        .follow-button:hover {
+            background-color: var(--brand-color-dark);
+        }
+        
+        .post-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .post-card:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <div class="text-2xl font-bold" style="color: var(--brand-color);">Connect</div>
+            <div class="flex items-center space-x-4">
+                <a href="#" class="text-gray-600 hover:text-gray-900">Feed</a>
+                <a href="#" class="text-gray-600 hover:text-gray-900">Messages</a>
+                <img src="https://placehold.co/40x40/e0e0e0/333333?text=Me" alt="My Avatar" class="w-9 h-9 rounded-full">
+            </div>
+        </nav>
+    </header>
+
+    <!-- Profile Header -->
+    <section class="bg-white shadow-lg">
+        <!-- Cover Photo -->
+        <div class="profile-cover bg-gray-300"></div>
+        
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center py-4">
+                
+                <!-- Avatar and Info -->
+                <div class="flex flex-col md:flex-row items-center">
+                    <img src="https://placehold.co/144x144/f0f2f5/1d9bf0?text=A.V.&font=poppins" alt="Profile Picture" class="w-36 h-36 rounded-full profile-avatar">
+                    <div class="mt-4 md:mt-0 md:ml-6 text-center md:text-left">
+                        <h1 class="text-3xl font-bold text-gray-900">Anna Vance</h1>
+                        <p class="text-gray-500">@annavance_design</p>
+                    </div>
+                </div>
+                
+                <!-- Stats and Follow Button -->
+                <div class="mt-6 md:mt-0 flex items-center space-x-6">
+                    <div class="text-center">
+                        <span class="font-bold text-xl block">1,290</span>
+                        <span class="text-sm text-gray-500">Following</span>
+                    </div>
+                    <div class="text-center">
+                        <span class="font-bold text-xl block">14.8K</span>
+                        <span class="text-sm text-gray-500">Followers</span>
+                    </div>
+                    <button class="follow-button text-white font-semibold py-2 px-6 rounded-full">
+                        Follow
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Profile Bio -->
+            <div class="max-w-xl py-6">
+                <p class="leading-relaxed">
+                    UX/UI Designer passionate about creating simple, beautiful, and accessible digital products. Co-founder @PixelHaus.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Profile Content (Grid) -->
+    <main class="container mx-auto px-6 py-12">
+        <h2 class="text-2xl font-bold text-gray-900 mb-6">Recent Posts</h2>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Post 1 -->
+            <div class="post-card">
+                <img src="https://placehold.co/600x400/dbeafe/1d9bf0?text=My+Latest+Design&font=poppins" alt="Post 1" class="w-full h-56 object-cover">
+                <div class="p-5">
+                    <p class="text-gray-700">Thrilled to share my latest project: a full rebrand and web app for a fintech startup. Loved working on this!</p>
+                    <span class="text-sm text-gray-400 mt-3 block">2 hours ago</span>
+                </div>
+            </div>
+            
+            <!-- Post 2 -->
+            <div class="post-card">
+                <img src="https://placehold.co/600x400/e0e7ff/1d9bf0?text=Workspace&font=poppins" alt="Post 2" class="w-full h-56 object-cover">
+                <div class="p-5">
+                    <p class="text-gray-700">New workspace setup is finally complete. A clean desk = a clean mind. 💡</p>
+                    <span class="text-sm text-gray-400 mt-3 block">1 day ago</span>
+                </div>
+            </div>
+            
+            <!-- Post 3 -->
+            <div class="post-card">
+                <img src="https://placehold.co/600x400/c7d2fe/1d9bf0?text=Inspiration&font=poppins" alt="Post 3" class="w-full h-56 object-cover">
+                <div class="p-5">
+                    <p class="text-gray-700">Finding so much inspiration in brutalist architecture lately. The raw honesty of the materials is just... *chef's kiss*</p>
+                    <span class="text-sm text-gray-400 mt-3 block">3 days ago</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>

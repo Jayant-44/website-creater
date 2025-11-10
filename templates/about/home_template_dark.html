@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Tech Startup</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Google Font: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom CSS for a modern, dark-mode tech "About" page */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827; /* Dark Blue-Gray */
+            color: #d1d5db; /* Light Gray */
+        }
+        
+        h1, h2, h3, h4, strong {
+            font-weight: 700;
+            color: #fff;
+        }
+
+        :root {
+            --brand-color: #06b6d4; /* Cyan */
+        }
+
+        .hero-gradient-text {
+            background: linear-gradient(to right, #06b6d4, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .stat-card {
+            background-color: #1f2937;
+            border: 1px solid #374151;
+            border-top: 4px solid var(--brand-color);
+            padding: 2rem;
+            border-radius: 0.5rem;
+        }
+
+        .team-card {
+            background-color: #1f2937;
+            border: 1px solid #374151;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            transition: all 0.3s ease;
+        }
+        .team-card:hover {
+            border-color: var(--brand-color);
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body class="text-gray-300">
+
+    <!-- Header -->
+    <header class="bg-gray-900/70 backdrop-blur-md sticky top-0 z-50 border-b border-gray-800">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-black text-white">Quantum<span style="color: var(--brand-color);">AI</span></div>
+            <div class="hidden md:flex space-x-6 items-center">
+                <a href="#" class="text-gray-300 hover:text-white">Home</a>
+                <a href="#" class="text-white font-semibold" style="color: var(--brand-color);">About Us</a>
+                <a href="#" class="text-gray-300 hover:text-white">Careers</a>
+                <a href="#" class="text-gray-300 hover:text-white">Blog</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="py-24 md:py-32">
+        <div class="container mx-auto px-6 max-w-4xl text-center">
+            <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-6">
+                Our mission is to make
+                <span class="hero-gradient-text">artificial intelligence</span>
+                accessible to everyone.
+            </h1>
+            <p class="text-lg md:text-xl text-gray-400 leading-relaxed">
+                We are a team of researchers, engineers, and designers building the next generation of AI tools that are powerful, ethical, and easy to use.
+            </p>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="container mx-auto px-6 -mt-16 z-10 relative">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="stat-card">
+                <span class="text-5xl font-extrabold hero-gradient-text">50M+</span>
+                <h3 class="text-xl font-semibold text-white mt-2">API Calls Daily</h3>
+                <p class="text-gray-400 mt-1">Our models are battle-tested at scale.</p>
+            </div>
+            <div class="stat-card">
+                <span class="text-5xl font-extrabold hero-gradient-text">10,000+</span>
+                <h3 class="text-xl font-semibold text-white mt-2">Developers</h3>
+                <p class="text-gray-400 mt-1">Trust our platform to build their apps.</p>
+            </div>
+            <div class="stat-card">
+                <span class="text-5xl font-extrabold hero-gradient-text">7</span>
+                <h3 class="text-xl font-semibold text-white mt-2">Continents</h3>
+                <p class="text-gray-400 mt-1">Our team is fully remote and distributed globally.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Story Section -->
+    <section class="py-24 md:py-32">
+        <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <div class="rounded-lg overflow-hidden">
+                <img src="https://placehold.co/600x450/1f2937/06b6d4?text=Our+Team&font=inter" alt="Our team" class="w-full h-full object-cover">
+            </div>
+            <div>
+                <h2 class="text-4xl font-bold text-white mb-6">Our Story</h2>
+                <div class="space-y-4 text-lg text-gray-400 leading-relaxed">
+                    <p>
+                        QuantumAI was founded in 2021 by a small group of researchers who believed that the power of large language models shouldn't be locked away in the hands of a few tech giants.
+                    </D>
+                    <p>
+                        We started with a simple open-source project. Today, we've grown into a global company, but our core mission remains the same: to build open, honest, and powerful AI that empowers human creativity and solves real-world problems.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leadership Section -->
+    <section class="py-20 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-white mb-4">Our Leadership</h2>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Team Card 1 -->
+                <div class="team-card text-center">
+                    <img src="https://placehold.co/200x200/374151/f3f4f6?text=AD" alt="Alia Denvers" class="w-24 h-24 rounded-full mx-auto mb-4">
+                    <h3 class="text-xl font-bold text-white">Alia Denvers</h3>
+                    <p class="text-gray-400" style="color: var(--brand-color);">Co-Founder & CEO</p>
+                </div>
+                <!-- Team Card 2 -->
+                <div class="team-card text-center">
+                    <img src="https://placehold.co/200x200/374151/f3f4f6?text=BM" alt="Ben Maro" class="w-24 h-24 rounded-full mx-auto mb-4">
+                    <h3 class="text-xl font-bold text-white">Ben Maro</h3>
+                    <p class="text-gray-400" style="color: var(--brand-color);">Co-Founder & CTO</p>
+                </div>
+                <!-- Team Card 3 -->
+                <div class="team-card text-center">
+                    <img src="https://placehold.co/200x200/374151/f3f4f6?text=CL" alt="Chandra Li" class="w-24 h-24 rounded-full mx-auto mb-4">
+                    <h3 class="text-xl font-bold text-white">Chandra Li</h3>
+                    <p class="text-gray-400" style="color: var(--brand-color);">Head of Research</p>
+                </div>
+                <!-- Team Card 4 -->
+                <div class="team-card text-center">
+                    <img src="https://placehold.co/200x200/374151/f3f4f6?text=RS" alt="Rajesh Singh" class="w-24 h-24 rounded-full mx-auto mb-4">
+                    <h3 class="text-xl font-bold text-white">Rajesh Singh</h3>
+                    <p class="text-gray-400" style="color: var(--brand-color);">Head of Ethics & Safety</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-gray-800">
+        <div class="container mx-auto px-6 text-center text-gray-500">
+            <p>&copy; 2025 QuantumAI. Building the future, responsibly.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

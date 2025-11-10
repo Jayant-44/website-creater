@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - E-commerce Brand</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom CSS for an earthy, e-commerce brand */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fcfbf8; /* Warm off-white */
+            color: #3d3d3d;
+        }
+        
+        h1, h2, h3, h4, .font-serif {
+            font-family: 'Lora', serif;
+        }
+
+        :root {
+            --brand-color: #4d7c0f; /* Olive Green */
+            --brand-color-light: #f7fee7;
+        }
+
+        .hero-bg {
+            background-color: var(--brand-color-light);
+        }
+        
+        .image-card {
+            position: relative;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+        .image-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
+            z-index: 10;
+        }
+        
+        .feature-item {
+            border-bottom: 2px solid #f0f0f0;
+            transition: border-color 0.3s ease;
+        }
+        .feature-item:hover {
+            border-bottom-color: var(--brand-color);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Header -->
+    <header class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-serif font-bold" style="color: var(--brand-color);">Evergreen</div>
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="#" class="text-gray-600 hover:text-gray-900">Home</a>
+                <a href="#" class="text-gray-600 hover:text-gray-900">Shop</a>
+                <a href="#" class="text-gray-900 font-semibold" style="color: var(--brand-color);">Our Story</a>
+                <a href="#" class="text-gray-600 hover:text-gray-900">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-bg py-24 md:py-32">
+        <div class="container mx-auto px-6 max-w-4xl text-center">
+            <h1 class="text-5xl md:text-6xl font-bold text-gray-900 mb-6">Built on passion. Crafted with care.</h1>
+            <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
+                Evergreen isn't just a brand. It's a promise to deliver sustainable, high-quality goods that are kind to you and to the planet.
+            </p>
+        </div>
+    </section>
+
+    <!-- Founder's Note Section -->
+    <section class="py-20">
+        <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <div class="rounded-lg overflow-hidden shadow-xl">
+                <img src="https://placehold.co/600x700/ecfccb/4d7c0f?text=Founder&font=lora" alt="Founder" class="w-full h-full object-cover">
+            </div>
+            <div>
+                <span class="text-sm font-semibold uppercase" style="color: var(--brand-color);">A Note From Our Founder</span>
+                <h2 class="text-4xl font-bold text-gray-900 mt-2 mb-6">From a Small Sketchbook to a Global Community</h2>
+                <div class="space-y-4 text-lg text-gray-600 leading-relaxed">
+                    <p>
+                        "I started Evergreen in my apartment with one goal: to create products I couldn't find anywhere else. Products that were timeless, beautifully crafted, and made from materials I could feel good about."
+                    </p>
+                    <p>
+                        "What began as a personal project has grown into a community of like-minded individuals who value quality and sustainability. Thank you for being part of this journey."
+                    </p>
+                    <p class="font-semibold text-gray-800">- Alex Chen, Founder</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Our Values / Process Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6 max-w-5xl">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Our Promise</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <!-- Value 1 -->
+                <div class="feature-item pb-6">
+                    <h3 class="text-2xl font-bold mb-3">Sustainable Materials</h3>
+                    <p class="text-gray-600">
+                        We source only the finest organic cotton, recycled fibers, and non-toxic dyes.
+                    </p>
+                </div>
+                <!-- Value 2 -->
+                <div class="feature-item pb-6">
+                    <h3 class="text-2xl font-bold mb-3">Ethical Production</h3>
+                    <p class="text-gray-600">
+                        Our products are made in fair-trade certified facilities, ensuring every worker is paid a living wage.
+                    </p>
+                </div>
+                <!-- Value 3 -->
+                <div class="feature-item pb-6">
+                    <h3 class="text-2xl font-bold mb-3">Timeless Design</h3>
+                    <p class="text-gray-600">
+                        We create products designed to last a lifetime, not just a season.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Image CTA Section -->
+    <section class="py-20">
+        <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="image-card h-80">
+                <img src="https://placehold.co/600x400/d4d4d4/333333?text=Our+Workshop&font=inter" alt="Workshop" class="w-full h-full object-cover">
+                <div class="absolute bottom-6 left-6 z-20">
+                    <h3 class="text-3xl font-bold text-white">Our Workshop</h3>
+                </div>
+            </div>
+            <div class="image-card h-80">
+                <img src="https://placehold.co/600x400/d4d4d4/333333?text=Our+Materials&font=inter" alt="Materials" class="w-full h-full object-cover">
+                <div class="absolute bottom-6 left-6 z-20">
+                    <h3 class="text-3xl font-bold text-white">Our Materials</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-12">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 Evergreen. Consciously Crafted.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

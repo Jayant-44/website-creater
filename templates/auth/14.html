@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Cyberpunk Auth</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Audiowide&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Orbitron', monospace;
+            background: #0d0221;
+            color: #00d9ff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Digital rain effect */
+        .digital-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .rain-drop {
+            position: absolute;
+            color: #00ff41;
+            font-family: 'Orbitron', monospace;
+            font-size: 14px;
+            opacity: 0.6;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100vh);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            background: rgba(13, 2, 33, 0.95);
+            border: 3px solid #ff0080;
+            border-radius: 20px;
+            box-shadow: 
+                0 0 60px rgba(255, 0, 128, 0.4),
+                inset 0 0 40px rgba(0, 217, 255, 0.1);
+            padding: 40px;
+            width: 90%;
+            max-width: 450px;
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(15px);
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #ff0080, #00d9ff, #ff0080);
+            border-radius: 20px;
+            z-index: -1;
+            animation: borderGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes borderGlow {
+            0% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-family: 'Audiowide', cursive;
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #ff0080, #00d9ff, #ff00ff);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(255, 0, 128, 0.8);
+            animation: textPulse 1.5s ease-in-out infinite alternate;
+            margin-bottom: 10px;
+        }
+
+        @keyframes textPulse {
+            0% { filter: drop-shadow(0 0 10px rgba(255, 0, 128, 0.8)); }
+            100% { filter: drop-shadow(0 0 25px rgba(0, 217, 255, 0.8)); }
+        }
+
+        .header p {
+            color: #888;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .form-container {
+            position: relative;
+            min-height: 400px;
+        }
+
+        .form {
+            position: absolute;
+            width: 100%;
+            opacity: 0;
+            transform: translateX(100px) rotateY(20deg);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+            transform-style: preserve-3d;
+        }
+
+        .form.active {
+            opacity: 1;
+            transform: translateX(0) rotateY(0deg);
+            pointer-events: all;
+        }
+
+        .form h2 {
+            font-family: 'Audiowide', cursive;
+            color: #00d9ff;
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ff0080;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid rgba(0, 217, 255, 0.3);
+            border-radius: 10px;
+            color: #00d9ff;
+            font-family: 'Orbitron', monospace;
+            font-size: 1rem;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #00d9ff;
+            background: rgba(0, 217, 255, 0.1);
+            box-shadow: 
+                0 0 25px rgba(0, 217, 255, 0.6),
+                inset 0 0 15px rgba(0, 217, 255, 0.1);
+            transform: scale(1.02);
+        }
+
+        input:focus + .input-glow {
+            opacity: 1;
+        }
+
+        .input-glow {
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #ff0080, #00d9ff, #ff00ff);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(45deg, #ff0080, #ff00ff);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Audiowide', cursive;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 25px;
+            animation: buttonPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes buttonPulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 0, 128, 0.5); }
+            50% { box-shadow: 0 0 40px rgba(255, 0, 128, 0.8); }
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #ff0080, #00d9ff, #ff00ff, #ff0080);
+            border-radius: 10px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 0, 128, 0.6);
+        }
+
+        .submit-btn:hover::before {
+            opacity: 1;
+        }
+
+        .toggle-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .toggle-link button {
+            background: none;
+            border: none;
+            color: #888;
+            cursor: pointer;
+            font-family: 'Orbitron', monospace;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            text-decoration: underline;
+        }
+
+        .toggle-link button:hover {
+            color: #00d9ff;
+            text-shadow: 0 0 10px rgba(0, 217, 255, 0.8);
+        }
+
+        .divider {
+            text-align: center;
+            margin: 25px 0;
+            color: #666;
+            position: relative;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #ff0080, #00d9ff, transparent);
+        }
+
+        .divider span {
+            background: #0d0221;
+            padding: 0 15px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .social-login {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .social-btn {
+            width: 55px;
+            height: 55px;
+            border: 2px solid rgba(0, 217, 255, 0.3);
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s ease;
+            color: #00d9ff;
+            font-size: 20px;
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-btn::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 0, 128, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+            opacity: 0;
+        }
+
+        .social-btn:hover {
+            border-color: #ff0080;
+            color: #ff00ff;
+            box-shadow: 
+                0 0 30px rgba(255, 0, 128, 0.6),
+                inset 0 0 20px rgba(0, 217, 255, 0.1);
+            transform: translateY(-3px) scale(1.05);
+        }
+
+        .social-btn:hover::before {
+            opacity: 1;
+            animation: sweep 0.6s ease;
+        }
+
+        @keyframes sweep {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                margin: 20px;
+                padding: 30px 25px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="digital-rain" id="digitalRain"></div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>NEXUS</h1>
+            <p>Neural Access Portal</p>
+        </div>
+
+        <div class="form-container">
+            <!-- Sign In Form -->
+            <div class="form active" id="signin-form-container">
+                <h2>System Login</h2>
+                <form id="signin-form">
+                    <div class="form-group">
+                        <label for="signin-email">User ID</label>
+                        <input type="email" id="signin-email" required>
+                        <div class="input-glow"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="signin-password">Access Code</label>
+                        <input type="password" id="signin-password" required>
+                        <div class="input-glow"></div>
+                    </div>
+                    <button type="submit" class="submit-btn">Initialize</button>
+                </form>
+
+                <div class="toggle-link">
+                    <button onclick="switchForm('signup')">New User? Register Neural Link</button>
+                </div>
+
+                <div class="divider">
+                    <span>Alternative Access</span>
+                </div>
+
+                <div class="social-login">
+                    <div class="social-btn" onclick="socialLogin('neural')">🧠</div>
+                    <div class="social-btn" onclick="socialLogin('quantum')">⚛️</div>
+                    <div class="social-btn" onclick="socialLogin('cyber')">🤖</div>
+                </div>
+            </div>
+
+            <!-- Sign Up Form -->
+            <div class="form" id="signup-form-container">
+                <h2>Neural Registration</h2>
+                <form id="signup-form">
+                    <div class="form-group">
+                        <label for="signup-name">Identity Code</label>
+                        <input type="text" id="signup-name" required>
+                        <div class="input-glow"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-email">Neural Interface</label>
+                        <input type="email" id="signup-email" required>
+                        <div class="input-glow"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">Security Protocol</label>
+                        <input type="password" id="signup-password" required>
+                        <div class="input-glow"></div>
+                    </div>
+                    <button type="submit" class="submit-btn">Register</button>
+                </form>
+
+                <div class="toggle-link">
+                    <button onclick="switchForm('signin')">Existing User? Access System</button>
+                </div>
+
+                <div class="divider">
+                    <span>Alternative Access</span>
+                </div>
+
+                <div class="social-login">
+                    <div class="social-btn" onclick="socialLogin('neural')">🧠</div>
+                    <div class="social-btn" onclick="socialLogin('quantum')">⚛️</div>
+                    <div class="social-btn" onclick="socialLogin('cyber')">🤖</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Digital rain effect
+        function createRain() {
+            const rain = document.getElementById('digitalRain');
+            const characters = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲンABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            
+            for (let i = 0; i < 50; i++) {
+                const drop = document.createElement('div');
+                drop.className = 'rain-drop';
+                drop.textContent = characters.charAt(Math.floor(Math.random() * characters.length));
+                drop.style.left = Math.random() * 100 + '%';
+                drop.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                drop.style.animationDelay = Math.random() * 2 + 's';
+                rain.appendChild(drop);
+            }
+        }
+
+        function switchForm(formType) {
+            const signinForm = document.getElementById('signin-form-container');
+            const signupForm = document.getElementById('signup-form-container');
+            
+            if (formType === 'signup') {
+                signinForm.classList.remove('active');
+                signupForm.classList.add('active');
+            } else {
+                signupForm.classList.remove('active');
+                signinForm.classList.add('active');
+            }
+        }
+
+        function socialLogin(provider) {
+            console.log('Social login with:', provider);
+            alert(`Connecting to ${provider.toUpperCase()} neural network...`);
+        }
+
+        document.getElementById('signin-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = this.querySelector('.submit-btn');
+            const originalText = btn.textContent;
+            
+            btn.textContent = 'CONNECTING...';
+            btn.style.pointerEvents = 'none';
+            
+            setTimeout(() => {
+                alert('NEURAL LINK ESTABLISHED - WELCOME TO THE NEXUS');
+                btn.textContent = originalText;
+                btn.style.pointerEvents = 'auto';
+            }, 2000);
+        });
+
+        document.getElementById('signup-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = this.querySelector('.submit-btn');
+            const originalText = btn.textContent;
+            
+            btn.textContent = 'REGISTERING...';
+            btn.style.pointerEvents = 'none';
+            
+            setTimeout(() => {
+                alert('NEURAL INTERFACE REGISTERED - INITIATING SYSTEM ACCESS');
+                btn.textContent = originalText;
+                btn.style.pointerEvents = 'auto';
+            }, 2000);
+        });
+
+        // Initialize rain effect
+        createRain();
+        
+        // Add glitch effects
+        setInterval(() => {
+            const elements = document.querySelectorAll('input, .submit-btn');
+            const randomEl = elements[Math.floor(Math.random() * elements.length)];
+            if (randomEl) {
+                randomEl.style.animation = 'glitch 0.1s ease-in-out';
+                setTimeout(() => {
+                    randomEl.style.animation = '';
+                }, 100);
+            }
+        }, 5000);
+
+        // Add glitch animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes glitch {
+                0% { transform: translate(0); }
+                20% { transform: translate(-2px, 2px); }
+                40% { transform: translate(-2px, -2px); }
+                60% { transform: translate(2px, 2px); }
+                80% { transform: translate(2px, -2px); }
+                100% { transform: translate(0); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Add entrance animation
+        window.addEventListener('load', function() {
+            document.querySelector('.container').style.animation = 'cyberpunkEntrance 1s ease forwards';
+        });
+
+        const entranceStyle = document.createElement('style');
+        entranceStyle.textContent = `
+            @keyframes cyberpunkEntrance {
+                from {
+                    opacity: 0;
+                    transform: translateY(50px) scale(0.8);
+                    filter: blur(10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0) scale(1);
+                    filter: blur(0);
+                }
+            }
+        `;
+        document.head.appendChild(entranceStyle);
+    </script>
+</body>
+</html>

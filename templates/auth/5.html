@@ -1,0 +1,271 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Flip Auth Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* --- CSS STYLES --- */
+        @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+        :root {
+            --primary-green: #28a745; /* Modern Green */
+            --primary-dark: #343a40; /* Dark for text/accents */
+            --background-light: #f8f9fa;
+            --white: #ffffff;
+            --input-border: #ced4da;
+            --shadow-subtle: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background: linear-gradient(135deg, #e0f2f7 0%, #c8e6c9 100%); /* Soft gradient background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            perspective: 1000px; /* For 3D flip effect */
+        }
+
+        .flip-container {
+            width: 380px; /* Fixed width for the card */
+            height: 550px; /* Fixed height for the card */
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.8s ease-in-out; /* Flip animation speed */
+            box-shadow: var(--shadow-subtle);
+            border-radius: 12px;
+        }
+
+        .flipper {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.8s; /* Ensure this matches flip-container's transition */
+        }
+
+        .front, .back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden; /* Hide the back when facing forward */
+            border-radius: 12px;
+            background-color: var(--white);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .back {
+            transform: rotateY(180deg); /* Rotate back side initially */
+        }
+
+        /* --- Active state for flip --- */
+        .flip-container.flipped .flipper {
+            transform: rotateY(180deg);
+        }
+
+        /* --- Form Elements --- */
+        .form-content h2 {
+            font-size: 2.2em;
+            color: var(--primary-dark);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .form-content p.sub-text {
+            font-size: 0.9em;
+            color: var(--primary-dark);
+            margin-bottom: 25px;
+        }
+
+        .form-content input {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 15px;
+            border: 1px solid var(--input-border);
+            border-radius: 8px;
+            font-size: 1em;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .form-content input:focus {
+            border-color: var(--primary-green);
+        }
+
+        .form-content button {
+            background-color: var(--primary-green);
+            color: var(--white);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s, transform 0.1s;
+            width: 100%;
+        }
+
+        .form-content button:hover {
+            background-color: #218838; /* Darker green */
+            transform: translateY(-2px);
+        }
+
+        .form-content a.link-text {
+            color: var(--primary-green);
+            font-size: 0.9em;
+            margin-top: 15px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .form-content a.link-text:hover {
+            text-decoration: underline;
+        }
+
+        /* --- Social Icons --- */
+        .social-login {
+            margin: 20px 0;
+        }
+
+        .social-login a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--input-border);
+            border-radius: 50%;
+            margin: 0 8px;
+            font-size: 1.2em;
+            color: var(--primary-dark);
+            text-decoration: none;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        .social-login a:hover {
+            background-color: var(--primary-green);
+            color: var(--white);
+            border-color: var(--primary-green);
+        }
+        
+        /* --- Toggle Button Specifics --- */
+        .toggle-btn {
+            background: none;
+            border: none;
+            color: var(--primary-green);
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: underline;
+            margin-top: 20px;
+            font-size: 0.95em;
+            transition: color 0.3s;
+        }
+        
+        .toggle-btn:hover {
+            color: #218838;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="flip-container" id="flipContainer">
+        <div class="flipper">
+            <div class="front">
+                <div class="form-content">
+                    <h2>Welcome Back!</h2>
+                    <p class="sub-text">Sign in to continue your journey</p>
+                    
+                    <div class="social-login">
+                        <a href="#"><i class="fab fa-google"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                    
+                    <p class="sub-text">Or use your email account</p>
+
+                    <form action="#" id="signInForm">
+                        <input type="email" placeholder="Email" required>
+                        <input type="password" placeholder="Password" required>
+                        <a href="#" class="link-text">Forgot your password?</a>
+                        <button type="submit">Sign In</button>
+                    </form>
+                    
+                    <button class="toggle-btn" id="showSignUp">Don't have an account? Sign Up</button>
+                </div>
+            </div>
+
+            <div class="back">
+                <div class="form-content">
+                    <h2>Create Account</h2>
+                    <p class="sub-text">Join us and start your new journey!</p>
+
+                    <div class="social-login">
+                        <a href="#"><i class="fab fa-google"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                    
+                    <p class="sub-text">Or register with your email</p>
+                    
+                    <form action="#" id="signUpForm">
+                        <input type="text" placeholder="Full Name" required>
+                        <input type="email" placeholder="Email" required>
+                        <input type="password" placeholder="Password" required minlength="6">
+                        <button type="submit">Sign Up</button>
+                    </form>
+                    
+                    <button class="toggle-btn" id="showSignIn">Already have an account? Sign In</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- JAVASCRIPT LOGIC ---
+        const flipContainer = document.getElementById('flipContainer');
+        const showSignUpBtn = document.getElementById('showSignUp');
+        const showSignInBtn = document.getElementById('showSignIn');
+        const signInForm = document.getElementById('signInForm');
+        const signUpForm = document.getElementById('signUpForm');
+
+        showSignUpBtn.addEventListener('click', () => {
+            flipContainer.classList.add('flipped');
+        });
+
+        showSignInBtn.addEventListener('click', () => {
+            flipContainer.classList.remove('flipped');
+        });
+
+        // Basic form submission alerts (replace with actual backend logic)
+        signInForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Sign In form submitted! (Not actually sent to server)');
+            // Add your AJAX/fetch call here
+        });
+
+        signUpForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Sign Up form submitted! (Not actually sent to server)');
+            // Add your AJAX/fetch call here
+        });
+
+    </script>
+</body>
+</html>

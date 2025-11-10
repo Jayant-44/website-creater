@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Footer Template - Simple Centered</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Google Font: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* This page is just a preview, so we add a light background 
+           to contrast with the footer. */
+        .preview-body {
+            background-color: #f9fafb;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end; /* Pushes footer to the bottom */
+        }
+        .footer-link {
+            color: #4b5563; /* text-gray-600 */
+            transition: color 0.3s ease;
+        }
+        .footer-link:hover {
+            color: #1d4ed8; /* text-blue-700 */
+        }
+        .social-icon {
+            color: #6b7280; /* text-gray-500 */
+            transition: color 0.3s ease;
+        }
+        .social-icon:hover {
+            color: #1f2937; /* text-gray-800 */
+        }
+    </style>
+</head>
+<body class="preview-body">
+
+    <!-- 
+      ============================================================
+      SIMPLE CENTERED FOOTER
+      Your Flask app can grab this <footer ...> ... </footer> block.
+      ============================================================
+    -->
+    <footer class="bg-white border-t border-gray-200">
+        <div class="container mx-auto px-6 py-12">
+            <div class="flex flex-col items-center">
+                
+                <!-- Logo (or Brand Name) -->
+                <div class="text-3xl font-bold text-blue-700 mb-4">
+                    BrandName
+                </div>
+                
+                <!-- Navigation Links -->
+                <nav class="flex flex-wrap justify-center gap-x-8 gap-y-2 mb-6">
+                    <a href="#" class="footer-link font-medium">Home</a>
+                    <a href="#" class="footer-link font-medium">About</a>
+                    <a href="#" class="footer-link font-medium">Services</a>
+                    <a href="#" class="footer-link font-medium">Portfolio</a>
+                    <a href="#" class="footer-link font-medium">Contact</a>
+                </nav>
+                
+                <!-- Social Media Icons -->
+                <div class="flex space-x-6 mb-8">
+                    <!-- Twitter -->
+                    <a href="#" class="social-icon">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117l12.966 15.644z"></path></svg>
+                    </a>
+                    <!-- Instagram -->
+                    <a href="#" class="social-icon">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.172.053 1.905.328 2.618.622.75.295 1.28.69 1.838 1.24.56.548.95 1.088 1.24 1.838.295.713.57 1.445.622 2.618.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.053 1.172-.328 1.905-.622 2.618-.295.75-.69 1.28-1.24 1.838-.548.56-1.088.95-1.838 1.24-.713.295-1.445.57-2.618.622-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.172-.053-1.905-.328-2.618-.622-.75-.295-1.28-.69-1.838-1.24-.56-.548-.95-1.088-1.24-1.838-.295-.713-.57-1.445-.622-2.618-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.053-1.172.328-1.905.622-2.618.295-.75.69-1.28 1.24-1.838.548-.56 1.088-.95 1.838-1.24.713-.295 1.445-.57 2.618-.622 1.266-.058 1.646-.07 4.85-.07zM12 0C8.741 0 8.333.014 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.936 3.351.63 4.14C.333 4.905.131 5.775.072 7.053.014 8.333 0 8.741 0 12s.014 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.667 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.986 8.741 24 12 24s3.667-.014 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.717 2.126-1.384.667-.667 1.079-1.336 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.277.072-1.685.072-4.947s-.014-3.667-.072-4.947c-.06-1.277-.262-2.148-.558-2.913-.306-.789-.717-1.459-1.384-2.126C21.319.936 20.651.524 19.86.218 19.095.06 18.225.06 16.947.072 15.667.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.88 1.44 1.44 0 000-2.88z"></path></svg>
+                    </a>
+                    <!-- LinkedIn -->
+                    <a href="#" class="social-icon">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14zm-11 6H5v10h3V9zM6.5 7.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3zM19 19H16v-5.17c0-1.33-.03-3.04-1.85-3.04C12.34 10.79 12 12.16 12 13.83V19h-3V9h2.88v1.36h.04c.42-.79 1.44-1.64 2.84-1.64 3.03 0 3.59 1.99 3.59 4.58V19z"></path></svg>
+                    </a>
+                </div>
+                
+                <!-- Copyright -->
+                <p class="text-gray-500 text-sm">
+                    &copy; 2025 BrandName. All rights reserved.
+                </p>
+                
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage - Fitness/Gym</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Google Fonts: Oswald (Headings) & Inter (Body) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom CSS for a high-energy, "human-made" fitness site */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a; /* Off-black */
+            color: #e5e5e5;
+        }
+        
+        h1, h2, h3, h4, .nav-link, .cta-button {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        :root {
+            --brand-color: #dfff00; /* Electric Lime */
+        }
+
+        .hero-bg {
+            background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://placehold.co/1920x1080/111111/dfff00?text=Find+Your+Strength&font=oswald');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .class-card {
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+        }
+        .class-card:hover {
+            border-color: var(--brand-color);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(223, 255, 0, 0.1);
+        }
+
+        .trainer-card {
+            transition: all 0.3s ease;
+        }
+        .trainer-card:hover img {
+            filter: grayscale(0%);
+            transform: scale(1.05);
+        }
+        .trainer-card img {
+            filter: grayscale(100%);
+            transition: all 0.3s ease;
+        }
+        
+        .cta-button-primary {
+            background-color: var(--brand-color);
+            color: #111;
+            transition: all 0.3s ease;
+        }
+        .cta-button-primary:hover {
+            background-color: #fff;
+            color: #111;
+            transform: scale(1.05);
+            box-shadow: 0 8px 15px rgba(223, 255, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="text-gray-300">
+
+    <!-- Header -->
+    <header class="bg-black/80 backdrop-blur-md sticky top-0 z-50 border-b border-gray-800">
+        <nav class="container mx-auto px-6 py-5 flex justify-between items-center">
+            <div class="text-3xl font-bold text-white">RISE</div>
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="#classes" class="nav-link text-gray-300 hover:text-white">Classes</a>
+                <a href="#trainers" class="nav-link text-gray-300 hover:text-white">Trainers</a>
+                <a href="#join" class="nav-link text-gray-300 hover:text-white">Join</a>
+                <a href="#" class="cta-button cta-button-primary px-5 py-2 rounded-sm font-medium">
+                    Start Trial
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-bg h-[80vh] md:h-[90vh] flex items-center justify-center text-white">
+        <div class="text-center p-6">
+            <h1 class="text-6xl md:text-8xl font-bold leading-tight">Define Yourself.</h1>
+            <p class="text-lg text-gray-300 max-w-lg mx-auto mt-6 mb-8">
+                We are not just a gym. We are a community. We are a mindset. This is where your transformation begins.
+            </p>
+            <a href="#join" class="cta-button cta-button-primary font-bold py-4 px-10 rounded-sm text-lg">
+                Join The Movement
+            </a>
+        </div>
+    </section>
+
+    <!-- Classes Section -->
+    <section id="classes" class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-white mb-4">Our Classes</h2>
+                <p class="text-lg text-gray-400 max-w-xl mx-auto">
+                    From high-intensity to mindful recovery, find the class that moves you.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Class 1 -->
+                <div class="class-card rounded-lg overflow-hidden">
+                    <img src="https://placehold.co/600x400/1a1a1a/e5e5e5?text=CrossFit&font=oswald" alt="CrossFit" class="w-full h-56 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2 text-white">Total Strength</h3>
+                        <p class="text-gray-400">Build foundational strength and power with classic lifts and functional movements.</p>
+                    </div>
+                </div>
+                <!-- Class 2 -->
+                <div class="class-card rounded-lg overflow-hidden">
+                    <img src="https://placehold.co/600x400/1a1a1a/dfff00?text=HIIT&font=oswald" alt="HIIT" class="w-full h-56 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2 text-white">Ignite (HIIT)</h3>
+                        <p class="text-gray-400">High-Intensity Interval Training to torch calories and build cardiovascular endurance.</p>
+                    </div>
+                </div>
+                <!-- Class 3 -->
+                <div class="class-card rounded-lg overflow-hidden">
+                    <img src="https://placehold.co/600x400/1a1a1a/e5e5e5?text=Yoga&font=oswald" alt="Yoga" class="w-full h-56 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2 text-white">Flow (Yoga)</h3>
+                        <p class="text-gray-400">Restore your body and mind with our Vinyasa flow, focusing on breath and movement.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trainers Section -->
+    <section id="trainers" class="py-20 bg-black">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-white mb-4">Meet The Trainers</h2>
+                <p class="text-lg text-gray-400 max-w-xl mx-auto">
+                    Guided by the best. Driven by passion.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Trainer 1 -->
+                <div class="text-center trainer-card">
+                    <div class="overflow-hidden rounded-full w-48 h-48 mx-auto border-2 border-gray-700">
+                        <img src="https://placehold.co/400x400/111111/dfff00?text=A&font=oswald" alt="Trainer 1" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mt-6 mb-1">Alex Ray</h3>
+                    <p class="font-medium" style="color: var(--brand-color);">Head of Strength</p>
+                </div>
+                <!-- Trainer 2 -->
+                <div class="text-center trainer-card">
+                    <div class="overflow-hidden rounded-full w-48 h-48 mx-auto border-2 border-gray-700">
+                        <img src="https://placehold.co/400x400/111111/dfff00?text=M&font=oswald" alt="Trainer 2" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mt-6 mb-1">Mia Chen</h3>
+                    <p class="font-medium" style="color: var(--brand-color);">Head of HIIT</p>
+                </div>
+                <!-- Trainer 3 -->
+                <div class="text-center trainer-card">
+                    <div class="overflow-hidden rounded-full w-48 h-48 mx-auto border-2 border-gray-700">
+                        <img src="https://placehold.co/400x400/111111/dfff00?text=D&font=oswald" alt="Trainer 3" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mt-6 mb-1">David Lee</h3>
+                    <p class="font-medium" style="color: var(--brand-color);">Head of Yoga</p>
+                </div>
+                <!-- Trainer 4 -->
+                <div class="text-center trainer-card">
+                    <div class="overflow-hidden rounded-full w-48 h-48 mx-auto border-2 border-gray-700">
+                        <img src="https://placehold.co/400x400/111111/dfff00?text=S&font=oswald" alt="Trainer 4" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mt-6 mb-1">Sarah K.</h3>
+                    <p class="font-medium" style="color: var(--brand-color);">Nutritionist</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Join Section -->
+    <section id="join" class="py-24" style="background-color: var(--brand-color);">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-5xl font-bold text-black mb-6">Start Your Journey Today</h2>
+            <p class="text-xl text-gray-900 max-w-xl mx-auto mb-8">
+                Get unlimited access to all classes, equipment, and expert trainers. No contracts, no excuses.
+            </p>
+            <a href="#" class="cta-button bg-black text-white font-bold py-4 px-10 rounded-sm text-lg hover:bg-gray-800">
+                Become a Member
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-12">
+        <div class="container mx-auto px-6 text-center text-gray-500">
+            <p>&copy; 2025 RISE Fitness. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Futuristic Dark Tech Auth</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Share Tech Mono', monospace;
+            background: #0a0a0f;
+            color: #00ffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Animated Circuit Background */
+        .circuit-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            z-index: 0;
+            background-image: 
+                linear-gradient(90deg, #00ffff 1px, transparent 1px),
+                linear-gradient(180deg, #00ffff 1px, transparent 1px),
+                linear-gradient(45deg, #ff00ff 1px, transparent 1px);
+            background-size: 50px 50px, 50px 50px, 100px 100px;
+            animation: circuitMove 20s linear infinite;
+        }
+
+        @keyframes circuitMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .container {
+            background: rgba(10, 10, 31, 0.95);
+            border: 2px solid #00ffff;
+            border-radius: 20px;
+            box-shadow: 
+                0 0 50px rgba(0, 255, 255, 0.3),
+                inset 0 0 30px rgba(255, 0, 255, 0.1);
+            padding: 40px;
+            width: 90%;
+            max-width: 900px;
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(10px);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #00ffff, #ff00ff, #00ff00);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.8)); }
+            to { filter: drop-shadow(0 0 20px rgba(255, 0, 255, 0.8)); }
+        }
+
+        .forms-container {
+            display: flex;
+            gap: 40px;
+            justify-content: space-between;
+        }
+
+        .form-section {
+            flex: 1;
+            background: rgba(0, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        .form-section:hover {
+            border-color: #00ffff;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+            transform: scale(1.02);
+        }
+
+        .form-section h2 {
+            font-family: 'Orbitron', monospace;
+            color: #00ffff;
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #00ff00;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            border-radius: 8px;
+            color: #00ffff;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #00ffff;
+            box-shadow: 
+                0 0 20px rgba(0, 255, 255, 0.5),
+                inset 0 0 10px rgba(0, 255, 255, 0.1);
+            transform: scale(1.02);
+        }
+
+        input:focus::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #00ffff, #ff00ff);
+            animation: underlineGlow 1s ease-in-out;
+        }
+
+        @keyframes underlineGlow {
+            0% { width: 0; opacity: 0; }
+            100% { width: 100%; opacity: 1; }
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(45deg, #00ffff, #ff00ff);
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn:hover {
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.8);
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .divider {
+            text-align: center;
+            margin: 25px 0;
+            color: #666;
+            position: relative;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #00ffff, transparent);
+        }
+
+        .divider span {
+            background: #0a0a0f;
+            padding: 0 15px;
+        }
+
+        .social-login {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .social-btn {
+            width: 50px;
+            height: 50px;
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            color: #00ffff;
+            font-size: 20px;
+        }
+
+        .social-btn:hover {
+            border-color: #00ffff;
+            color: #ff00ff;
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.6);
+            transform: translateY(-3px) scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .forms-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="circuit-bg"></div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>CYBERNET ACCESS</h1>
+        </div>
+
+        <div class="forms-container">
+            <!-- Sign In Form -->
+            <div class="form-section">
+                <h2>SIGN IN</h2>
+                <form id="signin-form">
+                    <div class="form-group">
+                        <label for="signin-email">EMAIL_ID</label>
+                        <input type="email" id="signin-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signin-password">PASSWORD</label>
+                        <input type="password" id="signin-password" required>
+                    </div>
+                    <button type="submit" class="submit-btn">INITIALIZE</button>
+                </form>
+
+                <div class="divider">
+                    <span>OR CONNECT VIA</span>
+                </div>
+
+                <div class="social-login">
+                    <div class="social-btn" onclick="socialLogin('google')">G</div>
+                    <div class="social-btn" onclick="socialLogin('github')">⚡</div>
+                    <div class="social-btn" onclick="socialLogin('discord')">D</div>
+                </div>
+            </div>
+
+            <!-- Sign Up Form -->
+            <div class="form-section">
+                <h2>SIGN UP</h2>
+                <form id="signup-form">
+                    <div class="form-group">
+                        <label for="signup-name">USER_NAME</label>
+                        <input type="text" id="signup-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-email">EMAIL_ID</label>
+                        <input type="email" id="signup-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">PASSWORD</label>
+                        <input type="password" id="signup-password" required>
+                    </div>
+                    <button type="submit" class="submit-btn">REGISTER</button>
+                </form>
+
+                <div class="divider">
+                    <span>OR CONNECT VIA</span>
+                </div>
+
+                <div class="social-login">
+                    <div class="social-btn" onclick="socialLogin('google')">G</div>
+                    <div class="social-btn" onclick="socialLogin('github')">⚡</div>
+                    <div class="social-btn" onclick="socialLogin('discord')">D</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function socialLogin(provider) {
+            console.log('Social login with:', provider);
+            alert(`Connecting to ${provider.toUpperCase()} mainframe...`);
+        }
+
+        document.getElementById('signin-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('ACCESSING CYBERNET... CONNECTION ESTABLISHED');
+        });
+
+        document.getElementById('signup-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('NEW USER REGISTERED... WELCOME TO THE MATRIX');
+        });
+
+        // Add glitch effect to inputs on focus
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.style.animation = 'glitch 0.3s ease-in-out';
+            });
+            
+            input.addEventListener('animationend', function() {
+                this.style.animation = '';
+            });
+        });
+
+        // Add glitch animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes glitch {
+                0% { transform: translate(0); }
+                20% { transform: translate(-1px, 1px); }
+                40% { transform: translate(-1px, -1px); }
+                60% { transform: translate(1px, 1px); }
+                80% { transform: translate(1px, -1px); }
+                100% { transform: translate(0); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
