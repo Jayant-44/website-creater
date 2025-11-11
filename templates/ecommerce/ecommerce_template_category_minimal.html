@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce - Minimalist Category</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Google Fonts: Playfair Display (Serif) & Inter (Sans) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom CSS for a high-end, minimalist e-commerce grid */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: #111;
+        }
+        
+        h1, h2, h3, h4, .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        :root {
+            --brand-color: #111; /* Black */
+        }
+        
+        .product-card {
+            background-color: #fff;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .product-image {
+            background-color: #f4f4f5; /* Light gray bg for image */
+            transition: opacity 0.3s ease;
+        }
+        .product-card:hover .product-image {
+            opacity: 0.85;
+        }
+        
+        .filter-bar {
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .filter-select {
+            border: 1px solid #e5e7eb;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="bg-white sticky top-0 z-50 border-b border-gray-200">
+        <nav class="container mx-auto px-6 py-5 flex justify-between items-center">
+            <div class="text-3xl font-serif font-bold text-black">AESTHETE</div>
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="#" class="text-gray-700 hover:text-black">New</a>
+                <a href="#" class="text-black font-semibold">Apparel</a>
+                <a href="#" class="text-gray-700 hover:text-black">Objects</a>
+                <a href="#" class="text-gray-700 hover:text-black">Journal</a>
+            </div>
+            <a href="#" class="p-2">
+                <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+            </a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-12">
+        <!-- Title & Filters -->
+        <div class="filter-bar pb-6 mb-8">
+            <h1 class="text-4xl font-serif font-bold text-gray-900 mb-6">Outerwear</h1>
+            <div class="flex justify-between items-center">
+                <div>
+                    <select class="filter-select rounded-md py-2 px-4 font-medium bg-white">
+                        <option>Filter by Category</option>
+                        <option>All Outerwear</option>
+                        <option>Coats</option>
+                        <option>Jackets</option>
+                    </select>
+                </div>
+                <div>
+                    <select class="filter-select rounded-md py-2 px-4 font-medium bg-white">
+                        <option>Sort by: Latest</option>
+                        <option>Price: Low to High</option>
+                        <option>Price: High to Low</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Product Grid -->
+        <section>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+                
+                <!-- Product Card 1 -->
+                <div class="product-card group">
+                    <div class="product-image rounded-lg overflow-hidden h-96">
+                        <img src="https://placehold.co/600x800/f4f4f5/333333?text=Wool+Overcoat&font=playfair" alt="Wool Overcoat" class="w-full h-full object-cover">
+                    </div>
+                    <div class="pt-4">
+                        <h3 class="text-lg font-semibold text-gray-800">Wool Overcoat</h3>
+                        <p class="text-lg font-medium text-gray-900 mt-1">$450.00</p>
+                    </div>
+                </div>
+                
+                <!-- Product Card 2 -->
+                <div class="product-card group">
+                    <div class="product-image rounded-lg overflow-hidden h-96">
+                        <img src="https://placehold.co/600x800/f4f4f5/333333?text=Linen+Jacket&font=playfair" alt="Linen Jacket" class="w-full h-full object-cover">
+                    </div>
+                    <div class="pt-4">
+                        <h3 class="text-lg font-semibold text-gray-800">Linen Field Jacket</h3>
+                        <p class="text-lg font-medium text-gray-900 mt-1">$220.00</p>
+                    </div>
+                </div>
+                
+                <!-- Product Card 3 -->
+                <div class="product-card group">
+                    <div class="product-image rounded-lg overflow-hidden h-96">
+                        <img src="https://placehold.co/600x800/f4f4f5/333333?text=Trench+Coat&font=playfair" alt="Trench Coat" class="w-full h-full object-cover">
+                    </div>
+                    <div class="pt-4">
+                        <h3 class="text-lg font-semibold text-gray-800">Classic Trench Coat</h3>
+                        <p class="text-lg font-medium text-gray-900 mt-1">$380.00</p>
+                    </div>
+                </div>
+                
+                <!-- Product Card 4 -->
+                <div class="product-card group">
+                    <div class="product-image rounded-lg overflow-hidden h-96">
+                        <img src="https://placehold.co/600x800/f4f4f5/333333?text=Bomber+Jacket&font=playfair" alt="Bomber Jacket" class="w-full h-full object-cover">
+                    </div>
+                    <div class="pt-4">
+                        <h3 class="text-lg font-semibold text-gray-800">Suede Bomber Jacket</h3>
+                        <p class="text-lg font-medium text-gray-900 mt-1">$310.00</p>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 mt-20">
+        <div class="container mx-auto px-6 py-12 text-center text-gray-500">
+            &copy; 2025 AESTHETE. All rights reserved.
+        </div>
+    </footer>
+</body>
+</html>

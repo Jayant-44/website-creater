@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce - Product Detail</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Google Font: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom CSS for a clean product detail page */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fff;
+            color: #1f2937;
+        }
+
+        :root {
+            --brand-color: #4f46e5; /* Indigo */
+            --brand-color-dark: #4338ca;
+        }
+        
+        .buy-button {
+            background-color: var(--brand-color);
+            transition: all 0.3s ease;
+        }
+        .buy-button:hover {
+            background-color: var(--brand-color-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 7px 14px rgba(79, 70, 229, 0.25);
+        }
+        
+        .thumbnail-image {
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .thumbnail-image:hover {
+            border-color: #a5b4fc;
+        }
+        .thumbnail-image.active {
+            border-color: var(--brand-color);
+        }
+        
+        .accordion-item {
+            border-bottom: 1px solid #e5e7eb;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold" style="color: var(--brand-color);">TechStore</div>
+            <div class="hidden md:flex space-x-6">
+                <a href="#" class="text-gray-600 hover:text-gray-900">Home</a>
+                <a href="#" class="text-gray-900 font-semibold">Shop</a>
+                <a href="#" class="text-gray-600 hover:text-gray-900">Deals</a>
+            </div>
+            <a href="#" class="p-2 rounded-full hover:bg-gray-100 transition duration-300">
+                <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+            </a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            
+            <!-- Product Gallery -->
+            <div class="flex flex-col-reverse md:flex-row gap-4">
+                <!-- Thumbnails -->
+                <div class="flex md:flex-col gap-3">
+                    <img src="https://placehold.co/100x100/e0e7ff/4338ca?text=Watch+1" alt="Thumbnail 1" class="thumbnail-image active rounded-lg">
+                    <img src="https://placehold.co/100x100/e0e7ff/4338ca?text=Watch+2" alt="Thumbnail 2" class="thumbnail-image rounded-lg">
+                    <img src="https://placehold.co/100x100/e0e7ff/4338ca?text=Watch+3" alt="Thumbnail 3" class="thumbnail-image rounded-lg">
+                </div>
+                <!-- Main Image -->
+                <div class="w-full h-96 lg:h-full bg-gray-100 rounded-lg flex items-center justify-center overflow-hidden">
+                    <img src="https://placehold.co/600x600/e0e7ff/4338ca?text=Aura+Smartwatch&font=poppins" alt="Main Product Image" class="w-full h-full object-contain p-8">
+                </div>
+            </div>
+            
+            <!-- Product Details -->
+            <div>
+                <span class="text-sm font-semibold uppercase" style="color: var(--brand-color);">Smartwatch</span>
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mt-2 mb-4">Aura Watch 5</h1>
+                <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                    The next generation of smart technology. Track your fitness, stay connected, and monitor your health, all from your wrist.
+                </p>
+                <span class="text-4xl font-bold text-gray-900">$399.00</span>
+                
+                <!-- Options -->
+                <div class="mt-6">
+                    <h3 class="text-sm font-medium text-gray-900 mb-2">Color</h3>
+                    <div class="flex space-x-2">
+                        <span class="w-8 h-8 rounded-full bg-black border-2 border-indigo-600 ring-2 ring-offset-1 ring-indigo-600 cursor-pointer"></span>
+                        <span class="w-8 h-8 rounded-full bg-gray-300 border-2 border-gray-300 cursor-pointer hover:border-gray-400"></span>
+                        <span class="w-8 h-8 rounded-full bg-blue-800 border-2 border-blue-800 cursor-pointer hover:border-blue-900"></span>
+                    </div>
+                </div>
+                
+                <!-- Quantity & Add to Cart -->
+                <div class="flex items-center gap-4 mt-8">
+                    <input type="number" value="1" min="1" class="w-20 px-4 py-3 border border-gray-300 rounded-lg text-center">
+                    <button class="buy-button text-white font-bold py-3 px-10 rounded-lg text-lg shadow-lg w-full">
+                        Add to Cart
+                    </button>
+                </div>
+                
+                <!-- Accordion for Details -->
+                <div class="mt-10">
+                    <div class="accordion-item py-4">
+                        <h4 class="text-lg font-semibold text-gray-900">Description</h4>
+                        <p class="text-gray-600 mt-2 text-sm">Featuring a brighter display, advanced health sensors, and a tougher, more durable design. The Aura Watch 5 is your perfect companion for a healthy and active life.</p>
+                    </div>
+                    <div class="accordion-item py-4">
+                        <h4 class="text-lg font-semibold text-gray-900">Specifications</h4>
+                    </div>
+                    <div class="accordion-item py-4">
+                        <h4 class="text-lg font-semibold text-gray-900">Shipping & Returns</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-100 border-t border-gray-200 mt-20">
+        <div class="container mx-auto px-6 py-8 text-center text-gray-500">
+            &copy; 2025 TechStore. All rights reserved.
+        </div>
+    </footer>
+</body>
+</html>

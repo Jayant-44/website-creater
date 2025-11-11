@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce - Modern Category</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Google Font: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom CSS for a clean, modern e-commerce grid */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9fafb;
+            color: #1f2937;
+        }
+
+        :root {
+            --brand-color: #3b82f6; /* Blue-600 */
+            --brand-color-dark: #2563eb;
+        }
+        
+        .product-card {
+            background-color: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.07);
+        }
+        .product-card img {
+            transition: transform 0.4s ease;
+        }
+        .product-card:hover img {
+            transform: scale(1.05);
+        }
+        
+        .filter-section h3 {
+            font-weight: 600;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .filter-link {
+            transition: color 0.2s ease;
+        }
+        .filter-link:hover {
+            color: var(--brand-color);
+        }
+        
+        .add-to-cart-btn {
+            background-color: var(--brand-color);
+            color: white;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+        .product-card:hover .add-to-cart-btn {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold" style="color: var(--brand-color);">E-Shop</div>
+            <div class="hidden md:flex space-x-6">
+                <a href="#" class="text-gray-600 hover:text-gray-900">Home</a>
+                <a href="#" class="text-gray-900 font-semibold">Shop</a>
+                <a href="#" class="text-gray-600 hover:text-gray-900">Deals</a>
+                <a href="#" class="text-gray-600 hover:text-gray-900">Contact</a>
+            </div>
+            <a href="#" class="p-2 rounded-full hover:bg-gray-100 transition duration-300">
+                <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+            </a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-12">
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-900 mb-2">Men's Apparel</h1>
+            <p class="text-lg text-gray-600">All the latest styles, all in one place.</p>
+        </div>
+        
+        <div class="flex flex-col lg:flex-row gap-12">
+            
+            <!-- Sidebar (Filters) -->
+            <aside class="w-full lg:w-1/4">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="filter-section mb-6">
+                        <h3>Categories</h3>
+                        <ul class="space-y-2 mt-4">
+                            <li><a href="#" class="filter-link">T-Shirts</a></li>
+                            <li><a href="#" class="filter-link font-bold" style="color: var(--brand-color);">Hoodies</a></li>
+                            <li><a href="#" class="filter-link">Jeans</a></li>
+                            <li><a href="#" class="filter-link">Jackets</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="filter-section mb-6">
+                        <h3>Price Range</h3>
+                        <input type="range" min="0" max="500" value="250" class="w-full mt-4 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer" style="accent-color: var(--brand-color);">
+                        <div class="flex justify-between text-sm text-gray-600 mt-2">
+                            <span>$0</span>
+                            <span>$500</span>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-section">
+                        <h3>Size</h3>
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="w-10 h-10 flex items-center justify-center border rounded-md cursor-pointer hover:bg-gray-100">S</span>
+                            <span class="w-10 h-10 flex items-center justify-center border rounded-md cursor-pointer bg-blue-600 text-white border-blue-600">M</span>
+                            <span class="w-10 h-10 flex items-center justify-center border rounded-md cursor-pointer hover:bg-gray-100">L</span>
+                            <span class="w-10 h-10 flex items-center justify-center border rounded-md cursor-pointer hover:bg-gray-100">XL</span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+            
+            <!-- Product Grid -->
+            <section class="w-full lg:w-3/4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
+                    
+                    <!-- Product Card 1 -->
+                    <div class="product-card">
+                        <div class="overflow-hidden h-64">
+                            <img src="https://placehold.co/400x500/dbeafe/1e3a8a?text=Classic+Hoodie&font=poppins" alt="Product 1" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6 text-center">
+                            <h3 class="text-lg font-semibold text-gray-800">Classic Navy Hoodie</h3>
+                            <p class="text-xl font-bold text-gray-900 mt-2">$79.00</p>
+                            <button class="add-to-cart-btn w-full mt-4 py-2 px-4 rounded-lg font-semibold">Add to Cart</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Product Card 2 -->
+                    <div class="product-card">
+                        <div class="overflow-hidden h-64">
+                            <img src="https://placehold.co/400x500/d1fae5/064e3b?text=Zip-Up+Hoodie&font=poppins" alt="Product 2" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6 text-center">
+                            <h3 class="text-lg font-semibold text-gray-800">Forest Green Zip-Up</h3>
+                            <p class="text-xl font-bold text-gray-900 mt-2">$85.00</p>
+                            <button class="add-to-cart-btn w-full mt-4 py-2 px-4 rounded-lg font-semibold">Add to Cart</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Product Card 3 -->
+                    <div class="product-card">
+                        <div class="overflow-hidden h-64">
+                            <img src="https://placehold.co/400x500/fee2e2/991b1b?text=Pullover+Hoodie&font=poppins" alt="Product 3" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6 text-center">
+                            <h3 class="text-lg font-semibold text-gray-800">Maroon Pullover</h3>
+                            <p class="text-xl font-bold text-gray-900 mt-2">$75.00</D>
+                            <button class="add-to-cart-btn w-full mt-4 py-2 px-4 rounded-lg font-semibold">Add to Cart</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Product Card 4 -->
+                    <div class="product-card">
+                        <div class="overflow-hidden h-64">
+                            <img src="https://placehold.co/400x500/f3f4f6/1f2937?text=Charcoal+Hoodie&font=poppins" alt="Product 4" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6 text-center">
+                            <h3 class="text-lg font-semibold text-gray-800">Charcoal Tech Hoodie</h3>
+                            <p class="text-xl font-bold text-gray-900 mt-2">$90.00</p>
+                            <button class="add-to-cart-btn w-full mt-4 py-2 px-4 rounded-lg font-semibold">Add to Cart</button>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                <!-- Pagination -->
+                <div class="mt-12 flex justify-center">
+                    <nav class="flex space-x-2">
+                        <span class="bg-blue-600 text-white px-4 py-2 rounded-md">1</span>
+                        <a href="#" class="px-4 py-2 rounded-md hover:bg-gray-200">2</a>
+                        <a href="#" class="px-4 py-2 rounded-md hover:bg-gray-200">3</a>
+                        <a href="#" class="px-4 py-2 rounded-md hover:bg-gray-200">&rarr;</a>
+                    </nav>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 mt-12">
+        <div class="container mx-auto px-6 py-8 text-center text-gray-500">
+            &copy; 2025 E-Shop. All rights reserved.
+        </div>
+    </footer>
+</body>
+</html>
