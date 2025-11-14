@@ -125,13 +125,17 @@ class CategoryDetector:
         prompt_lower = prompt.lower()
         
         types = {
-            'ecommerce': ['shop', 'store', 'product', 'ecommerce', 'cart'],
-            'saas': ['saas', 'software', 'platform', 'service'],
-            'portfolio': ['portfolio', 'showcase', 'work'],
-            'blog': ['blog', 'article', 'post'],
-            'corporate': ['corporate', 'business', 'company'],
-            'admin': ['admin', 'dashboard', 'panel']
-        }
+                'ecommerce': ['shop', 'store', 'product', 'ecommerce', 'cart'],
+                'saas': ['saas', 'software', 'platform', 'service', 'tech'],
+                'portfolio': ['portfolio', 'showcase', 'work', 'freelancer', 'artist'],
+                'blog': ['blog', 'article', 'post'],
+                'corporate': ['corporate', 'business', 'company'],
+                'admin': ['admin', 'dashboard', 'panel'],
+                'nonprofit': ['nonprofit', 'charity', 'ngo', 'foundation'],
+                'restaurant': ['restaurant', 'food', 'cafe', 'menu', 'culinary'],
+                'farm': ['farm', 'farmer', 'agriculture', 'crops'], # <-- ADDED NEW
+                'creator': ['creator', 'onlyfans', 'fan'] # <-- ADDED NEW
+            }
         
         for website_type, keywords in types.items():
             if any(keyword in prompt_lower for keyword in keywords):
@@ -158,26 +162,27 @@ class RequirementAnalyzer:
                 print("Warning: spaCy model not found.")
         
         self.style_keywords = {
-            "modern": ["modern", "sleek", "clean", "minimal", "contemporary"],
-            "classic": ["classic", "traditional", "formal", "elegant"],
-            "creative": ["creative", "artistic", "colorful", "unique", "vibrant"],
-            "professional": ["professional", "corporate", "business"],
-            "dark": ["dark", "night", "black"],
-            "light": ["light", "bright", "white", "airy"],
-            "cyberpunk": ["cyberpunk", "neon", "futuristic"],
-            "glassmorphism": ["glass", "blur", "transparent", "frosted"],
-            "minimalist": ["minimalist", "simple", "bare"]
-        }
+                    "modern": ["modern", "sleek", "clean", "minimal", "contemporary"],
+                    "classic": ["classic", "traditional", "formal", "elegant"],
+                    "creative": ["creative", "artistic", "colorful", "unique", "vibrant"],
+                    "professional": ["professional", "corporate", "business"],
+                    "dark": ["dark", "night", "black"],
+                    "light": ["light", "bright", "white", "airy"],
+                    "cyberpunk": ["cyberpunk", "neon", "futuristic"], # <-- ADDED 'futuristic'
+                    "glassmorphism": ["glass", "blur", "transparent", "frosted"], # <-- ADDED 'glass', 'blur'
+                    "minimalist": ["minimalist", "simple", "bare"],
+                    "timeline": ['timeline', 'history', 'chronological']
+                }
         
         self.color_keywords = {
-            "blue": ["blue", "azure", "navy"],
-            "red": ["red", "crimson"],
-            "green": ["green", "emerald"],
-            "purple": ["purple", "violet"],
-            "pink": ["pink", "rose"],
-            "orange": ["orange", "amber"],
-            "gradient": ["gradient", "rainbow"]
-        }
+                    "blue": ["blue", "azure", "navy"],
+                    "red": ["red", "crimson"],
+                    "green": ["green", "emerald"],
+                    "purple": ["purple", "violet"],
+                    "pink": ["pink", 'rose', 'raspberry', 'hot pink'], # <-- ADDED NEW
+                    "orange": ["orange", "amber"],
+                    "gradient": ["gradient", "rainbow"]
+                }
         
     def analyze_prompt(self, user_prompt):
         """Enhanced analysis"""
