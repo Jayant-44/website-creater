@@ -125,15 +125,18 @@ class CategoryDetector:
         prompt_lower = prompt.lower()
         
         types = {
-            'ecommerce': ['shop', 'store', 'product', 'ecommerce', 'cart'],
-            'saas': ['saas', 'software', 'platform', 'service', 'tech'], #### MODIFIED ####
-            'portfolio': ['portfolio', 'showcase', 'work', 'freelancer', 'artist'], #### MODIFIED ####
-            'blog': ['blog', 'article', 'post'],
-            'corporate': ['corporate', 'business', 'company'],
-            'admin': ['admin', 'dashboard', 'panel'],
-            'nonprofit': ['nonprofit', 'charity', 'ngo', 'foundation'], #### ADDED ####
-            'restaurant': ['restaurant', 'food', 'cafe', 'menu', 'culinary'], #### ADDED ####
-        }
+                'ecommerce': ['shop', 'store', 'product', 'ecommerce', 'cart'],
+                'saas': ['saas', 'software', 'platform', 'service', 'tech'],
+                'portfolio': ['portfolio', 'showcase', 'work', 'freelancer', 'artist'],
+                'blog': ['blog', 'article', 'post'],
+                'corporate': ['corporate', 'business', 'company'],
+                'admin': ['admin', 'dashboard', 'panel'],
+                'nonprofit': ['nonprofit', 'charity', 'ngo', 'foundation'],
+                'restaurant': ['restaurant', 'food', 'cafe', 'menu', 'culinary'],
+                'farm': ['farm', 'farmer', 'agriculture', 'crops'],
+                'creator': ['creator', 'onlyfans', 'fan'],
+                'support': ['support', 'helpdesk', 'contact', 'faq'] # <-- ADDED NEW
+            }
         
         for website_type, keywords in types.items():
             if any(keyword in prompt_lower for keyword in keywords):
@@ -169,7 +172,10 @@ class RequirementAnalyzer:
             "cyberpunk": ["cyberpunk", "neon", "futuristic"],
             "glassmorphism": ["glass", "blur", "transparent", "frosted"],
             "minimalist": ["minimalist", "simple", "bare"],
-            "timeline": ['timeline', 'history', 'chronological'], #### ADDED ####
+            "timeline": ['timeline', 'history', 'chronological'],
+            "friendly": ['friendly', 'bubbly', 'warm', 'inviting'], # <-- ADDED NEW
+            "map": ['map', 'location', 'local'], # <-- ADDED NEW
+            "split_screen": ['split', 'split screen'] # <-- ADDED NEW
         }
         
         self.color_keywords = {
