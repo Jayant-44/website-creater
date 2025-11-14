@@ -127,7 +127,7 @@ class CategoryDetector:
         types = {
                 'ecommerce': ['shop', 'store', 'product', 'ecommerce', 'cart', 'category', 'product detail'],
                 'saas': ['saas', 'software', 'platform', 'service', 'tech', 'analytics'],
-                'portfolio': ['portfolio', 'showcase', 'work', 'freelancer', 'artist'],
+                'portfolio': ['portfolio', 'showcase', 'work', 'freelancer', 'artist', 'profile'], # <-- 'profile' is already here, which is perfect
                 'blog': ['blog', 'article', 'post'],
                 'corporate': ['corporate', 'business', 'company'],
                 'admin': ['admin', 'dashboard', 'panel'],
@@ -137,11 +137,12 @@ class CategoryDetector:
                 'creator': ['creator', 'onlyfans', 'fan'],
                 'support': ['support', 'helpdesk', 'contact', 'faq'],
                 'fitness': ['fitness', 'workout', 'tracker'],
-                'social': ['social', 'feed', 'twitter', 'post'],
+                'social': ['social', 'feed', 'twitter', 'post'], # <-- 'social' is already here
                 'newsletter': ['newsletter', 'subscribe'],
                 'app_download': ['app', 'app download', 'app store', 'google play'],
-                'travel': ['travel', 'tours', 'adventure', 'destination'], # <-- ADDED NEW
-                'real_estate': ['real estate', 'realty', 'property', 'home'] # <-- ADDED NEW
+                'travel': ['travel', 'tours', 'adventure', 'destination'],
+                'real_estate': ['real estate', 'realty', 'property', 'home'],
+                'settings': ['settings', 'account settings', 'edit profile'] # <-- ADDED NEW
             }
         
         for website_type, keywords in types.items():
@@ -187,8 +188,9 @@ class RequirementAnalyzer:
             "serif": ['serif', 'playfair', 'elegant'],
             "sitemap": ['sitemap', 'fat footer', 'footer links'],
             "centered": ['centered', 'center aligned'],
-            "typewriter": ['typewriter', 'typing animation'], # <-- ADDED NEW
-            "gym": ['gym', 'fitness', 'high energy'] # <-- ADDLED NEW
+            "typewriter": ['typewriter', 'typing animation'],
+            "gym": ['gym', 'fitness', 'high energy'],
+            "vcard": ['vcard', 'profile card', 'minimal profile'] # <-- ADDED NEW
         }
         
         self.color_keywords = {
