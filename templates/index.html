@@ -21,13 +21,12 @@
     <style>
       /* --- GLOBAL STYLES & RESETS --- */
       :root {
-        /* DEEP SPACE / CYBERPUNK PALETTE */
-        --primary-color: #00bcd4; /* Cyan/Aqua */
-        --secondary-color: #1f084a; /* Deep Violet/Black Background */
-        --accent-color: #ff0077; /* Neon Pink */
-        --text-color: #a0aec0; /* Light Gray for body text */
-        --light-text: #edf2f7; /* Near-white for headers */
-        --card-bg: rgba(31, 8, 74, 0.6); /* Semi-transparent card background */
+        --primary-color: #00bcd4;
+        --secondary-color: #1f084a;
+        --accent-color: #ff0077;
+        --text-color: #a0aec0;
+        --light-text: #edf2f7;
+        --card-bg: rgba(31, 8, 74, 0.6);
         --card-border: 1px solid rgba(0, 188, 212, 0.2);
         --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
         --font-body: "Inter", sans-serif;
@@ -59,7 +58,7 @@
       }
 
       section {
-        padding: 100px 5%; /* Increased padding for more breathing room */
+        padding: 100px 5%;
         position: relative;
         overflow: hidden;
       }
@@ -82,7 +81,7 @@
         color: var(--text-color);
       }
 
-      /* --- NAVIGATION (Minimalist Dark) --- */
+      /* --- NAVIGATION --- */
       header {
         position: sticky;
         top: 0;
@@ -178,7 +177,7 @@
         }
       }
 
-      /* --- BUTTONS (Advanced Neon/Glow) --- */
+      /* --- BUTTONS --- */
       .btn,
       .btn-outline {
         display: inline-block;
@@ -205,7 +204,221 @@
         filter: brightness(1.1);
       }
 
-      /* --- HERO SECTION (Enhanced with AI Features) --- */
+      /* --- WEBSITE CONFIGURATION PANEL --- */
+      .website-config-panel {
+        background: var(--card-bg);
+        border: var(--card-border);
+        border-radius: 20px;
+        padding: 30px;
+        margin-bottom: 30px;
+        backdrop-filter: blur(10px);
+        box-shadow: var(--card-shadow);
+      }
+
+      .config-section {
+        margin-bottom: 25px;
+      }
+
+      .config-section:last-of-type {
+        margin-bottom: 15px;
+      }
+
+      .config-label {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--primary-color);
+        margin-bottom: 15px;
+        font-family: var(--font-heading);
+        letter-spacing: 1px;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .config-label i {
+        font-size: 1.2rem;
+      }
+
+      .option-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+      }
+
+      .pill-option {
+        background: rgba(0, 188, 212, 0.1);
+        border: 2px solid rgba(0, 188, 212, 0.3);
+        color: var(--text-color);
+        padding: 10px 20px;
+        border-radius: 25px;
+        cursor: pointer;
+        font-size: 0.95rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .pill-option i {
+        font-size: 1rem;
+      }
+
+      .pill-option::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(0, 188, 212, 0.3);
+        transform: translate(-50%, -50%);
+        transition: width 0.4s ease, height 0.4s ease;
+        z-index: 0;
+      }
+
+      .pill-option:hover {
+        border-color: var(--primary-color);
+        color: var(--light-text);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 188, 212, 0.3);
+      }
+
+      .pill-option:hover::before {
+        width: 300px;
+        height: 300px;
+      }
+
+      .pill-option i,
+      .pill-option span {
+        position: relative;
+        z-index: 1;
+      }
+
+      /* Single select active state */
+      .pill-option.active:not(.multi) {
+        background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+        border-color: var(--accent-color);
+        color: white;
+        box-shadow: 0 0 20px rgba(255, 0, 119, 0.5);
+        transform: scale(1.05);
+      }
+
+      /* Multi-select active state */
+      .pill-option.multi.active {
+        background: linear-gradient(135deg, rgba(0, 188, 212, 0.3), rgba(255, 0, 119, 0.3));
+        border-color: var(--accent-color);
+        color: var(--light-text);
+        box-shadow: 0 0 15px rgba(0, 188, 212, 0.4);
+      }
+
+      .pill-option.multi.active::after {
+        content: '✓';
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background: var(--accent-color);
+        color: white;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.8rem;
+        font-weight: bold;
+        box-shadow: 0 2px 8px rgba(255, 0, 119, 0.5);
+        z-index: 2;
+      }
+
+      .other-input {
+        margin-top: 15px;
+        display: none;
+      }
+
+      .other-input.active {
+        display: block;
+      }
+
+      .other-input input {
+        width: 100%;
+        max-width: 400px;
+        padding: 12px 20px;
+        border: 2px solid rgba(0, 188, 212, 0.3);
+        border-radius: 10px;
+        background: rgba(0, 0, 0, 0.3);
+        color: var(--light-text);
+        font-size: 0.95rem;
+        transition: all 0.3s ease;
+        margin: 0 auto;
+        display: block;
+      }
+
+      .other-input input:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 15px rgba(0, 188, 212, 0.4);
+      }
+
+      .other-input input::placeholder {
+        color: var(--text-color);
+      }
+
+      .selection-summary {
+        margin-top: 20px;
+        padding: 15px 20px;
+        background: rgba(0, 188, 212, 0.05);
+        border: 1px solid rgba(0, 188, 212, 0.2);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .summary-label {
+        font-weight: 600;
+        color: var(--primary-color);
+        font-size: 0.95rem;
+      }
+
+      .summary-text {
+        color: var(--light-text);
+        font-size: 0.9rem;
+        flex: 1;
+        text-align: center;
+      }
+
+      .clear-btn {
+        background: rgba(255, 0, 119, 0.2);
+        border: 1px solid var(--accent-color);
+        color: var(--accent-color);
+        padding: 6px 15px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 0.85rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .clear-btn:hover {
+        background: var(--accent-color);
+        color: white;
+        box-shadow: 0 0 15px rgba(255, 0, 119, 0.5);
+        transform: scale(1.05);
+      }
+
+      /* --- HERO SECTION --- */
       .hero-container {
         background: none;
         padding-top: 120px;
@@ -231,7 +444,7 @@
         line-height: 1.1;
         font-family: var(--font-heading);
         color: var(--light-text);
-        /* Neon Glow Effect */
+        text-align: center;
         text-shadow: 0 0 10px rgba(0, 188, 212, 0.6),
           0 0 20px rgba(0, 188, 212, 0.4);
       }
@@ -240,14 +453,15 @@
         margin-bottom: 40px;
         font-size: 1.15rem;
         color: var(--text-color);
+        text-align: center;
       }
 
-      /* Enhanced Search Form with AI Features */
+      /* Enhanced Search Form */
       .hero-search-form {
         position: relative;
         display: flex;
         max-width: 700px;
-        margin-top: 40px;
+        margin: 40px auto 0;
         border-radius: 15px;
         overflow: hidden;
         background: rgba(255, 255, 255, 0.08);
@@ -296,7 +510,7 @@
         cursor: not-allowed;
       }
 
-      /* AI Analysis Preview Box */
+      /* AI Analysis Preview */
       .ai-analysis-preview {
         position: absolute;
         top: 100%;
@@ -353,58 +567,7 @@
         transition: width 1s ease;
       }
 
-      .hero-image-container {
-        flex: 1;
-        height: 400px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 20px;
-        border: var(--card-border);
-        position: relative;
-        overflow: hidden;
-        box-shadow: var(--card-shadow);
-        background: linear-gradient(
-          135deg,
-          rgba(31, 8, 74, 0.8) 0%,
-          rgba(0, 188, 212, 0.1) 100%
-        );
-      }
-
-      .hero-image-preview {
-        max-width: 90%;
-        max-height: 90%;
-        object-fit: contain;
-        border-radius: 10px;
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5),
-          0 0 25px rgba(255, 0, 119, 0.5);
-        transition: transform 0.5s ease;
-      }
-
-      .hero-image-preview:hover {
-        transform: scale(1.03);
-      }
-
-      @media (max-width: 1024px) {
-        .hero-content {
-          flex-direction: column;
-          text-align: center;
-        }
-        .hero-text {
-          flex: none;
-        }
-        .hero-content h1 {
-          font-size: 3rem;
-        }
-        .hero-image-container {
-          display: none;
-        }
-        .hero-search-form {
-          margin: 40px auto 0;
-        }
-      }
-
-      /* --- AI SUGGESTIONS SECTION (NEW) --- */
+      /* AI Suggestions Section */
       .ai-suggestions-section {
         background: var(--card-bg);
         backdrop-filter: blur(10px);
@@ -414,6 +577,11 @@
         max-width: 1000px;
         border: var(--card-border);
         box-shadow: var(--card-shadow);
+        display: none;
+      }
+
+      .ai-suggestions-section.active {
+        display: block;
       }
 
       .ai-suggestions-title {
@@ -424,6 +592,7 @@
         display: flex;
         align-items: center;
         gap: 10px;
+        justify-content: center;
       }
 
       .suggestion-grid {
@@ -473,7 +642,17 @@
         text-transform: uppercase;
       }
 
-      /* --- FEATURES SECTION (Enhanced) --- */
+      .loading-suggestions {
+        text-align: center;
+        padding: 40px;
+        color: var(--text-color);
+      }
+
+      .loading-suggestions .loading-spinner {
+        margin: 0 auto 15px;
+      }
+
+      /* FEATURES SECTION */
       #features {
         background-color: var(--secondary-color);
       }
@@ -541,7 +720,6 @@
         color: var(--text-color);
       }
 
-      /* Enhanced feature cards with new AI capabilities */
       .feature-card.enhanced {
         border: 2px solid var(--accent-color);
         background: linear-gradient(135deg, var(--card-bg), rgba(255, 0, 119, 0.1));
@@ -561,7 +739,7 @@
         letter-spacing: 1px;
       }
 
-      /* --- PROCESS SECTION (Enhanced with AI Steps) --- */
+      /* PROCESS SECTION */
       .process-steps {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -621,7 +799,7 @@
         line-height: 1.5;
       }
 
-      /* --- CONTACT SECTION --- */
+      /* CONTACT SECTION */
       #contact {
         background: linear-gradient(
           45deg,
@@ -645,7 +823,7 @@
         font-size: 1.1rem;
       }
 
-      /* --- FOOTER --- */
+      /* FOOTER */
       footer {
         background-color: var(--secondary-color);
         border-top: 1px solid rgba(255, 0, 119, 0.1);
@@ -679,7 +857,7 @@
         transform: translateY(-2px);
       }
 
-      /* --- Modal Styles --- */
+      /* Modal Styles */
       .modal {
         display: none;
         position: fixed;
@@ -805,7 +983,7 @@
         text-align: center;
       }
 
-      /* Loading and status indicators */
+      /* Loading spinner */
       .loading-spinner {
         border: 3px solid rgba(0, 188, 212, 0.3);
         border-top: 3px solid var(--primary-color);
@@ -823,7 +1001,45 @@
       }
 
       /* Responsive Design */
+      @media (max-width: 1024px) {
+        .hero-content {
+          flex-direction: column;
+          text-align: center;
+        }
+        .hero-text {
+          flex: none;
+        }
+        .hero-content h1 {
+          font-size: 3rem;
+        }
+        .hero-search-form {
+          margin: 40px auto 0;
+        }
+      }
+
       @media (max-width: 768px) {
+        .website-config-panel {
+          padding: 20px;
+        }
+
+        .config-label {
+          font-size: 1rem;
+        }
+
+        .pill-option {
+          padding: 8px 15px;
+          font-size: 0.85rem;
+        }
+
+        .selection-summary {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .clear-btn {
+          align-self: center;
+        }
+
         .suggestion-grid {
           grid-template-columns: 1fr;
         }
@@ -884,7 +1100,98 @@
             Website Buddy leverages advanced AI and natural language processing to transform your descriptions into production-ready HTML, CSS, and JavaScript. Our enhanced matching system understands your requirements and generates perfectly customized code.
           </p>
 
+          <!-- Website Configuration Panel -->
+          <div class="website-config-panel">
+            <div class="config-section">
+              <label class="config-label">
+                <i class="fas fa-globe"></i> Website Type
+              </label>
+              <div class="option-pills">
+                <button type="button" class="pill-option" data-group="website-type" data-value="ecommerce">
+                  <i class="fas fa-shopping-cart"></i> <span>E-Commerce</span>
+                </button>
+                <button type="button" class="pill-option" data-group="website-type" data-value="sales">
+                  <i class="fas fa-chart-line"></i> <span>Sales/Landing</span>
+                </button>
+                <button type="button" class="pill-option" data-group="website-type" data-value="portfolio">
+                  <i class="fas fa-briefcase"></i> <span>Portfolio</span>
+                </button>
+                <button type="button" class="pill-option" data-group="website-type" data-value="blog">
+                  <i class="fas fa-blog"></i> <span>Blog</span>
+                </button>
+                <button type="button" class="pill-option" data-group="website-type" data-value="admin">
+                  <i class="fas fa-user-shield"></i> <span>Admin Panel</span>
+                </button>
+                <button type="button" class="pill-option" data-group="website-type" data-value="general">
+                  <i class="fas fa-desktop"></i> <span>General</span>
+                </button>
+                <button type="button" class="pill-option" data-group="website-type" data-value="other">
+                  <i class="fas fa-ellipsis-h"></i> <span>Other</span>
+                </button>
+              </div>
+              <div class="other-input" id="website-type-other">
+                <input type="text" id="website-type-other-input" placeholder="Specify your website type...">
+              </div>
+            </div>
+
+            <div class="config-section">
+              <label class="config-label">
+                <i class="fas fa-puzzle-piece"></i> Pages & Components (Select Multiple)
+              </label>
+              <div class="option-pills multi-select">
+                <button type="button" class="pill-option multi" data-group="pages" data-value="homepage">
+                  <i class="fas fa-home"></i> <span>Homepage</span>
+                </button>
+                <button type="button" class="pill-option multi" data-group="pages" data-value="authentication">
+                  <i class="fas fa-user-lock"></i> <span>Authentication</span>
+                </button>
+                <button type="button" class="pill-option multi" data-group="pages" data-value="header">
+                  <i class="fas fa-bars"></i> <span>Header/Nav</span>
+                </button>
+                <button type="button" class="pill-option multi" data-group="pages" data-value="footer">
+                  <i class="fas fa-shoe-prints"></i> <span>Footer</span>
+                </button>
+                <button type="button" class="pill-option multi" data-group="pages" data-value="about">
+                  <i class="fas fa-info-circle"></i> <span>About Us</span>
+                </button>
+                <button type="button" class="pill-option multi" data-group="pages" data-value="contact">
+                  <i class="fas fa-envelope"></i> <span>Contact Us</span>
+                </button>
+                <button type="button" class="pill-option multi" data-group="pages" data-value="products">
+                  <i class="fas fa-box"></i> <span>Products/Services</span>
+                </button>
+                <button type="button" class="pill-option multi" data-group="pages" data-value="chatbot">
+                  <i class="fas fa-comments"></i> <span>Chatbot</span>
+                </button>
+                <button type="button" class="pill-option multi" data-group="pages" data-value="dashboard">
+                  <i class="fas fa-tachometer-alt"></i> <span>Dashboard</span>
+                </button>
+                <button type="button" class="pill-option multi" data-group="pages" data-value="pricing">
+                  <i class="fas fa-dollar-sign"></i> <span>Pricing</span>
+                </button>
+                <button type="button" class="pill-option multi" data-group="pages" data-value="other">
+                  <i class="fas fa-ellipsis-h"></i> <span>Other</span>
+                </button>
+              </div>
+              <div class="other-input" id="pages-other">
+                <input type="text" id="pages-other-input" placeholder="Specify other pages/components...">
+              </div>
+            </div>
+
+            <div class="selection-summary">
+              <span class="summary-label">Selected:</span>
+              <span id="selection-display" class="summary-text">No selections yet</span>
+              <button type="button" id="clear-selections" class="clear-btn" style="display: none;">
+                <i class="fas fa-times-circle"></i> Clear All
+              </button>
+            </div>
+          </div>
+
           <form class="hero-search-form" action="/generate" method="POST" id="main-form">
+            <input type="hidden" name="website_type" id="website-type-input" value="">
+            <input type="hidden" name="website_type_other" id="website-type-other-input-hidden" value="">
+            <input type="hidden" name="pages" id="pages-input" value="">
+            <input type="hidden" name="pages_other" id="pages-other-input-hidden" value="">
             <input
               type="text"
               name="query"
@@ -897,7 +1204,7 @@
               <span class="loading-spinner" id="loading-spinner" style="display: none;"></span>
             </button>
             
-            <!-- AI Analysis Preview (shown when user starts typing) -->
+            <!-- AI Analysis Preview -->
             <div class="ai-analysis-preview" id="analysis-preview">
               <div class="analysis-item">
                 <span class="label">Style Detected:</span>
@@ -921,45 +1228,24 @@
             </div>
           </form>
         </div>
-        <div class="hero-image-container">
-          <img
-            src="static/images/WebBuddy.png"
-            alt="WebBuddy AI Generation Preview"
-            class="hero-image-preview"
-          />
-        </div>
       </div>
 
       <!-- AI Smart Suggestions Section -->
-      <div class="ai-suggestions-section">
+      <div class="ai-suggestions-section" id="smart-suggestions">
         <div class="ai-suggestions-title">
-          <i class="fas fa-magic"></i>
-          Smart Suggestions - Try These Popular Requests
+          <i class="fas fa-history"></i>
+          Smart Suggestions Based on Your History
         </div>
-        <div class="suggestion-grid">
-          <div class="suggestion-card" onclick="fillSuggestion('Create a dark mode cyberpunk login form with neon glowing effects and social media integration')">
-            <div class="suggestion-badge">HOT</div>
-            <h4>Cyberpunk Login</h4>
-            <p>Dark mode with neon effects, glowing borders, and social login options</p>
-          </div>
-          <div class="suggestion-card" onclick="fillSuggestion('Build a glassmorphism signup form with blur effects, gradient background, and smooth animations')">
-            <div class="suggestion-badge">NEW</div>
-            <h4>Glassmorphism Signup</h4>
-            <p>Modern glass effect design with smooth transitions and blur backgrounds</p>
-          </div>
-          <div class="suggestion-card" onclick="fillSuggestion('Design a minimalist professional login page with clean white design and subtle animations')">
-            <h4>Minimalist Professional</h4>
-            <p>Clean, corporate-friendly design with subtle hover effects</p>
-          </div>
-          <div class="suggestion-card" onclick="fillSuggestion('Create a retro 90s style signup form with bold colors, geometric shapes, and fun animations')">
-            <div class="suggestion-badge">FUN</div>
-            <h4>Retro 90s Style</h4>
-            <p>Nostalgic design with vibrant colors and playful geometric elements</p>
+        <div id="suggestions-content">
+          <div class="loading-suggestions">
+            <div class="loading-spinner" style="width: 30px; height: 30px;"></div>
+            <p>Analyzing your history for personalized suggestions...</p>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- Rest of the HTML remains the same -->
     <section id="features">
       <h2>ENHANCED AI CAPABILITIES</h2>
       <p class="section-description">
@@ -1094,6 +1380,265 @@
     </div>
 
     <script>
+      // --- Website Configuration System ---
+      const websiteTypeButtons = document.querySelectorAll('.pill-option[data-group="website-type"]');
+      const pagesButtons = document.querySelectorAll('.pill-option[data-group="pages"]');
+      const websiteTypeInput = document.getElementById('website-type-input');
+      const websiteTypeOtherInput = document.getElementById('website-type-other-input');
+      const websiteTypeOtherInputHidden = document.getElementById('website-type-other-input-hidden');
+      const websiteTypeOtherContainer = document.getElementById('website-type-other');
+      const pagesInput = document.getElementById('pages-input');
+      const pagesOtherInput = document.getElementById('pages-other-input');
+      const pagesOtherInputHidden = document.getElementById('pages-other-input-hidden');
+      const pagesOtherContainer = document.getElementById('pages-other');
+      const selectionDisplay = document.getElementById('selection-display');
+      const clearSelectionsBtn = document.getElementById('clear-selections');
+
+      let selectedWebsiteType = '';
+      let selectedWebsiteTypeOther = '';
+      let selectedPages = [];
+      let selectedPagesOther = '';
+
+      // Website Type Selection (Single Select)
+      websiteTypeButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          // Remove active class from all website type buttons
+          websiteTypeButtons.forEach(btn => btn.classList.remove('active'));
+          
+          // Add active class to clicked button
+          this.classList.add('active');
+          
+          // Store selection
+          selectedWebsiteType = this.dataset.value;
+          websiteTypeInput.value = selectedWebsiteType;
+          
+          // Show/hide other input
+          if (selectedWebsiteType === 'other') {
+            websiteTypeOtherContainer.classList.add('active');
+          } else {
+            websiteTypeOtherContainer.classList.remove('active');
+            selectedWebsiteTypeOther = '';
+            websiteTypeOtherInput.value = '';
+            websiteTypeOtherInputHidden.value = '';
+          }
+          
+          // Update summary
+          updateSelectionSummary();
+        });
+      });
+
+      // Website Type Other Input
+      websiteTypeOtherInput.addEventListener('input', function() {
+        selectedWebsiteTypeOther = this.value.trim();
+        websiteTypeOtherInputHidden.value = selectedWebsiteTypeOther;
+        updateSelectionSummary();
+      });
+
+      // Pages Selection (Multi-Select)
+pagesButtons.forEach(button => {
+  button.addEventListener('click', function() {
+    const value = this.dataset.value;
+    
+    // Toggle active class
+    this.classList.toggle('active');
+    
+    // Update selected pages array
+    if (this.classList.contains('active')) {
+      if (!selectedPages.includes(value)) {
+        selectedPages.push(value);
+      }
+    } else {
+      selectedPages = selectedPages.filter(page => page !== value);
+    }
+    
+    // Show/hide pages other input
+    if (selectedPages.includes('other')) {
+      pagesOtherContainer.classList.add('active');
+    } else {
+      pagesOtherContainer.classList.remove('active');
+      selectedPagesOther = '';
+      pagesOtherInput.value = '';
+      pagesOtherInputHidden.value = '';
+    }
+    
+    // UPDATE: Create comma-separated string and update hidden input
+    const pagesValue = selectedPages.join(',');
+    pagesInput.value = pagesValue;
+    
+    console.log('Selected pages array:', selectedPages);
+    console.log('Pages input value:', pagesValue);
+    
+    // Update summary
+    updateSelectionSummary();
+  });
+});
+
+// Pages Other Input
+pagesOtherInput.addEventListener('input', function() {
+  selectedPagesOther = this.value.trim();
+  pagesOtherInputHidden.value = selectedPagesOther;
+  
+  // UPDATE: Rebuild the comma-separated string
+  const pagesValue = selectedPages.join(',');
+  pagesInput.value = pagesValue;
+  
+  console.log('Pages input updated:', pagesValue);
+  
+  updateSelectionSummary();
+});
+
+// Clear All Selections
+clearSelectionsBtn.addEventListener('click', function() {
+  // Clear website type
+  websiteTypeButtons.forEach(btn => btn.classList.remove('active'));
+  selectedWebsiteType = '';
+  websiteTypeInput.value = '';
+  websiteTypeOtherContainer.classList.remove('active');
+  selectedWebsiteTypeOther = '';
+  websiteTypeOtherInput.value = '';
+  websiteTypeOtherInputHidden.value = '';
+  
+  // Clear pages
+  pagesButtons.forEach(btn => btn.classList.remove('active'));
+  selectedPages = [];
+  pagesInput.value = '';  // Clear the hidden input
+  pagesOtherContainer.classList.remove('active');
+  selectedPagesOther = '';
+  pagesOtherInput.value = '';
+  pagesOtherInputHidden.value = '';
+  
+  console.log('All selections cleared');
+  
+  // Update summary
+  updateSelectionSummary();
+});
+
+// Update Selection Summary
+function updateSelectionSummary() {
+  let summaryParts = [];
+  
+  if (selectedWebsiteType) {
+    let typeText = selectedWebsiteType.charAt(0).toUpperCase() + selectedWebsiteType.slice(1);
+    if (selectedWebsiteType === 'other' && selectedWebsiteTypeOther) {
+      typeText = selectedWebsiteTypeOther;
+    }
+    summaryParts.push(`Type: ${typeText}`);
+  }
+  
+  if (selectedPages.length > 0) {
+    let pagesText = `${selectedPages.length} page${selectedPages.length > 1 ? 's' : ''}`;
+    if (selectedPages.includes('other') && selectedPagesOther) {
+      pagesText += ` + custom`;
+    }
+    summaryParts.push(pagesText);
+  }
+  
+  if (summaryParts.length === 0) {
+    selectionDisplay.textContent = 'No selections yet';
+    clearSelectionsBtn.style.display = 'none';
+  } else {
+    selectionDisplay.textContent = summaryParts.join(' | ');
+    clearSelectionsBtn.style.display = 'flex';
+  }
+}
+
+// Enhanced form submission with debug logs
+mainForm.addEventListener('submit', function(e) {
+  console.log('=== FORM SUBMISSION DEBUG ===');
+  console.log('Query:', document.getElementById('main-query').value);
+  console.log('Website Type:', websiteTypeInput.value);
+  console.log('Pages (as string):', pagesInput.value);
+  console.log('Selected Pages Array:', selectedPages);
+  console.log('============================');
+  
+  generateBtn.disabled = true;
+  loadingSpinner.style.display = 'inline-block';
+  generateBtn.innerHTML = '<i class="fa-solid fa-cog fa-spin"></i> Generating...';
+  
+  analysisPreview.classList.remove('active');
+});
+
+      // --- Smart Suggestions System ---
+      function loadSmartSuggestions() {
+        const suggestionsSection = document.getElementById('smart-suggestions');
+        const suggestionsContent = document.getElementById('suggestions-content');
+        
+        // Show loading state
+        suggestionsContent.innerHTML = `
+          <div class="loading-suggestions">
+            <div class="loading-spinner" style="width: 30px; height: 30px;"></div>
+            <p>Analyzing your history for personalized suggestions...</p>
+          </div>
+        `;
+        
+        // Fetch user history and get TF-IDF based suggestions
+        fetch('/get_smart_suggestions')
+          .then(response => response.json())
+          .then(data => {
+            if (data.success && data.suggestions && data.suggestions.length > 0) {
+              const suggestionsHtml = data.suggestions.map(suggestion => `
+                <div class="suggestion-card" onclick="fillSuggestion('${suggestion.query.replace(/'/g, "\\'")}')">
+                  <div class="suggestion-badge" style="background: ${getBadgeColor(suggestion.score)}">
+                    ${getBadgeText(suggestion.score)}
+                  </div>
+                  <h4>${suggestion.title || suggestion.query.substring(0, 50)}...</h4>
+                  <p>${suggestion.description || 'Based on your previous generations'}</p>
+                </div>
+              `).join('');
+              
+              suggestionsContent.innerHTML = `
+                <div class="suggestion-grid">
+                  ${suggestionsHtml}
+                </div>
+              `;
+              suggestionsSection.classList.add('active');
+            } else {
+              // Fallback to default suggestions if no history
+              suggestionsContent.innerHTML = `
+                <div class="suggestion-grid">
+                  <div class="suggestion-card" onclick="fillSuggestion('Create a dark mode cyberpunk login form with neon glowing effects and social media integration')">
+                    <div class="suggestion-badge">POPULAR</div>
+                    <h4>Cyberpunk Login</h4>
+                    <p>Dark mode with neon effects, glowing borders, and social login options</p>
+                  </div>
+                  <div class="suggestion-card" onclick="fillSuggestion('Build a glassmorphism signup form with blur effects, gradient background, and smooth animations')">
+                    <div class="suggestion-badge">TRENDING</div>
+                    <h4>Glassmorphism Signup</h4>
+                    <p>Modern glass effect design with smooth transitions and blur backgrounds</p>
+                  </div>
+                  <div class="suggestion-card" onclick="fillSuggestion('Design a minimalist professional login page with clean white design and subtle animations')">
+                    <div class="suggestion-badge">PRO</div>
+                    <h4>Minimalist Professional</h4>
+                    <p>Clean, corporate-friendly design with subtle hover effects</p>
+                  </div>
+                </div>
+              `;
+              suggestionsSection.classList.add('active');
+            }
+          })
+          .catch(error => {
+            console.error('Error loading suggestions:', error);
+            suggestionsSection.classList.remove('active');
+          });
+      }
+
+      function getBadgeColor(score) {
+        if (score >= 0.8) return '#ff0077';
+        if (score >= 0.6) return '#00bcd4';
+        return '#6c757d';
+      }
+
+      function getBadgeText(score) {
+        if (score >= 0.8) return 'BEST MATCH';
+        if (score >= 0.6) return 'GOOD MATCH';
+        return 'SUGGESTED';
+      }
+
+      // Load suggestions when page loads
+      document.addEventListener('DOMContentLoaded', function() {
+        loadSmartSuggestions();
+      });
+
       // --- Enhanced AI Features ---
       let analysisTimeout;
       const queryInput = document.getElementById('main-query');
@@ -1116,9 +1661,8 @@
         }
       });
 
-      // Mock AI analysis function (replace with real API call)
+      // Mock AI analysis function
       function analyzePrompt(query) {
-        // Simulate AI analysis
         const analysis = performMockAnalysis(query);
         
         // Update UI with analysis results
@@ -1135,7 +1679,7 @@
         analysisPreview.classList.add('active');
       }
 
-      // Mock analysis logic (replace with real AI service)
+      // Mock analysis logic
       function performMockAnalysis(query) {
         const lowerQuery = query.toLowerCase();
         let style = 'Modern';
@@ -1198,7 +1742,7 @@
       mainForm.addEventListener('submit', function(e) {
         generateBtn.disabled = true;
         loadingSpinner.style.display = 'inline-block';
-        generateBtn.innerHTML = '<i class="fa-solid fa-cog fa-spin"></i> Generating... <span class="loading-spinner" style="display: inline-block;"></span>';
+        generateBtn.innerHTML = '<i class="fa-solid fa-cog fa-spin"></i> Generating...';
         
         // Hide analysis preview
         analysisPreview.classList.remove('active');
@@ -1305,19 +1849,18 @@
         ...scrollRevealOption,
         delay: 500,
       });
+      ScrollReveal().reveal(".website-config-panel", {
+        ...scrollRevealOption,
+        delay: 700,
+      });
       ScrollReveal().reveal(".hero-search-form", {
         ...scrollRevealOption,
-        delay: 800,
-      });
-      ScrollReveal().reveal(".hero-image-container", {
-        ...scrollRevealOption,
-        origin: "right",
-        delay: 300,
+        delay: 900,
       });
 
       ScrollReveal().reveal(".ai-suggestions-section", {
         ...scrollRevealOption,
-        delay: 1000,
+        delay: 1100,
       });
 
       ScrollReveal().reveal("#features h2, #features .section-description", {
