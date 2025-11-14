@@ -1,0 +1,8 @@
+Template details for pricing pages
+==================================================
+(1). Modern pricing template with gradient background and clean design.
+_______________________________________________________________________________________
+(2). Responsive pricing layout with mobile-first approach and smooth animations.
+_______________________________________________________________________________________
+(3). Dark mode pricing with cyberpunk theme and neon accents.
+_______________________________________________________________________________________

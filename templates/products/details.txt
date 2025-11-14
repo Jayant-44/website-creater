@@ -1,0 +1,8 @@
+Template details for products pages
+==================================================
+(1). Modern products template with gradient background and clean design.
+_______________________________________________________________________________________
+(2). Responsive products layout with mobile-first approach and smooth animations.
+_______________________________________________________________________________________
+(3). Dark mode products with cyberpunk theme and neon accents.
+_______________________________________________________________________________________

@@ -1,0 +1,8 @@
+Template details for chatbot pages
+==================================================
+(1). Modern chatbot template with gradient background and clean design.
+_______________________________________________________________________________________
+(2). Responsive chatbot layout with mobile-first approach and smooth animations.
+_______________________________________________________________________________________
+(3). Dark mode chatbot with cyberpunk theme and neon accents.
+_______________________________________________________________________________________

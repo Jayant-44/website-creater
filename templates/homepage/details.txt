@@ -1,0 +1,8 @@
+Template details for homepage pages
+==================================================
+(1). Modern homepage template with gradient background and clean design.
+_______________________________________________________________________________________
+(2). Responsive homepage layout with mobile-first approach and smooth animations.
+_______________________________________________________________________________________
+(3). Dark mode homepage with cyberpunk theme and neon accents.
+_______________________________________________________________________________________
