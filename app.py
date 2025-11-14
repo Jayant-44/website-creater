@@ -1852,7 +1852,7 @@ def signin():
             return redirect('/index')
         else:
             flash('Invalid email or password.', 'danger')
-    return render_template('signin.html', form=form)
+    return render_template('index.html', form=form)
 
 @app.route('/forgot_password', methods=['GET', 'POST'])
 def forgot_password():
