@@ -125,8 +125,8 @@ class CategoryDetector:
         prompt_lower = prompt.lower()
         
         types = {
-                'ecommerce': ['shop', 'store', 'product', 'ecommerce', 'cart'],
-                'saas': ['saas', 'software', 'platform', 'service', 'tech'],
+                'ecommerce': ['shop', 'store', 'product', 'ecommerce', 'cart', 'category', 'product detail'],
+                'saas': ['saas', 'software', 'platform', 'service', 'tech', 'analytics'],
                 'portfolio': ['portfolio', 'showcase', 'work', 'freelancer', 'artist'],
                 'blog': ['blog', 'article', 'post'],
                 'corporate': ['corporate', 'business', 'company'],
@@ -135,7 +135,13 @@ class CategoryDetector:
                 'restaurant': ['restaurant', 'food', 'cafe', 'menu', 'culinary'],
                 'farm': ['farm', 'farmer', 'agriculture', 'crops'],
                 'creator': ['creator', 'onlyfans', 'fan'],
-                'support': ['support', 'helpdesk', 'contact', 'faq'] # <-- ADDED NEW
+                'support': ['support', 'helpdesk', 'contact', 'faq'],
+                'fitness': ['fitness', 'workout', 'tracker'],
+                'social': ['social', 'feed', 'twitter', 'post'],
+                'newsletter': ['newsletter', 'subscribe'],
+                'app_download': ['app', 'app download', 'app store', 'google play'],
+                'travel': ['travel', 'tours', 'adventure', 'destination'], # <-- ADDED NEW
+                'real_estate': ['real estate', 'realty', 'property', 'home'] # <-- ADDED NEW
             }
         
         for website_type, keywords in types.items():
@@ -173,9 +179,16 @@ class RequirementAnalyzer:
             "glassmorphism": ["glass", "blur", "transparent", "frosted"],
             "minimalist": ["minimalist", "simple", "bare"],
             "timeline": ['timeline', 'history', 'chronological'],
-            "friendly": ['friendly', 'bubbly', 'warm', 'inviting'], # <-- ADDED NEW
-            "map": ['map', 'location', 'local'], # <-- ADDED NEW
-            "split_screen": ['split', 'split screen'] # <-- ADDED NEW
+            "friendly": ['friendly', 'bubbly', 'warm', 'inviting'],
+            "map": ['map', 'location', 'local'],
+            "split_screen": ['split', 'split screen'],
+            "kanban": ['kanban', 'trello', 'project', 'tasks'],
+            "analytics": ['analytics', 'charts', 'stats', 'revenue'],
+            "serif": ['serif', 'playfair', 'elegant'],
+            "sitemap": ['sitemap', 'fat footer', 'footer links'],
+            "centered": ['centered', 'center aligned'],
+            "typewriter": ['typewriter', 'typing animation'], # <-- ADDED NEW
+            "gym": ['gym', 'fitness', 'high energy'] # <-- ADDLED NEW
         }
         
         self.color_keywords = {
