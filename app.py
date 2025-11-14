@@ -1470,70 +1470,100 @@ def index():
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     form = SignUpForm()
+    # If user already logged in, send them to index
+    if 'email' in session:
+        return redirect(url_for('index'))
+
     if form.validate_on_submit():
-        username = form.username.data
-        email = form.email.data
+        username = form.username.data.strip()
+        email = form.email.data.strip().lower()
         password = form.password.data
 
         if get_user_by_email(email):
             flash('Email already registered. Please sign in instead.', 'warning')
-            return redirect('/signin')
+            return redirect(url_for('signin'))
 
+        # Generate OTP and timestamp
         otp = str(random.randint(100000, 999999))
-        
+        otp_ts = datetime.now().isoformat()
+
+        # Attempt to send OTP email
         if send_otp_email(email, otp):
-            session['otp'] = otp
-            session['otp_timestamp'] = datetime.now().isoformat()
-            session['email_temp'] = email
-            session['username'] = username
-            session['password'] = generate_password_hash(password)
+            # store minimal temporary info for verification using consistent keys
+            session['signup_otp'] = otp
+            session['signup_otp_ts'] = otp_ts
+            session['signup_email'] = email
+            session['signup_username'] = username
+            # store hashed password temporarily
+            session['signup_password_hash'] = generate_password_hash(password)
+
             flash('OTP sent to your email. Please check your inbox.', 'info')
-            return redirect('/verify_otp')
+            return redirect(url_for('verify_otp'))
         else:
             flash('Failed to send OTP. Please check your email configuration or try again later.', 'danger')
-            return redirect('/signup')
-    
+            return redirect(url_for('signup'))
+
     return render_template('signup.html', form=form)
 
 @app.route('/verify_otp', methods=['GET', 'POST'])
 def verify_otp():
     form = OTPForm()
-    
-    if 'otp' not in session or 'email_temp' not in session:
-        flash('Session expired. Please try signing up again.', 'warning')
-        return redirect('/signup')
-    
-    if 'otp_timestamp' in session:
-        try:
-            otp_time = datetime.fromisoformat(session['otp_timestamp'])
-            if datetime.now() - otp_time > timedelta(minutes=10):
-                session.pop('otp', None)
-                session.pop('otp_timestamp', None)
-                flash('OTP expired. Please request a new one.', 'warning')
-                return redirect('/signup')
-        except Exception as e:
-            print(f"Error checking OTP timestamp: {e}")
-    
-    if form.validate_on_submit():
-        user_otp = form.otp.data
-        session_otp = session.get('otp')
-        email = session.get('email_temp')
-        username = session.get('username')
-        password = session.get('password')
 
-        if user_otp == session_otp and email and password and username:
+    # Ensure signup temp data exists
+    if not all(k in session for k in ('signup_otp', 'signup_email', 'signup_username', 'signup_password_hash')):
+        flash('Session expired or invalid. Please try signing up again.', 'warning')
+        # ensure any leftover keys are cleaned
+        session.pop('signup_otp', None)
+        session.pop('signup_otp_ts', None)
+        session.pop('signup_email', None)
+        session.pop('signup_username', None)
+        session.pop('signup_password_hash', None)
+        return redirect(url_for('signup'))
+
+    # Check OTP expiry if timestamp exists
+    if 'signup_otp_ts' in session:
+        try:
+            otp_time = datetime.fromisoformat(session['signup_otp_ts'])
+            if datetime.now() - otp_time > timedelta(minutes=10):
+                # expire and cleanup
+                session.pop('signup_otp', None)
+                session.pop('signup_otp_ts', None)
+                session.pop('signup_email', None)
+                session.pop('signup_username', None)
+                session.pop('signup_password_hash', None)
+                flash('OTP expired. Please request a new one.', 'warning')
+                return redirect(url_for('signup'))
+        except Exception as e:
+            print(f"Error parsing signup OTP timestamp: {e}")
+
+    if form.validate_on_submit():
+        user_otp = form.otp.data.strip()
+        session_otp = session.get('signup_otp')
+        email = session.get('signup_email')
+        username = session.get('signup_username')
+        password_hash = session.get('signup_password_hash')
+
+        if not (session_otp and email and username and password_hash):
+            flash('Session data missing. Please try signing up again.', 'warning')
+            return redirect(url_for('signup'))
+
+        if user_otp == session_otp:
             try:
-                new_user = User(email=email, username=username, password=password)
+                # create user with hashed password saved in session
+                new_user = User(email=email, username=username, password=password_hash)
                 db.session.add(new_user)
                 db.session.commit()
 
+                # log user in
                 session['email'] = new_user.email
                 session.permanent = True
-                session.pop('otp', None)
-                session.pop('otp_timestamp', None)
-                session.pop('password', None)
-                session.pop('username', None)
-                session.pop('email_temp', None)
+
+                # cleanup signup temp keys
+                session.pop('signup_otp', None)
+                session.pop('signup_otp_ts', None)
+                session.pop('signup_email', None)
+                session.pop('signup_username', None)
+                session.pop('signup_password_hash', None)
 
                 flash('Account created successfully! Welcome to WebBuddy!', 'success')
                 return redirect('/index')
@@ -1542,10 +1572,10 @@ def verify_otp():
                 print(f"Error creating user: {e}")
                 traceback.print_exc()
                 flash('An error occurred while creating your account. Please try again.', 'danger')
-                return redirect('/signup')
+                return redirect(url_for('signup'))
         else:
             flash('Invalid OTP. Please try again.', 'danger')
-    
+
     return render_template('verify_otp.html', form=form)
 
 @app.route("/google_dashboard")
@@ -1637,39 +1667,43 @@ def forgot_password():
 @app.route('/reset_password', methods=['GET', 'POST'])
 def reset_password():
     form = ResetPasswordForm()
-    
-    if 'reset_otp' not in session or 'reset_email' not in session:
+
+    # Ensure reset flow data exists
+    if not all(k in session for k in ('reset_otp', 'reset_email')):
         flash('Session expired. Please request a new password reset.', 'warning')
-        return redirect('/forgot_password')
-    
-    if 'reset_otp_timestamp' in session:
+        return redirect(url_for('forgot_password'))
+
+    # Check OTP expiry if timestamp exists
+    if 'reset_otp_ts' in session:
         try:
-            otp_time = datetime.fromisoformat(session['reset_otp_timestamp'])
+            otp_time = datetime.fromisoformat(session['reset_otp_ts'])
             if datetime.now() - otp_time > timedelta(minutes=10):
                 session.pop('reset_otp', None)
-                session.pop('reset_otp_timestamp', None)
+                session.pop('reset_otp_ts', None)
+                session.pop('reset_email', None)
                 flash('OTP expired. Please request a new one.', 'warning')
-                return redirect('/forgot_password')
+                return redirect(url_for('forgot_password'))
         except Exception as e:
             print(f"Error checking reset OTP timestamp: {e}")
-    
+
     if form.validate_on_submit():
-        otp = form.otp.data
+        otp = form.otp.data.strip()
         new_password = form.new_password.data
         session_otp = session.get('reset_otp')
         email = session.get('reset_email')
-        
+
         if otp == session_otp and email:
             try:
                 user = get_user_by_email(email)
                 if user:
                     user.password = generate_password_hash(new_password)
                     db.session.commit()
-                
+
+                # cleanup reset session keys
                 session.pop('reset_otp', None)
-                session.pop('reset_otp_timestamp', None)
+                session.pop('reset_otp_ts', None)
                 session.pop('reset_email', None)
-                
+
                 flash('Password reset successfully! Please sign in with your new password.', 'success')
                 return redirect('/signin')
             except Exception as e:
@@ -1679,7 +1713,7 @@ def reset_password():
                 flash('An error occurred. Please try again.', 'danger')
         else:
             flash('Invalid OTP. Please try again.', 'danger')
-    
+
     return render_template('reset_password.html', form=form)
 
 @app.route('/generate', methods=['POST'])
