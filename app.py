@@ -17,6 +17,7 @@ from flask_dance.contrib.google import make_google_blueprint, google
 from smtplib import SMTPException
 from sqlalchemy import select, desc
 import time
+import spacy
 import traceback
 import urllib.parse
 import threading
