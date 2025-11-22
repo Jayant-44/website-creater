@@ -17,7 +17,6 @@ from flask_dance.contrib.google import make_google_blueprint, google
 from smtplib import SMTPException
 from sqlalchemy import select, desc
 import time
-import spacy
 import traceback
 import urllib.parse
 import threading
@@ -136,6 +135,7 @@ except ImportError:
     print("Warning: Advanced NLP libraries not installed. Using basic matching.")
     NLP_AVAILABLE = False
 
+# Gemini API Keys configuration
 # Gemini API Keys configuration - Load from environment
 GEMINI_API_KEYS = {
     'homepage': os.getenv('GEMINI_API_KEY_HOMEPAGE', ''),
@@ -305,7 +305,7 @@ class PageTypeDetector:
     def __init__(self):
         self.page_types = PAGE_TYPES
 
-    def detect_category(self, prompt):
+    def detect_page_type(self, prompt):
         prompt_lower = prompt.lower()
         page_keywords = {
             'homepage': ['home', 'landing', 'main page', 'welcome'],
@@ -324,36 +324,6 @@ class PageTypeDetector:
                 scores[page_type] = score
         return max(scores, key=scores.get) if scores else 'authentication'
 
-    def detect_website_type(self, prompt):
-        """Detect website type"""
-        prompt_lower = prompt.lower()
-        
-        types = {
-                'ecommerce': ['shop', 'store', 'product', 'ecommerce', 'cart', 'category', 'product detail'],
-                'saas': ['saas', 'software', 'platform', 'service', 'tech', 'analytics'],
-                'portfolio': ['portfolio', 'showcase', 'work', 'freelancer', 'artist', 'profile'],
-                'blog': ['blog', 'article', 'post'],
-                'corporate': ['corporate', 'business', 'company'],
-                'admin': ['admin', 'dashboard', 'panel'],
-                'nonprofit': ['nonprofit', 'charity', 'ngo', 'foundation'],
-                'restaurant': ['restaurant', 'food', 'cafe', 'menu', 'culinary'],
-                'farm': ['farm', 'farmer', 'agriculture', 'crops'],
-                'creator': ['creator', 'onlyfans', 'fan'],
-                'support': ['support', 'helpdesk', 'contact', 'faq'],
-                'fitness': ['fitness', 'workout', 'tracker'],
-                'social': ['social', 'feed', 'twitter', 'post'],
-                'newsletter': ['newsletter', 'subscribe'],
-                'app_download': ['app', 'app download', 'app store', 'google play'],
-                'travel': ['travel', 'tours', 'adventure', 'destination'],
-                'real_estate': ['real estate', 'realty', 'property', 'home'],
-                'settings': ['settings', 'account settings', 'edit profile']
-            }
-        
-        for website_type, keywords in types.items():
-            if any(keyword in prompt_lower for keyword in keywords):
-                return website_type
-        return 'general'
-
     def should_include_both_auth(self, prompt):
         prompt_lower = prompt.lower()
         only_signup = any(phrase in prompt_lower for phrase in ['only signup', 'just signup', 'only register'])
@@ -363,13 +333,6 @@ class PageTypeDetector:
 # ---------------------- Requirement Analyzer ----------------------
 class RequirementAnalyzer:
     def __init__(self):
-        self.nlp = None
-        if NLP_AVAILABLE:
-            try:
-                self.nlp = spacy.load("en_core_web_sm")
-            except OSError:
-                print("Warning: spaCy model not found.")
-        
         self.style_keywords = {
             "modern": ["modern", "sleek", "clean", "minimal", "contemporary"],
             "classic": ["classic", "traditional", "formal", "elegant"],
@@ -379,21 +342,8 @@ class RequirementAnalyzer:
             "light": ["light", "bright", "white", "airy"],
             "cyberpunk": ["cyberpunk", "neon", "futuristic"],
             "glassmorphism": ["glass", "blur", "transparent", "frosted"],
-            "minimalist": ["minimalist", "simple", "bare"],
-            "timeline": ['timeline', 'history', 'chronological'],
-            "friendly": ['friendly', 'bubbly', 'warm', 'inviting'],
-            "map": ['map', 'location', 'local'],
-            "split_screen": ['split', 'split screen'],
-            "kanban": ['kanban', 'trello', 'project', 'tasks'],
-            "analytics": ['analytics', 'charts', 'stats', 'revenue'],
-            "serif": ['serif', 'playfair', 'elegant'],
-            "sitemap": ['sitemap', 'fat footer', 'footer links'],
-            "centered": ['centered', 'center aligned'],
-            "typewriter": ['typewriter', 'typing animation'],
-            "gym": ['gym', 'fitness', 'high energy'],
-            "vcard": ['vcard', 'profile card', 'minimal profile']
+            "minimalist": ["minimalist", "simple", "bare"]
         }
-        
         self.color_keywords = {
             "blue": ["blue", "azure", "navy"],
             "red": ["red", "crimson"],
@@ -403,9 +353,8 @@ class RequirementAnalyzer:
             "orange": ["orange", "amber"],
             "gradient": ["gradient", "rainbow"]
         }
-        
+
     def analyze_prompt(self, user_prompt):
-        """Enhanced analysis"""
         analysis = {
             "style_preference": self.extract_style(user_prompt),
             "color_preferences": self.extract_colors(user_prompt),
@@ -413,47 +362,39 @@ class RequirementAnalyzer:
             "complexity": self.determine_complexity(user_prompt),
             "theme_intensity": self.determine_theme_intensity(user_prompt),
         }
-        
         return analysis
-    
+
     def extract_style(self, prompt):
         prompt_lower = prompt.lower()
         style_scores = {}
-        
         for style, keywords in self.style_keywords.items():
             score = sum(1 for keyword in keywords if keyword in prompt_lower)
             if score > 0:
                 style_scores[style] = score
-        
         return max(style_scores, key=style_scores.get) if style_scores else "modern"
-    
+
     def extract_colors(self, prompt):
         prompt_lower = prompt.lower()
         colors = []
-        
         for color, keywords in self.color_keywords.items():
             if any(keyword in prompt_lower for keyword in keywords):
                 colors.append(color)
-        
         return colors
-    
+
     def extract_features(self, prompt):
         features = []
         prompt_lower = prompt.lower()
-        
         feature_map = {
             "social_login": ["social", "google", "facebook"],
             "animations": ["animated", "animation"],
             "responsive": ["responsive", "mobile"],
             "forgot_password": ["forgot", "reset"]
         }
-        
         for feature, keywords in feature_map.items():
             if any(keyword in prompt_lower for keyword in keywords):
                 features.append(feature)
-        
         return features
-    
+
     def determine_complexity(self, prompt):
         prompt_lower = prompt.lower()
         if any(word in prompt_lower for word in ["simple", "basic", "minimal"]):
@@ -461,7 +402,7 @@ class RequirementAnalyzer:
         elif any(word in prompt_lower for word in ["advanced", "complex", "detailed"]):
             return "complex"
         return "medium"
-    
+
     def determine_theme_intensity(self, prompt):
         prompt_lower = prompt.lower()
         if any(word in prompt_lower for word in ["vibrant", "bright", "bold"]):
@@ -475,7 +416,7 @@ def check_rate_limit(page_type):
     """Improved rate limiter for specific page type"""
     service_key = f'gemini_{page_type}'
     if service_key not in API_RATE_LIMITS:
-        return True # No limit for this type
+        return True
     now = datetime.now()
     time_diff = (now - API_RATE_LIMITS[service_key]['reset_time']).total_seconds()
     if time_diff >= 60:
@@ -902,12 +843,6 @@ class WebsiteGenerator:
         print(f"👤 User ID: {user_id}")
         print(f"{'='*60}")
 
-        # ADDED FROM OLD FILE
-        website_type = self.page_detector.detect_website_type(user_prompt)
-        include_both = self.page_detector.should_include_both_auth(user_prompt)
-        print(f"🌐 Website Type Detected: {website_type}")
-        print(f"🔐 Include both login/signup: {include_both}")
-
         if isinstance(selected_pages, str):
             if selected_pages:
                 page_types = [p.strip() for p in selected_pages.split(',') if p.strip()]
@@ -934,11 +869,13 @@ class WebsiteGenerator:
                 print(f"⚠️ Invalid page type: {page_type}")
 
         if not valid_page_types:
-            detected = self.page_detector.detect_category(user_prompt)
+            detected = self.page_detector.detect_page_type(user_prompt)
             valid_page_types = [detected]
             print(f"⚠️ No valid pages selected, auto-detected: {detected}")
 
+        include_both = self.page_detector.should_include_both_auth(user_prompt)
         print(f"📂 Valid Page Types to Generate: {valid_page_types}")
+        print(f"🔐 Include both login/signup: {include_both}")
         print(f"📊 Total pages to generate: {len(valid_page_types)}")
 
         requirements = self.analyzer.analyze_prompt(user_prompt)
@@ -1471,100 +1408,70 @@ def index():
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     form = SignUpForm()
-    # If user already logged in, send them to index
-    if 'email' in session:
-        return redirect(url_for('index'))
-
     if form.validate_on_submit():
-        username = form.username.data.strip()
-        email = form.email.data.strip().lower()
+        username = form.username.data
+        email = form.email.data
         password = form.password.data
 
         if get_user_by_email(email):
             flash('Email already registered. Please sign in instead.', 'warning')
-            return redirect(url_for('signin'))
+            return redirect('/signin')
 
-        # Generate OTP and timestamp
         otp = str(random.randint(100000, 999999))
-        otp_ts = datetime.now().isoformat()
-
-        # Attempt to send OTP email
+        
         if send_otp_email(email, otp):
-            # store minimal temporary info for verification using consistent keys
-            session['signup_otp'] = otp
-            session['signup_otp_ts'] = otp_ts
-            session['signup_email'] = email
-            session['signup_username'] = username
-            # store hashed password temporarily
-            session['signup_password_hash'] = generate_password_hash(password)
-
+            session['otp'] = otp
+            session['otp_timestamp'] = datetime.now().isoformat()
+            session['email_temp'] = email
+            session['username'] = username
+            session['password'] = generate_password_hash(password)
             flash('OTP sent to your email. Please check your inbox.', 'info')
-            return redirect(url_for('verify_otp'))
+            return redirect('/verify_otp')
         else:
             flash('Failed to send OTP. Please check your email configuration or try again later.', 'danger')
-            return redirect(url_for('signup'))
-
+            return redirect('/signup')
+    
     return render_template('signup.html', form=form)
 
 @app.route('/verify_otp', methods=['GET', 'POST'])
 def verify_otp():
     form = OTPForm()
-
-    # Ensure signup temp data exists
-    if not all(k in session for k in ('signup_otp', 'signup_email', 'signup_username', 'signup_password_hash')):
-        flash('Session expired or invalid. Please try signing up again.', 'warning')
-        # ensure any leftover keys are cleaned
-        session.pop('signup_otp', None)
-        session.pop('signup_otp_ts', None)
-        session.pop('signup_email', None)
-        session.pop('signup_username', None)
-        session.pop('signup_password_hash', None)
-        return redirect(url_for('signup'))
-
-    # Check OTP expiry if timestamp exists
-    if 'signup_otp_ts' in session:
+    
+    if 'otp' not in session or 'email_temp' not in session:
+        flash('Session expired. Please try signing up again.', 'warning')
+        return redirect('/signup')
+    
+    if 'otp_timestamp' in session:
         try:
-            otp_time = datetime.fromisoformat(session['signup_otp_ts'])
+            otp_time = datetime.fromisoformat(session['otp_timestamp'])
             if datetime.now() - otp_time > timedelta(minutes=10):
-                # expire and cleanup
-                session.pop('signup_otp', None)
-                session.pop('signup_otp_ts', None)
-                session.pop('signup_email', None)
-                session.pop('signup_username', None)
-                session.pop('signup_password_hash', None)
+                session.pop('otp', None)
+                session.pop('otp_timestamp', None)
                 flash('OTP expired. Please request a new one.', 'warning')
-                return redirect(url_for('signup'))
+                return redirect('/signup')
         except Exception as e:
-            print(f"Error parsing signup OTP timestamp: {e}")
-
+            print(f"Error checking OTP timestamp: {e}")
+    
     if form.validate_on_submit():
-        user_otp = form.otp.data.strip()
-        session_otp = session.get('signup_otp')
-        email = session.get('signup_email')
-        username = session.get('signup_username')
-        password_hash = session.get('signup_password_hash')
+        user_otp = form.otp.data
+        session_otp = session.get('otp')
+        email = session.get('email_temp')
+        username = session.get('username')
+        password = session.get('password')
 
-        if not (session_otp and email and username and password_hash):
-            flash('Session data missing. Please try signing up again.', 'warning')
-            return redirect(url_for('signup'))
-
-        if user_otp == session_otp:
+        if user_otp == session_otp and email and password and username:
             try:
-                # create user with hashed password saved in session
-                new_user = User(email=email, username=username, password=password_hash)
+                new_user = User(email=email, username=username, password=password)
                 db.session.add(new_user)
                 db.session.commit()
 
-                # log user in
                 session['email'] = new_user.email
                 session.permanent = True
-
-                # cleanup signup temp keys
-                session.pop('signup_otp', None)
-                session.pop('signup_otp_ts', None)
-                session.pop('signup_email', None)
-                session.pop('signup_username', None)
-                session.pop('signup_password_hash', None)
+                session.pop('otp', None)
+                session.pop('otp_timestamp', None)
+                session.pop('password', None)
+                session.pop('username', None)
+                session.pop('email_temp', None)
 
                 flash('Account created successfully! Welcome to WebBuddy!', 'success')
                 return redirect('/index')
@@ -1573,10 +1480,10 @@ def verify_otp():
                 print(f"Error creating user: {e}")
                 traceback.print_exc()
                 flash('An error occurred while creating your account. Please try again.', 'danger')
-                return redirect(url_for('signup'))
+                return redirect('/signup')
         else:
             flash('Invalid OTP. Please try again.', 'danger')
-
+    
     return render_template('verify_otp.html', form=form)
 
 @app.route("/google_dashboard")
@@ -1668,43 +1575,39 @@ def forgot_password():
 @app.route('/reset_password', methods=['GET', 'POST'])
 def reset_password():
     form = ResetPasswordForm()
-
-    # Ensure reset flow data exists
-    if not all(k in session for k in ('reset_otp', 'reset_email')):
+    
+    if 'reset_otp' not in session or 'reset_email' not in session:
         flash('Session expired. Please request a new password reset.', 'warning')
-        return redirect(url_for('forgot_password'))
-
-    # Check OTP expiry if timestamp exists
-    if 'reset_otp_ts' in session:
+        return redirect('/forgot_password')
+    
+    if 'reset_otp_timestamp' in session:
         try:
-            otp_time = datetime.fromisoformat(session['reset_otp_ts'])
+            otp_time = datetime.fromisoformat(session['reset_otp_timestamp'])
             if datetime.now() - otp_time > timedelta(minutes=10):
                 session.pop('reset_otp', None)
-                session.pop('reset_otp_ts', None)
-                session.pop('reset_email', None)
+                session.pop('reset_otp_timestamp', None)
                 flash('OTP expired. Please request a new one.', 'warning')
-                return redirect(url_for('forgot_password'))
+                return redirect('/forgot_password')
         except Exception as e:
             print(f"Error checking reset OTP timestamp: {e}")
-
+    
     if form.validate_on_submit():
-        otp = form.otp.data.strip()
+        otp = form.otp.data
         new_password = form.new_password.data
         session_otp = session.get('reset_otp')
         email = session.get('reset_email')
-
+        
         if otp == session_otp and email:
             try:
                 user = get_user_by_email(email)
                 if user:
                     user.password = generate_password_hash(new_password)
                     db.session.commit()
-
-                # cleanup reset session keys
+                    
                 session.pop('reset_otp', None)
-                session.pop('reset_otp_ts', None)
+                session.pop('reset_otp_timestamp', None)
                 session.pop('reset_email', None)
-
+                
                 flash('Password reset successfully! Please sign in with your new password.', 'success')
                 return redirect('/signin')
             except Exception as e:
@@ -1714,7 +1617,7 @@ def reset_password():
                 flash('An error occurred. Please try again.', 'danger')
         else:
             flash('Invalid OTP. Please try again.', 'danger')
-
+    
     return render_template('reset_password.html', form=form)
 
 @app.route('/generate', methods=['POST'])
@@ -1851,11 +1754,11 @@ def dashboard():
     print(f"   Rendering template with {len(results.get('results', {}))} pages\n")
     
     return render_template('dashboard.html',
-                           results=results,
-                           user_prompt=user_query,
-                           generated_prompt=user_query,
-                           page_types=PAGE_TYPES,
-                           user=user)
+                         results=results,
+                         user_prompt=user_query,
+                         generated_prompt=user_query,
+                         page_types=PAGE_TYPES,
+                         user=user)
 
 @app.route('/template_file/<page_type>/<int:template_id>')
 def serve_template_file(page_type, template_id):
@@ -1949,8 +1852,8 @@ def list_ai_templates():
                 })
         user_templates.sort(key=lambda x: x['created_time'], reverse=True)
         return render_template('ai_templates.html',
-                               templates=user_templates,
-                               user=user)
+                             templates=user_templates,
+                             user=user)
     except Exception as e:
         print(f"Error listing AI templates: {e}")
         traceback.print_exc()
