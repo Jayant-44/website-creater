@@ -8,7 +8,6 @@ app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USERNAME'] = 'tanishqparashar2@gmail.com'
-# Paste your NEW Google App Password here, being very careful with spacing.
 app.config['MAIL_PASSWORD'] = 'frwytcnekntgpxgd'
 app.config['MAIL_DEFAULT_SENDER'] = 'tanishqparashar2@gmail.com'
 
