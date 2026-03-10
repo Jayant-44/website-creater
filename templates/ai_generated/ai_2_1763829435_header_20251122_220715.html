@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeonShop Header</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Electrolize&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --dark-bg: #0a0a1a;
+            --dark-card-bg: #1a1a2e;
+            --text-color: #e0e0e0;
+            --neon-blue: #00f0ff;
+            --neon-pink: #ff00ff;
+            --neon-green: #00ff00;
+            --glow-strength: 0 0 8px rgba(0, 240, 255, 0.7), 0 0 15px rgba(0, 240, 255, 0.5);
+            --glow-strength-pink: 0 0 8px rgba(255, 0, 255, 0.7), 0 0 15px rgba(255, 0, 255, 0.5);
+            --glow-strength-green: 0 0 8px rgba(0, 255, 0, 0.7), 0 0 15px rgba(0, 255, 0, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 150vh; /* Just for scrolling context */
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--text-color);
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--neon-blue);
+            text-shadow: var(--glow-strength);
+        }
+
+        .main-header {
+            background: var(--dark-card-bg);
+            padding: 15px 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 20px rgba(0, 240, 255, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative; /* For dropdowns */
+        }
+
+        .logo {
+            font-family: 'Electrolize', sans-serif;
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--neon-pink);
+            text-shadow: var(--glow-strength-pink);
+            padding: 5px 0;
+            animation: pulse-logo 2s infinite alternate;
+        }
+
+        @keyframes pulse-logo {
+            from { text-shadow: var(--glow-strength-pink); }
+            to { text-shadow: var(--glow-strength-pink), 0 0 20px rgba(255, 0, 255, 0.8); }
+        }
+
+        /* Main Navigation */
+        .main-nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        .main-nav ul li {
+            margin: 0 15px;
+            position: relative;
+        }
+
+        .main-nav ul li a {
+            font-size: 1.05em;
+            padding: 10px 0;
+            display: block;
+            position: relative;
+        }
+
+        .main-nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--neon-blue);
+            box-shadow: var(--glow-strength);
+            transition: width 0.3s ease;
+        }
+
+        .main-nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Dropdown Menu (Categories) */
+        .main-nav .dropdown {
+            position: relative;
+        }
+
+        .main-nav .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--dark-card-bg);
+            min-width: 160px;
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5), var(--glow-strength);
+            z-index: 1;
+            top: 100%;
+            left: 0;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 10px;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .main-nav .dropdown-content a {
+            color: var(--text-color);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            font-size: 0.95em;
+        }
+
+        .main-nav .dropdown-content a:hover {
+            background-color: rgba(0, 240, 255, 0.1);
+            color: var(--neon-blue);
+            text-shadow: var(--glow-strength);
+        }
+
+        .main-nav .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Header Actions (Search, User, Cart) */
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .search-bar {
+            display: flex;
+            border: 1px solid var(--neon-blue);
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: var(--glow-strength);
+            transition: all 0.3s ease;
+        }
+
+        .search-bar:focus-within {
+            box-shadow: var(--glow-strength), 0 0 20px rgba(0, 240, 255, 0.7);
+            border-color: var(--neon-pink);
+        }
+
+        .search-bar input {
+            background: rgba(26, 26, 46, 0.7);
+            border: none;
+            padding: 8px 15px;
+            color: var(--text-color);
+            font-size: 0.95em;
+            outline: none;
+            width: 180px;
+        }
+
+        .search-bar input::placeholder {
+            color: rgba(224, 224, 224, 0.6);
+        }
+
+        .search-bar button {
+            background: var(--neon-blue);
+            border: none;
+            padding: 8px 12px;
+            color: var(--dark-bg);
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .search-bar button:hover {
+            background: var(--neon-pink);
+            transform: scale(1.05);
+            color: var(--dark-bg);
+        }
+
+        /* User Menu & Social Login */
+        .user-menu {
+            position: relative;
+        }
+
+        .user-btn {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.4em;
+            cursor: pointer;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+            padding: 5px;
+        }
+
+        .user-btn:hover {
+            color: var(--neon-green);
+            text-shadow: var(--glow-strength-green);
+        }
+
+        .user-dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: var(--dark-card-bg);
+            min-width: 200px;
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5), var(--glow-strength-green);
+            z-index: 1;
+            top: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 10px;
+            animation: fadeIn 0.3s ease-out;
+            padding: 10px 0;
+        }
+
+        .user-dropdown a {
+            color: var(--text-color);
+            padding: 10px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            font-size: 0.95em;
+        }
+
+        .user-dropdown a:hover {
+            background-color: rgba(0, 255, 0, 0.1);
+            color: var(--neon-green);
+            text-shadow: var(--glow-strength-green);
+        }
+
+        .user-dropdown hr {
+            border: none;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin: 5px 0;
+        }
+
+        .social-login-options {
+            padding: 10px 16px;
+            text-align: center;
+        }
+
+        .social-login-options p {
+            font-size: 0.85em;
+            color: rgba(224, 224, 224, 0.7);
+            margin-bottom: 8px;
+        }
+
+        .social-login-options .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin: 0 5px;
+            font-size: 1.1em;
+            color: var(--dark-bg);
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+        .social-login-options .social-icon i {
+            margin-right: 0; /* No text, just icon */
+        }
+
+        .social-icon.google { background: #db4437; box-shadow: 0 0 8px #db4437; }
+        .social-icon.facebook { background: #4267B2; box-shadow: 0 0 8px #4267B2; }
+
+        .social-icon:hover {
+            transform: scale(1.1);
+            border-color: var(--text-color);
+            box-shadow: var(--glow-strength-blue) 0 0 15px rgba(255, 255, 255, 0.5);
+        }
+        .social-icon.google:hover { box-shadow: 0 0 15px #db4437, var(--glow-strength); }
+        .social-icon.facebook:hover { box-shadow: 0 0 15px #4267B2, var(--glow-strength); }
+
+        .user-menu.active .user-dropdown {
+            display: block;
+        }
+
+        /* Cart Icon */
+        .cart-icon {
+            position: relative;
+            font-size: 1.4em;
+            padding: 5px;
+        }
+
+        .cart-icon .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            background: var(--neon-pink);
+            color: var(--dark-bg);
+            border-radius: 50%;
+            padding: 2px 7px;
+            font-size: 0.7em;
+            font-weight: 600;
+            line-height: 1;
+            box-shadow: var(--glow-strength-pink);
+        }
+
+        .cart-icon:hover {
+            color: var(--neon-pink);
+            text-shadow: var(--glow-strength-pink);
+        }
+
+        /* Hamburger Menu for Mobile */
+        .hamburger-menu {
+            display: none; /* Hidden on desktop */
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.8em;
+            cursor: pointer;
+            padding: 5px;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        .hamburger-menu:hover {
+            color: var(--neon-blue);
+            text-shadow: var(--glow-strength);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .main-nav {
+                display: none; /* Hide main nav by default on smaller screens */
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--dark-card-bg);
+                box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5);
+                padding: 10px 0;
+                border-top: 1px solid rgba(255, 255, 255, 0.05);
+                animation: slideDown 0.3s ease-out;
+            }
+
+            .main-nav.active {
+                display: flex;
+            }
+
+            .main-nav ul {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .main-nav ul li {
+                margin: 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            }
+            .main-nav ul li:last-child {
+                border-bottom: none;
+            }
+
+            .main-nav ul li a {
+                padding: 15px 25px;
+                text-align: center;
+            }
+            .main-nav ul li a::after {
+                display: none; /* Hide underline effect on mobile */
+            }
+
+            .main-nav .dropdown-content {
+                position: static; /* Make dropdown content part of the flow */
+                box-shadow: none;
+                background-color: rgba(0, 0, 0, 0.2);
+                border-radius: 0;
+                margin-top: 0;
+            }
+            .main-nav .dropdown-content a {
+                padding-left: 40px; /* Indent dropdown items */
+            }
+
+            .header-actions {
+                gap: 15px;
+            }
+
+            .search-bar {
+                width: auto;
+                flex-grow: 1;
+                max-width: 250px;
+            }
+            .search-bar input {
+                width: 100%;
+            }
+
+            .hamburger-menu {
+                display: block; /* Show hamburger menu */
+                order: 3; /* Move to the end */
+            }
+
+            .header-container {
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+            .logo {
+                flex-grow: 1;
+            }
+            .header-actions {
+                order: 2;
+                flex-grow: 1;
+                justify-content: flex-end;
+            }
+            
+            .user-menu .user-dropdown {
+                min-width: 180px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 0 15px;
+            }
+            .search-bar {
+                max-width: 180px;
+            }
+            .search-bar input {
+                padding: 6px 10px;
+                font-size: 0.9em;
+            }
+            .search-bar button {
+                padding: 6px 10px;
+            }
+            .logo {
+                font-size: 1.5em;
+            }
+            .user-btn, .cart-icon {
+                font-size: 1.2em;
+            }
+            .hamburger-menu {
+                font-size: 1.6em;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .header-container {
+                flex-wrap: wrap;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .logo {
+                flex-basis: 100%; /* Logo takes full width */
+                text-align: center;
+                margin-bottom: 10px;
+            }
+            .header-actions {
+                order: 2;
+                flex-basis: calc(100% - 60px); /* Adjust for hamburger */
+                justify-content: flex-end;
+                gap: 10px;
+            }
+            .search-bar {
+                max-width: 100%;
+                flex-grow: 1;
+            }
+            .hamburger-menu {
+                order: 3;
+                flex-basis: 50px;
+                text-align: right;
+            }
+            .main-nav {
+                top: calc(100% + 10px); /* Adjust position if logo takes full width */
+            }
+            .user-dropdown {
+                right: -10px; /* Adjust dropdown position for very small screens */
+            }
+            .social-login-options .social-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 1em;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-container">
+            <a href="#" class="logo">NeonShop</a>
+            
+            <nav class="main-nav" id="mainNav">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Shop</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">Categories <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-content">
+                            <a href="#">Electronics</a>
+                            <a href="#">Apparel</a>
+                            <a href="#">Gadgets</a>
+                            <a href="#">Gaming</a>
+                            <a href="#">Accessories</a>
+                        </div>
+                    </li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search...">
+                    <button aria-label="Search"><i class="fas fa-search"></i></button>
+                </div>
+                
+                <div class="user-menu" id="userMenu">
+                    <button class="user-btn" aria-label="User Account"><i class="fas fa-user"></i></button>
+                    <div class="user-dropdown">
+                        <a href="#">My Account</a>
+                        <a href="#">Orders</a>
+                        <hr>
+                        <a href="#" class="login-btn">Login / Register</a>
+                        <div class="social-login-options">
+                            <p>Or login with:</p>
+                            <a href="#" class="social-icon google" aria-label="Login with Google"><i class="fab fa-google"></i></a>
+                            <a href="#" class="social-icon facebook" aria-label="Login with Facebook"><i class="fab fa-facebook-f"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <a href="#" class="cart-icon" aria-label="Shopping Cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">3</span>
+                </a>
+                
+                <button class="hamburger-menu" id="hamburgerMenu" aria-label="Open navigation menu"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const hamburgerMenu = document.getElementById('hamburgerMenu');
+            const mainNav = document.getElementById('mainNav');
+            const userMenu = document.getElementById('userMenu');
+            const dropdownToggles = document.querySelectorAll('.main-nav .dropdown-toggle');
+
+            // Toggle main navigation on hamburger click
+            hamburgerMenu.addEventListener('click', () => {
+                mainNav.classList.toggle('active');
+                // Close user dropdown if open
+                userMenu.classList.remove('active');
+            });
+
+            // Toggle user dropdown on user button click
+            userMenu.querySelector('.user-btn').addEventListener('click', (event) => {
+                userMenu.classList.toggle('active');
+                // Close main nav if open
+                if (window.innerWidth <= 992) { // Only close main nav on mobile
+                    mainNav.classList.remove('active');
+                }
+                event.stopPropagation(); // Prevent click from propagating to document
+            });
+
+            // Toggle category dropdown for mobile
+            dropdownToggles.forEach(toggle => {
+                toggle.addEventListener('click', (event) => {
+                    if (window.innerWidth <= 992) { // Only apply on mobile
+                        event.preventDefault(); // Prevent default link behavior
+                        const dropdownContent = toggle.nextElementSibling;
+                        if (dropdownContent && dropdownContent.classList.contains('dropdown-content')) {
+                            dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+                        }
+                    }
+                });
+            });
+
+            // Close dropdowns when clicking outside
+            document.addEventListener('click', (event) => {
+                if (!userMenu.contains(event.target)) {
+                    userMenu.classList.remove('active');
+                }
+                // For main nav dropdowns on desktop, they close on mouseleave (CSS driven).
+                // For mobile, they are toggled by JS. No need to close on outside click for category dropdowns
+                // if they are part of the main nav which itself closes with hamburger.
+            });
+
+            // Close nav when resizing from mobile to desktop
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 992) {
+                    mainNav.classList.remove('active');
+                    // Ensure category dropdowns are display: none on desktop initially
+                    document.querySelectorAll('.main-nav .dropdown-content').forEach(content => {
+                        content.style.display = ''; // Reset inline style
+                    });
+                } else {
+                    // On mobile, ensure category dropdowns are initially hidden
+                    document.querySelectorAll('.main-nav .dropdown-content').forEach(content => {
+                        content.style.display = 'none';
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
